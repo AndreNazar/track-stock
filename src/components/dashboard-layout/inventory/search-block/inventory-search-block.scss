@@ -1,0 +1,71 @@
+.inventory-control {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+    &__search {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        gap: 0;
+        &-icon {
+            margin-left: 1em;
+        }
+
+        &-input {
+            padding: .6em 1em;
+            font-family: "Ubuntu-Regular";
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: #FFFFFF;
+            z-index: 2;
+
+            &::placeholder {
+                color: #6578A9;
+            }
+        }
+    }
+    &__sort, &__add{
+        padding: .3em 1em;
+        img{
+            width: 15px;
+        }
+    }
+    &__add{
+        border: 2px solid #6FCF97;
+    }
+}
+
+
+@media (max-width: 860px) {
+    .inventory-control{
+        flex-wrap: wrap;
+        &__search{
+            width: 100%;
+            flex: auto;
+        }
+        &__sort, &__add{
+        }
+    }
+}
+
+@media (max-width: 860px) {
+    .inventory-control{
+        flex-wrap: wrap;
+        &__search{
+            width: 100%;
+            flex: auto;
+        }
+    }
+}
+@media (max-width: 530px) {
+    .inventory-control{
+        &__sort, &__add{
+            flex: 1;
+            justify-content: space-between;
+        }
+    }
+}

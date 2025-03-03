@@ -1,0 +1,28 @@
+.recovery{
+    width: 600px;
+    padding-bottom: 2em;
+    .auth__form{
+        
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .auth__control{
+        width: 600px;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .recovery{
+        width: 90vw;
+        .auth__control{
+            width: 100%;
+        }
+    }
+}
+@media (max-width: 550px) {
+    .recovery .auth__form{
+        grid-template-columns: 1fr !important;
+        gap: 1.5em;
+    }
+}

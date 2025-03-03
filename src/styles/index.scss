@@ -1,0 +1,54 @@
+@use "./fonts.scss";
+
+:root {
+  font-family: "Ubuntu-Regular";
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #001022;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body, html{
+  margin: 0;
+}
+ul{
+  padding: 0;
+  li{
+    list-style: none;
+  }
+}
+
+.menu-burger-button{
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  top: 1em;
+  left: 1em;
+  z-index: 10;
+}
+
+
+*::-webkit-scrollbar {
+  width: 10px;
+  /* Ширина всего элемента навигации */
+}
+
+*::-webkit-scrollbar-track {
+  background: #2A3759;
+  /* Цвет дорожки */
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #8BA1DA;
+  /* Цвет бегунка */
+  border-radius: 20px;
+  /* Округление бегунка */
+}

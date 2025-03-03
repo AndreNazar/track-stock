@@ -1,0 +1,61 @@
+.auth {
+    display: grid;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-top: 2em;
+    justify-content: center;
+    background-image: url('../../assets/imgs/backgrounds/bg.png');
+    background-size: cover;
+
+    h1{
+        font-family: "Ubuntu-Bold", sans-serif;
+    }
+
+
+    &__form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3em;
+        &-checkbox{
+            display: flex;
+            gap: 1em;
+        }
+        &-rules{
+            color: #6578A9;
+        }
+    }
+
+    &__control {
+        margin-top: 2em;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+        align-items: center;
+        gap: 1em 3em;
+
+        &-link {
+            color: #fff;
+            opacity: .5;
+        }
+
+        &-recovery {
+            color: #6578A9;
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .auth{
+        main{
+            display: grid;
+            width: 100%;
+            justify-content: center;
+            padding-bottom: 2em;
+        }
+        &__control, &__form{
+            width: 90vw;
+            grid-template-columns: 1fr;
+        }
+    }
+}

@@ -1,0 +1,38 @@
+.field{
+    display: grid;
+    &__heading{
+        color: #6578A9;
+        margin: 0;
+        font-size: 14px;
+        transition: color .2s;
+        &.active{
+            color: #8199d5;
+        }
+    }
+    &__input{
+        outline: none;
+        border: none;
+        border-bottom: 2px solid #394974;
+        background-color: transparent;
+        width: 100%;
+        padding: .5em 0;
+        font-size: 18px;
+        color: #ffffff;
+        transition: border-bottom .2s;
+        &.active{
+            border-bottom: 2px solid #576eae;
+        }
+        &::placeholder{
+            color: #394974;
+        }
+    }
+}
+
+.field-password{
+    position: relative;
+    &__show{
+        position: absolute;
+        bottom: .5em;
+        right: .5em;
+    }
+}

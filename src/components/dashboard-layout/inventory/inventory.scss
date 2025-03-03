@@ -1,0 +1,20 @@
+.inventory{
+    &-ui{
+        display: flex;
+        box-sizing: border-box;
+        border: 2px solid #6578A9;
+        border-radius: 20px;
+        gap: 1em;
+        &__text{
+            margin: 0;
+            font-size: 14px;
+        }
+        &__icon{
+
+        }
+    }
+}
+p{
+    margin: 0;
+}
+

@@ -1,0 +1,46 @@
+.dialog{
+    &__down{
+        display: grid;
+        gap: 1.3em;
+        align-content: start;
+        margin-top: 1.6em;
+        grid-template-columns: 1fr 1.3fr;
+        .down__tracks{
+            &-list{
+                display: grid;
+                gap: 1em;
+            }
+            &-item{
+                display: flex;
+                gap: 1em;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        .add-track-number-button{
+            display: flex;
+            background-color: transparent;
+            border: none;
+            align-items: center;
+            gap: 1em;
+            color: #56CCF2;
+            svg{
+
+            }
+        }
+        .down__info{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2em;
+            &-date{
+                width: 30%;
+            }
+            &-brand{
+                width: 50%;
+            }
+            &-comment{
+                width: 100%;
+            }
+        }
+    }
+}

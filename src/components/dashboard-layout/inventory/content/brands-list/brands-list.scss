@@ -1,0 +1,121 @@
+.brands__list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    gap: 2em;
+    .brands__item{
+        position: relative;
+        background: url('../../../../../assets/imgs/backgrounds/brand-bg.png') no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: filter .1s;
+            
+        &:hover{
+            filter: brightness(1.3);
+        }
+        &:hover .brands__item-share{
+            max-height: 100px;
+            padding: 1em 2em;
+            filter: brightness(.7);
+        }
+        &:hover .brands__item-arrow{
+            transform: translateY(10px);
+        }
+        &-link{
+            width: 100%;
+            height: 300px;
+            display: grid;
+            align-items: center;
+            justify-items: center;
+        }
+        &-share{
+            position: absolute;
+            top: 0;
+            right: 0;
+            border: 0;
+            padding: 0;
+            background-color: #56CCF2;
+            border-top-right-radius: 30px;
+            border-bottom-left-radius: 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all .1s ease;
+            cursor: pointer;
+        }
+        &-image{
+            width: 100px;
+        }
+        &-arrow{
+            position: absolute;
+            bottom: 1em;
+            width: 35px;
+            transform: translateY(0);
+            transition: transform .1s ease;
+        }
+    }
+}
+
+
+@media (max-width: 1280px) {
+    .brands__list .brands__item-link{
+        height: 200px; 
+    }
+}
+
+@media (max-width: 1024px) {
+    .brands__list .brands__item{
+        border-radius: 15px;
+    }
+    .brands__list .brands__item-link{
+        height: 150px; 
+    }
+    
+    .brands__item:hover .brands__item-share{
+        max-height: 100px;
+        padding: .7em 1em;
+    }
+    .brands__list .brands__item-share{
+        font-size: 13px;
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+    .brands__list .brands__item-image{
+        width: 70px;
+    }
+    .brands__list .brands__item-arrow{
+        width: 25px;
+    }
+}
+
+@media (max-width: 530px) {
+    .brands__list{
+        gap: 1em;
+        .brands__item{
+            &-share{display: none;}
+        }
+    }
+}
+
+@media (max-width: 425px) {
+}
+
+@media (max-width: 375px) {
+ .brands__list{
+    .brands__item{
+        &-link{
+            height: 120px;
+        }
+        &-share{}
+        &-image{
+            width: 50px ;
+        }
+        &-arrow{}
+    }
+ }
+}
+
+@media (max-width: 320px) {
+ // 100%
+}

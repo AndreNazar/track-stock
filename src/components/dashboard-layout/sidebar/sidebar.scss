@@ -1,0 +1,124 @@
+.sidebar{
+    position: fixed;
+    display: grid;
+    align-content: space-between;
+    height: 100vh;
+    width: 250px;
+    padding-bottom: 2em;
+    box-sizing: border-box;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #151D31;
+    overflow-y: auto;
+    z-index: 11;
+    transition: left .2s;
+    &--closed{
+        left: -250px;
+    }
+    &--opened{
+        left: 0;
+    }
+    &__close{
+        position: absolute;
+        margin: 1em 1.2em;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    &__logo{
+        margin-top: 3em;
+        padding: 2em;
+        box-sizing: border-box;
+        img{
+            width: 100%;
+        }
+    }
+    &__exit{
+        box-sizing: border-box;
+    }
+    .menu{
+        &__list{
+            display: grid;
+            padding: 0;
+            gap: 1em;
+        }
+        &__item{
+            position: relative;
+            box-sizing: border-box;
+            width: 100%;
+            list-style: none;
+        }
+        &__link{
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+            opacity: .5;
+            transition: opacity .2s;
+            z-index: 1;
+            &-text{
+                font-family: "Ubuntu-Regular";
+                font-size: 17px;
+                margin: 0;
+                color: #ffffff;
+            }
+            &-icon{
+                
+            }
+            &-highlight{
+                position: absolute;
+                left: 0;
+                top: 0;
+                border-top-left-radius: 40px;
+                border-bottom-left-radius: 40px;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                &--active{
+                    background-color: #001022;
+                }
+            }
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .sidebar{
+        width: 200px;
+        padding-bottom: 1em;
+        .menu{
+            &__list{
+                gap: .7em;
+            }
+            &__link{
+                padding: .7em 2em;
+                &-text{
+                    font-size: 14px;
+                }
+                &-icon{
+                    width: 20px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+ // 700px
+}
+
+@media (max-width: 425px) {
+ // 100%
+}
+
+@media (max-width: 375px) {
+ // 100%
+}
+
+@media (max-width: 320px) {
+ // 100%
+}

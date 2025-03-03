@@ -1,0 +1,12 @@
+.dialog {
+
+    &__wrapper-images {
+    }
+
+    &__wrapper-right {
+    }
+
+    &__wrapper-down {
+        grid-column: 1/3;
+    }
+}
