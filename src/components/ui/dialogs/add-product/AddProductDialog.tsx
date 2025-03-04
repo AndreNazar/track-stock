@@ -1,8 +1,8 @@
 import "../dialogs.scss"
-import cross_img from "../../../../assets/imgs/control/cross.svg"
 import AddProductSearch from "./left-block/AddProductSearch"
 import AddProductImages from "./left-block/AddProductImages"
 import { IProducts } from "../../../../types/types"
+import cross_img from "../../../../assets/imgs/control/cross.svg"
 import boot_img2 from "../../../../assets/imgs/boots/boots2.png"
 import boot_img2_1 from "../../../../assets/imgs/boots/boots2_1.png"
 import boot_img2_2 from "../../../../assets/imgs/boots/boots2_2.png"
@@ -41,12 +41,12 @@ function AddProductDialog() {
     setTimeout(() => {
       dialogRef.current?.classList.remove("dialog--close")
       dispatch(closeDialogAddProduct())
-    }, 500)
+    }, 10) // тут анимацию хотел сделать, попозже
   }
 
   return (
     <div ref={dialogRef} onClick={closeDialog} className="dialog">
-      <div className="dialog__content">
+      <div onClick={(e) => {e.stopPropagation();e.preventDefault()}} className="dialog__content">
         <div onClick={closeDialog} className="dialog__close">
           <img className="dialog__close-img" src={cross_img} alt="close" />
         </div>

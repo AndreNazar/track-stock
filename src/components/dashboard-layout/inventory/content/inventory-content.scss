@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin-top: 3em;
     padding-right: 2em;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 210px);
     overflow-y: auto;
 }
 
@@ -39,11 +39,12 @@
 @media (max-width: 530px) {
     .inventory__content{
         padding-right: 1em;
-        height: calc(100vh - 240px);
+        margin-top: 1em;
+        height: calc(100vh - 200px);
     }
 }
 @media (max-width: 330px) {
     .inventory__content{
-        height: calc(100vh - 290px);
+        height: calc(100vh - 200px);
     }
 }

@@ -12,7 +12,7 @@ function AddProductImages({images}: {images: string[]}) {
   function getImages(): string[] {
     if(images.length === 0) return []
     
-    return images.filter((img, index) => index !== 0)
+    return images.filter((_, index) => index !== 0)
   }
 
   return (

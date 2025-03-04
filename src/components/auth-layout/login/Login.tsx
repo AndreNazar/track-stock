@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../../ui/buttons/Button";
 import Field from "../../ui/fields/Field";
 import "./login.scss"
@@ -9,6 +9,11 @@ function Login() {
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const navigate = useNavigate()
+
+    function gotoDashboard() {
+        navigate("/inventory")
+    }
 
     return (
         <div className="login">
@@ -18,7 +23,7 @@ function Login() {
                 <FieldPassword value={password} setValue={setPassword} heading="Введите пароль" placeholder="Пароль"/>
             </div>
             <div className="auth__control">
-                <Button>Вход</Button> 
+                <Button onClick={gotoDashboard}>Вход</Button> 
                 <NavLink className={"auth__control-link"} to="/register">или регистрация</NavLink>
                 <NavLink className={"auth__control-recovery"} to="/recovery">Забыли пароль?</NavLink>
             </div>

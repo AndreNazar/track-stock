@@ -6,7 +6,7 @@ import exit_svg from "../../../assets/imgs/tabs/exit.svg"
 import close_menu_svg from "../../../assets/imgs/control/close_menu.svg"
 import { useDispatch, useSelector } from "react-redux"
 import { closeMobileMenu, makeMobileMenu, removeMobileMenu } from "../../../redux/slices/menuSlice"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo } from "react"
 
 function Sidebar() {
   const dispatch = useDispatch()  

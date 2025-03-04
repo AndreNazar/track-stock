@@ -11,6 +11,8 @@ import copy_svg from "../../../../../assets/imgs/control/copy.svg"
 import ButtonDash from "../../../../ui/buttons/ButtonDash"
 import down_arrow_svg from "../../../../../assets/imgs/actions/down-arrow-gray.svg" 
 import { useEffect, useRef } from "react"
+import { NavLink } from "react-router-dom"
+import ProductPropertiesPart from "./ProductPropertiesPart"
 
 function InventoryProductsItem({product, selectedProduct, setSelectedProduct}:{product: IProducts, selectedProduct: number, setSelectedProduct: (id: number) => void}) {
 
@@ -41,28 +43,22 @@ function InventoryProductsItem({product, selectedProduct, setSelectedProduct}:{p
       <div ref={productRef} onClick={onFocusProduct} className="product">
         <div className="product__preinfo">
           <div className="product__info-wrapper">
-          <img className="product__image" src={product.images[0]} alt="" />
-          <div className="product__text">
-            <div className="product__text-wrapper">
-              <p title={product.name} className="product__text-name">{product.name}</p>
-              <p className="product__text-price">${product.price}</p>
-            </div> 
-            <div className="product__text-wrapper">
-              <div className="product__property">
-                <span className="product__property-attribute">Размер</span>
-                <span className="product__property-value">{product.size}</span>
-              </div>
-              <div className="product__property">
-                <span className="product__property-attribute">Источник</span>
-                <span className="product__property-value">{product.brand}</span>
-              </div>
-              <div className="product__property">
-                <span className="product__property-attribute">Цвет</span>
-                <span className="product__property-value">{product.color}</span>
+            <img className="product__image" src={product.images[0]} alt="" />
+            <div className="product__text">
+              <div className="product__text-wrapper">
+                <p title={product.name} className="product__text-name">{product.name}</p>
+                <NavLink  to={`/product/${product.id}`} className="product__text-link">Подробнее</NavLink>
+                <p className="product__text-price">${product.price}</p>
+              </div> 
+              <div className="product__text-wrapper product__text-wrapper--web">
+                <ProductPropertiesPart product={product} />
               </div>
             </div>
           </div>
-          </div>
+          
+          <div className="product__text-wrapper product__text-wrapper--mobile">
+              <ProductPropertiesPart product={product} />
+            </div>
           <div className="product__control-wrapper">
             <div className="product__buttons">
               <ButtonDash>Продано</ButtonDash>
@@ -73,7 +69,7 @@ function InventoryProductsItem({product, selectedProduct, setSelectedProduct}:{p
               <img className="product__control-close" src={cross_svg} alt="" />
               <img className="product__control-status" src={status_svg} alt="" />
               <img className="product__control-edit" src={edit_svg} alt="" />
-              <div/>
+              <div className="empty-div"/>
               <img className="product__control-copy" src={copy_svg} alt="" />
             </div>
           </div>
