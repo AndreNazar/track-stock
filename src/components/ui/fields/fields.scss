@@ -36,3 +36,17 @@
         right: .5em;
     }
 }
+
+
+@media (max-width: 1024px) {
+    
+    .field{
+        &__heading{
+            font-size: 12px;
+        }
+        &__input{
+            font-size: 16px;
+        }
+    }
+    
+}

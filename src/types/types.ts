@@ -19,3 +19,25 @@ export interface IProducts{
     price_outofstock: string | null,
     price_poison: string | null,
 }
+export interface ISearchProducts{
+    id: number,
+    name: string,
+    image: string,
+    link: string,
+    article: string,
+}
+
+export interface InfoList{
+    title: string,
+    value: string | null,
+    img: string,
+}
+export interface CardList{
+    title: string,
+    value: string | null,
+}
+export interface IProductSalesTab{
+    type: string,
+    title: string,
+    active: boolean,
+}

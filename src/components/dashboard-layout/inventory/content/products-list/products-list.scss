@@ -1,7 +1,7 @@
 .products-list{
     display: grid;
     gap: 1em;
-    .product{
+    .inventory-product{
         display: grid;
         background-color: #151D31;
         border-radius: 25px;
@@ -13,6 +13,8 @@
         cursor: pointer;
         box-sizing: border-box;
         transition: max-height .2s;
+    }
+    .product{
         &__preinfo{
             display: flex;
             align-items: center;
@@ -157,8 +159,10 @@
 
 @media (max-width: 1270px) {
     .products-list{
-        .product{
+        .inventory-product{
             max-height: 230px;
+        }
+        .product{
             &__preinfo{
                 flex-wrap: wrap;
             }
@@ -187,8 +191,10 @@
 
 @media (max-width: 930px) {
     .products-list{
-        .product{
+        .inventory-product{
             max-height: 250px;
+        }
+        .product{
             &__preinfo{
                 gap: 1em;
             }
@@ -241,8 +247,10 @@
 
 @media (max-width: 590px) {
     .products-list{
-        .product{
+        .inventory-product{
             max-height: 270px;
+        }
+        .product{
             &__image{
                 width: 90px;
                 object-fit: contain;
@@ -276,8 +284,10 @@
 }
 @media (max-width: 460px) {
     .products-list{
-        .product{
+        .inventory-product{
             padding: 2em 1em;
+        }
+        .product{
             &__text{
                 &-name{
                     font-size: 18px;
@@ -327,56 +337,60 @@
 }
                     
 @media (max-width: 400px) {
-    .products-list .product {
-        max-height: 320px;
-        &__text{
-            
-            &-wrapper--mobile {
-                display: grid;
-                gap: .5em;
-                justify-content: stretch;
+    .products-list {
+        .inventory-product {
+            max-height: 320px;
+        }
+        .product{
+            &__text{
+                
+                &-wrapper--mobile {
+                    display: grid;
+                    gap: .5em;
+                    justify-content: stretch;
 
-                .product__property {
-                    display: flex;
-                    justify-content: space-between;
-                    width: 100%;
-                    align-items: flex-end;
-                    gap: 0;
+                    .product__property {
+                        display: flex;
+                        justify-content: space-between;
+                        width: 100%;
+                        align-items: flex-end;
+                        gap: 0;
 
-                    &-attribute {
-                        order: 1;
-                    }
+                        &-attribute {
+                            order: 1;
+                        }
 
-                    &-value {
-                        order: 3;
-                    }
+                        &-value {
+                            order: 3;
+                        }
 
-                    &::after {
-                        content: "";
-                        flex: 1;
-                        border-bottom: 2px dotted #6578A9;
-                        margin: 2px 4px;
-                        align-self: flex-end;
-                        order: 2;
+                        &::after {
+                            content: "";
+                            flex: 1;
+                            border-bottom: 2px dotted #6578A9;
+                            margin: 2px 4px;
+                            align-self: flex-end;
+                            order: 2;
+                        }
                     }
                 }
+            
+                &-name{
+                    font-size: 14px;
+                    -webkit-line-clamp: 2; 
+                    min-width: 60px;
+                    height: 40px;
+                }
+                &-price{
+                    font-size: 14px;
+                }
+                &-link{
+                    font-size: 12px;
+                }
             }
-        
-            &-name{
-                font-size: 14px;
-                -webkit-line-clamp: 2; 
-                min-width: 60px;
-                height: 40px;
-            }
-            &-price{
-                font-size: 14px;
-            }
-            &-link{
+            &__buttons .button-dash{
                 font-size: 12px;
             }
-        }
-        &__buttons .button-dash{
-            font-size: 12px;
         }
     }
 }

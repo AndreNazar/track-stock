@@ -1,0 +1,77 @@
+.dialog {
+    &__right {
+        display: grid;
+        gap: 1.3em;
+        align-content: start;
+        margin-top: 1.6em;
+
+        .right__locker {
+            width: 100%;
+            &-img {}
+        }
+
+        .right__content {
+            display: flex;
+            gap: 1em;
+            flex-wrap: wrap;
+
+            &-field {
+                &-m{width: 25%}
+                &-l{width: 40%}
+                &-xl{width: 60%}
+            }
+            &-checkbox{
+                display: flex;
+                gap: 1em;
+            }
+        }
+    }
+
+
+}
+
+
+@media (max-width: 1024px) {
+    .dialog {
+        &__right {
+            gap: 1em;
+            margin-top: 1.6em;
+
+            .right__content {
+                gap: 1.5em 1em;
+
+                &-field {
+                    &-m{width: 25%}
+                    &-l{width: 35%}
+                    &-xl{width: 60%}
+                }
+            }
+        }
+
+
+    }
+
+}
+
+@media (max-width: 625px) {
+    
+    .dialog {
+        &__right {
+            gap: 1em;
+            margin-top: 1.6em;
+
+            .right__locker {
+                display: flex;
+                width: 10%;
+                align-items: center;
+                justify-content: center;
+            }
+            .right__content {
+                gap: 1.5em 1em;
+
+            }
+        }
+
+
+    }
+}

@@ -40,14 +40,14 @@ function InventoryProductsItem({product, selectedProduct, setSelectedProduct}:{p
   }, [selectedProduct])
 
     return (
-      <div ref={productRef} onClick={onFocusProduct} className="product">
+      <div ref={productRef} onClick={onFocusProduct} className="inventory-product">
         <div className="product__preinfo">
           <div className="product__info-wrapper">
             <img className="product__image" src={product.images[0]} alt="" />
             <div className="product__text">
               <div className="product__text-wrapper">
                 <p title={product.name} className="product__text-name">{product.name}</p>
-                <NavLink  to={`/product/${product.id}`} className="product__text-link">Подробнее</NavLink>
+                <NavLink  to={`${product.id}`} className="product__text-link">Подробнее</NavLink>
                 <p className="product__text-price">${product.price}</p>
               </div> 
               <div className="product__text-wrapper product__text-wrapper--web">

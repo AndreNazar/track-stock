@@ -3,7 +3,8 @@ import "./inventory.scss"
 import InventorySearchBlock from "./search-block/InventorySearchBlock"
 import InventoryTabs from "./tabs/InventoryTabs"
 
-function Inventory(){
+function Inventory() {
+    
     return <div className="inventory">
         <InventoryTabs />
         <InventorySearchBlock />

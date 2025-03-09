@@ -10,37 +10,12 @@ function InventoryBrandsList() {
       id: 1,
       img: adidas_logo,
       link: "adidas",
-    },
-    {
-      id: 1,
-      img: adidas_logo,
-      link: "adidas",
-    },
-    {
-      id: 1,
-      img: adidas_logo,
-      link: "adidas",
-    },
-    {
-      id: 1,
-      img: adidas_logo,
-      link: "adidas",
-    },
-    {
-      id: 1,
-      img: adidas_logo,
-      link: "adidas",
-    },
-    {
-      id: 1,
-      img: adidas_logo,
-      link: "adidas",
-    },
+    }
   ]
 
     return (
       <ul className="brands__list">
-        {brands.map((b: any) => <InventoryBrandsItem brand={b} />)}
+        {brands.map((b: IBrand) => <InventoryBrandsItem key={b.id} brand={b} />)}
       </ul>
     );
   }

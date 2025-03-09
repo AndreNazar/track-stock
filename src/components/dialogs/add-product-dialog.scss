@@ -1,0 +1,21 @@
+.dialog {
+
+    &__wrapper-left {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__wrapper-right {
+    }
+
+    &__wrapper-down {
+        grid-column: 1/3;
+    }
+}
+
+
+@media (max-width: 625px) {
+    .dialog__wrapper-down {
+        grid-column: 1/2;
+    }
+}

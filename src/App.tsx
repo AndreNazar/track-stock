@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import AuthLayout from "./components/auth-layout/AuthLayout"
 import Login from "./components/auth-layout/login/Login"
 import Registration from "./components/auth-layout/registration/Registration"
@@ -9,24 +9,35 @@ import Statistic from "./components/dashboard-layout/statistic/Statistic"
 import Account from "./components/dashboard-layout/account/Account"
 import InventoryBrandsList from "./components/dashboard-layout/inventory/content/brands-list/InventoryBrandsList"
 import InventoryProductsList from "./components/dashboard-layout/inventory/content/products-list/InventoryProductsList"
-import AddProductDialog from "./components/ui/dialogs/add-product/AddProductDialog"
 import { useDispatch, useSelector } from "react-redux"
 import burger_svg from "./assets/imgs/control/burger.svg"
 import { openMobileMenu } from "./redux/slices/menuSlice"
-import { useEffect } from "react"
-
+import { useEffect, useState } from "react"
+import Loading from "./components/ui/loadings/Loading"
+import Product from "./components/dashboard-layout/product/Product"
+import AddProductDialog from "./components/dialogs/AddProductDialog"
 function App() {
 
   const openAddProductDialog = useSelector((s:any) => s.dialog.dialogAddProduct)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
+  const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(true)
+  const [isAuth, setIsAuth] = useState<boolean>(false)
+  const navigate = useNavigate()
   
   useEffect(() => {
-    console.log(isMobileMenu)
-  }, [isMobileMenu])
+    if (localStorage.getItem('token')) { // WARNING
+      navigate("/login")
+      setIsAuth(false)
+    }else{
+      setIsAuth(true)
+    }
+    setIsGlobalLoading(false)
+  }, [])
 
-  return (
-    <div>
+  return isGlobalLoading 
+  ? <div className="global-loading"><Loading/></div>
+  : (<div>
       {isMobileMenu && <button onClick={() => dispatch(openMobileMenu())} className="menu-burger-button">
         <img src={burger_svg} alt="" />
       </button>}
@@ -38,14 +49,15 @@ function App() {
           <Route path="/register" element={<Registration />} />
           <Route path="/recovery" element={<Recovery />} />
         </Route>
-        <Route element={<DashboardLayout />}>
+        {isAuth && <Route element={<DashboardLayout />}>
           <Route path="/inventory" element={<Inventory />}>
             <Route path="" element={<InventoryBrandsList />} />
             <Route path=":brand_name" element={<InventoryProductsList />} />
           </Route>
           <Route path="/statistic" element={<Statistic />} />
           <Route path="/account" element={<Account />} />
-        </Route>
+          <Route path="/inventory/:brand_name/:product_id" element={<Product />} />
+        </Route>}
       </Routes>
     </div>
   )

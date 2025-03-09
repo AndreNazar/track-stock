@@ -1,0 +1,32 @@
+.product__statuses{
+    width: 45%;
+    box-sizing: border-box;
+    &-wrapper{
+
+    }
+
+    &-heading{
+        margin: 0;
+        font-size: 24px;
+        font-family: "Ubuntu-Bold";
+    }
+
+    &-list{}
+    &-item{
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        padding: .5em 0;
+    }
+    &-icon{
+        width: 50px;
+    }
+    &-title{}
+    &-value{}
+
+    &-buttons{
+        display: flex;
+        margin-top: .5em;
+        gap: 1em;
+    }
+}

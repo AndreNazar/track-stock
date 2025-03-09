@@ -1,8 +1,13 @@
 import "./button.scss";
 
-function ButtonDash({children}: {children: string}) {
+interface PropsButtonDash {
+  children: string,
+  color?: string
+}
+
+function ButtonDash({children, color = "#56CCF2"}: PropsButtonDash) {
   return (
-    <button className="button-dash">{children}</button>
+    <button style={{border: `2px solid ${color}`}} className="button-dash">{children}</button>
   )
 }
 

@@ -43,6 +43,15 @@
             color: #6578A9;
         }
     }
+    
+    &__message{
+        margin-top: 2em;
+        &-text{
+            &--error{
+                color: #a43f3f;
+            }
+        }
+    }
 }
 
 @media (max-width: 550px) {

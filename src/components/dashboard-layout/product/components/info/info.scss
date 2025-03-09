@@ -1,0 +1,23 @@
+.product__info{
+    width: 250px;
+    &-list{
+        display: grid;
+        gap: .5em;
+    }
+    &-item{
+        display: flex;
+        gap: 2em;
+    }
+
+
+    &-icon{
+        width: 35px;
+        max-height: 40px;
+        object-fit: contain;
+    }
+
+
+    &-text{
+        
+    }
+}
