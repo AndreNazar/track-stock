@@ -1,9 +1,9 @@
 .property{
     &__title{
         color: #6578A9;
-        font-size: 14px;
+        font-size: clamp(12px, 2vw, 14px);
     }
     &__value{
-        font-size: 18px;
+        font-size: clamp(14px, 2vw, 18px);
     }
 }

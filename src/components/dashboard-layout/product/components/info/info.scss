@@ -21,3 +21,28 @@
         
     }
 }
+
+@media (max-width: 1191px) {
+    .product__info{
+        width: 50%;
+        &-list{
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+@media (max-width: 940px) {
+    .product__info{
+        width: 45%;
+        &-list{
+            grid-template-columns: 1fr;
+        }
+    }
+}
+@media (max-width: 550px) {
+    .product__info{
+        width: 100%;
+        &-list{
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}

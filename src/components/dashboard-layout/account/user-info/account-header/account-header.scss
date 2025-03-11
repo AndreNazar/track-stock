@@ -1,0 +1,56 @@
+.account-header{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    &__avatar{
+        position: relative;
+        width: 70px;
+        height: 70px;
+        &-image{
+            width: 100%;
+            border-radius: 50%;
+        }
+        &-change{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            display: grid;
+            padding: 5px;
+            place-items: center;
+            cursor: pointer;
+            background-color: #2D9CDB;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            img{
+                width: 100%;
+            }
+        }
+    }
+    &__text{
+        flex: 1;
+        &-nickname{
+            margin: 0;
+            font-family: "Ubuntu-Bold";
+            font-size: 18px;
+        }
+        &-mail{
+            font-size: 14px;
+            color: #56CCF2;
+        }
+    }
+
+    &__control{
+        &-text{
+            font-size: 14px;
+            text-decoration: underline;
+            color: #BDBDBD;
+            cursor: pointer;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 .product__sales{
     width: 50%;
     box-sizing: border-box;
+    padding-bottom: 2em;
     &-heading{
         width: 100%;
         font-size: 24px;
@@ -30,5 +31,17 @@
                 color: #FFFFFF;
             }
         }
+    }
+
+
+    &-graph{
+        width: 100%;
+        margin-top: 1em;
+    }
+}
+
+@media (max-width: 1191px) {
+    .product__sales{
+        width: 100%;
     }
 }

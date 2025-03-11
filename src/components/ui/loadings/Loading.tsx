@@ -9,14 +9,14 @@ function Loading({color = "#56CCF2", size = 20}: {color?: string, size?:number})
   }, [size])
 
   return (
-    <div className="loading">
-      <div style={{
+    <span className="loading">
+      <span style={{
         border: `${getSize}px solid ${color}`,
         borderLeft: `${getSize}px solid transparent`,
         width: size,
         height: size
-      }} className="loading__spinner"></div>
-    </div>
+      }} className="loading__spinner"></span>
+    </span>
   );
 }
 

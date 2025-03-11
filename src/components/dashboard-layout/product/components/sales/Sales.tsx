@@ -1,5 +1,18 @@
+import { BarElement, CategoryScale, Chart, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import { IProductSalesTab } from "../../../../../types/types"
 import "./sales.scss"
+import { Bar } from 'react-chartjs-2';
+
+
+
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Sales() {
   const tabs: IProductSalesTab[] = [
@@ -35,6 +48,42 @@ function Sales() {
           </div>
         ))}
       </div>
+        <div className="product__sales-graph">
+          <Bar
+            data={{
+              labels: ['04.03.2025', '05.03.2025', '06.03.2025', '07.03.2025', '08.03.2025', '09.03.2025', '10.03.2025'],
+              datasets: [{
+                label: '# of Votes',
+                data: [9, 12, 3, 5, 2, 3, 6, 5, 8],
+                borderWidth: 1,
+                backgroundColor: "#56CCF2",
+                borderRadius: 10,
+              }]
+            }}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+              scales: {
+                x: {
+                  grid: {
+                    display: true,
+                    color: "#394974"
+                  }
+                },
+                y: {
+                  grid: {
+                    display: true,
+                    color: "#394974"
+                  }
+                }
+              }
+            }}
+          />
+        </div>
     </div>
   )
 }

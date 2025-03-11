@@ -12,7 +12,10 @@
         flex-wrap: wrap;
         margin-top: 2em;
     }
-    &__card{
-        
+}
+
+@media (max-width: 768px) {
+    .product__back{
+        margin-top: 2.5em;
     }
 }

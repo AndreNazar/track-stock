@@ -41,3 +41,8 @@ export interface IProductSalesTab{
     title: string,
     active: boolean,
 }
+
+export interface ICard{
+    number: string,
+    date: string,
+}

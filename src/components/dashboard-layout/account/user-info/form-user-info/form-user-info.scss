@@ -1,0 +1,14 @@
+.form-user-info{
+    display: grid;
+    &__inputs{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+    }
+    &__button{
+        margin-top: 1em;
+        justify-self: end;
+        display: grid;
+        width: calc(50% - 1em);
+    }
+}

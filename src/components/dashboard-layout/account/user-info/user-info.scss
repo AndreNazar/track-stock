@@ -1,0 +1,21 @@
+.user-info{
+    display: grid;
+    gap: 1em;
+    &__edit{
+        display: grid;
+        gap: 2em;
+        padding: 2em;
+        border: 2px solid #2D9CDB;
+        border-radius: 20px;
+        overflow: hidden;
+        max-height: 65px;
+        transition: max-height .2s ease-in-out;
+        &--open{
+            max-height: 1000px;
+            padding-bottom: 4em;
+        }
+    }
+    &__subscribe{
+        
+    }
+}

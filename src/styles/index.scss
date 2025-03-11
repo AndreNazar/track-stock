@@ -60,3 +60,15 @@ ul{
   border-radius: 20px;
   /* Округление бегунка */
 }
+.remont{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  margin: 0;
+}
+.heading-mini{
+  font-size: 14px;
+  color: #6578A9;
+}

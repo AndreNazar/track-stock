@@ -25,7 +25,7 @@ function Card({cardList, mainImg, name, size}: CardProps) {
                 <p className="card__info-name">{name}</p>
                 <p className="card__info-size">{size}</p>
                 <ul className="card__property-list">
-                    {cardList.map((p:CardList) => <li className="card__property-item">
+                    {cardList.map((p:CardList) => <li key={p.title} className="card__property-item">
                         <Property title={p.title} value={p.value} />
                     </li>)}
                 </ul>
