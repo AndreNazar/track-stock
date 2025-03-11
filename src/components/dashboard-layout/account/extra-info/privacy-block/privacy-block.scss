@@ -1,0 +1,14 @@
+.privacy{
+    background-color: #151D31;
+    padding: 2em;
+    border-radius: 20px;
+    &__heading{
+        font-family: "Ubuntu-Bold";
+        font-size: 18px;
+    }
+    &__fields{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+    }
+}

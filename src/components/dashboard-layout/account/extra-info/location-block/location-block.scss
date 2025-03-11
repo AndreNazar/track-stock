@@ -1,0 +1,10 @@
+.location{
+    background-color: #151D31;
+    padding: 1em 2em;
+    border-radius: 20px;
+    &__fields{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+    }
+}

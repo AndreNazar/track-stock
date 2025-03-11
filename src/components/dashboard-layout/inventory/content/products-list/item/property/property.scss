@@ -1,0 +1,123 @@
+.products-list{
+    .product{
+        &__property{
+            display: flex;
+            font-size: 14px;
+            gap: 1em;
+            align-items: center;
+            &-attribute{
+                color: #6578A9;
+            }
+            &-value{
+                color: #ffffff;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1; /* Ограничение на 3 строки */
+                overflow: hidden;
+                text-overflow: ellipsis;
+                min-width: 30px;
+                &.platform-value{
+                    color: #6FCF97;
+                }
+            }
+            &-icon{
+                width: fit-content;
+                height: fit-content;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 860px) {
+    .products-list .product{
+        &__extrainfo{
+            .product__property{
+                &-attribute{
+                    text-wrap: nowrap;
+                }
+            }
+        }
+        &__platforms{
+            .product__property{
+                width: fit-content;
+            }
+        }
+    }
+}
+
+@media (max-width: 590px) {
+    .products-list {
+        .product__text-wrapper--mobile {
+            .product__property {
+                span {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 460px) {
+    .products-list {
+        .product__extrainfo {
+            .product__property {
+                width: 100%;
+                justify-content: space-between;
+                gap: 0;
+
+                &-attribute {
+                    order: 1;
+                }
+
+                &-icon {
+                    order: 1;
+                }
+
+                &-value {
+                    order: 3;
+                }
+
+                &::after {
+                    content: "";
+                    flex: 1;
+                    border-bottom: 2px dotted #6578A9;
+                    margin: 2px 4px;
+                    align-self: flex-end;
+                    order: 2;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 400px) {
+    .products-list {
+        .product__text-wrapper--mobile {
+            .product__property {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                align-items: flex-end;
+                gap: 0;
+
+                &-attribute {
+                    order: 1;
+                }
+
+                &-value {
+                    order: 3;
+                }
+
+                &::after {
+                    content: "";
+                    flex: 1;
+                    border-bottom: 2px dotted #6578A9;
+                    margin: 2px 4px;
+                    align-self: flex-end;
+                    order: 2;
+                }
+            }
+        }
+    }
+}

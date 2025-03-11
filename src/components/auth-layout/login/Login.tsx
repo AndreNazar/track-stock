@@ -3,16 +3,15 @@ import Button from "../../ui/buttons/Button"
 import Field from "../../ui/fields/Field"
 import "./login.scss"
 import FieldPassword from "../../ui/fields/FieldPassword"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import api, { ILogin } from "../../../api/api"
 import Loading from "../../ui/loadings/Loading"
 
-function Login() {
+function Login({setIsAuth}: {setIsAuth: (arg: boolean) => void}) {
   const [login, setLogin] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isAuth, setIsAuth] = useState<boolean>(Boolean(localStorage.getItem("access-token")))
   const navigate = useNavigate()
 
   function gotoDashboard() {
@@ -20,12 +19,14 @@ function Login() {
   }
   
   async function signIn(fields: ILogin) {
-    return api.login(fields).then((auth) => {
+    return api.login(fields).then(async(auth) => {
         
       setIsAuth(Boolean(auth.token));
       localStorage.setItem("access-token", auth.token);
 
-      gotoDashboard()
+      setTimeout(() => {
+        gotoDashboard()
+      }, 1);
     });
   }
   
@@ -46,6 +47,13 @@ function Login() {
         setIsLoading(false);
       })
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('access-token')) { // WARNING
+      navigate("/inventory")
+      setIsAuth(true)
+    }
+  }, [])
 
   return (
     <div className="login">

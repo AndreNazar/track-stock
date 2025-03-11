@@ -1,0 +1,21 @@
+.select{
+    position: relative;
+    display: grid;
+    cursor: pointer;
+    &__image{
+        position: absolute;
+        right: 1.3em;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &__input{
+        border: 2px solid #2D9CDB;
+        padding: .7em 1.3em;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        background-color: transparent;
+        color: #ffffff;
+        outline: none;
+    }
+}

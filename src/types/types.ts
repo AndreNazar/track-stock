@@ -46,3 +46,11 @@ export interface ICard{
     number: string,
     date: string,
 }
+
+export interface IServiceBlock{
+    onClick: () => void
+    isSelect: boolean
+    img: string,
+    title: string,
+    text: string,
+}

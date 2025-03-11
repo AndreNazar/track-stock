@@ -1,0 +1,46 @@
+.inventory-product {
+    display: grid;
+    background-color: #151D31;
+    border-radius: 25px;
+    padding: 2em;
+    gap: 1em;
+    overflow: hidden;
+    border: 2px solid transparent;
+    max-height: 167px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: max-height .2s;
+}
+
+
+
+@media (max-width: 1270px) {
+    .inventory-product {
+        max-height: 230px;
+    }
+}
+
+@media (max-width: 930px) {
+    .inventory-product {
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 590px) {
+    .inventory-product {
+        max-height: 270px;
+    }
+}
+
+@media (max-width: 460px) {
+    .inventory-product {
+        padding: 2em 1em;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .inventory-product {
+        max-height: 320px;
+    }
+}

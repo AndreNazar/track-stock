@@ -26,7 +26,7 @@ function App() {
   const navigate = useNavigate()
   
   useEffect(() => {
-    if (localStorage.getItem('token')) { // WARNING
+    if (!localStorage.getItem('access-token')) { // WARNING
       navigate("/login")
       setIsAuth(false)
     }else{
@@ -45,7 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/recovery" element={<Recovery />} />
         </Route>

@@ -1,0 +1,14 @@
+
+.dropdown{
+    display: grid;
+    margin-top: 1em;
+    gap: .5em;
+    &__heading{
+        display: flex;
+        gap: .5em;
+        color: #6578A9;
+        font-size: 14px;
+        &-text{}
+        &-information{}
+    }
+}
