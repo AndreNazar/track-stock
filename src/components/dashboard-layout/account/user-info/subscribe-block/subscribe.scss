@@ -20,6 +20,7 @@
                 &-price{
                     width: 10%;
                     justify-self: flex-end;
+                    text-wrap: nowrap;
                 }
                 &-name, &-price{
                     font-family: "Ubuntu-Bold";
@@ -38,6 +39,42 @@
                     text-decoration: underline;
                     justify-content: flex-end;
                     cursor: pointer;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 400px) {
+    .subscribe-block__tariff {
+        .tariff {
+            &__heading {}
+
+            &__info {
+                display: flex;
+                flex-wrap: wrap;
+
+                &-name {
+                    width: 90%;
+                }
+
+                &-price {
+                    width: 10%;
+                }
+
+                &-name,
+                &-price {
+                    font-size: 14px;
+                }
+
+                &-next {
+                    font-size: 12px;
+                    width: 100%;
+                }
+
+                &-cancel {
+                    width: 100%;
+                    font-size: 12px;
+                    justify-content: flex-start;
                 }
             }
         }

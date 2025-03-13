@@ -54,3 +54,48 @@
         }
     }
 }
+
+
+@media (max-width: 438px) {
+    .account-header{
+        flex-wrap: wrap;
+        &__avatar{
+            width: 20%;
+            height: 50%;
+        }
+        &__text{
+            width: 70%;
+        }
+        &__control{
+            width: 100%;
+        }
+    }
+}
+@media (max-width: 438px) {
+    .account-header{
+        &__avatar{
+            min-height: 63px;
+        }
+    }
+}
+
+@media (max-width: 387px) {
+    .account-header{
+        &__avatar{
+            &-change{
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+}
+
+@media (max-width: 345px) {
+    .account-header{
+        &__avatar{
+            &-change{
+                bottom: 1em;
+            }
+        }
+    }
+}

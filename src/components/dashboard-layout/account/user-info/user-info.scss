@@ -1,6 +1,7 @@
 .user-info{
     display: grid;
     gap: 1em;
+    min-width: 415px;
     &__edit{
         display: grid;
         gap: 2em;
@@ -11,11 +12,20 @@
         max-height: 65px;
         transition: max-height .2s ease-in-out;
         &--open{
-            max-height: 1000px;
+            max-height: 1000px !important;
             padding-bottom: 4em;
         }
     }
     &__subscribe{
         
+    }
+}
+
+@media (max-width: 438px) {
+    .user-info{
+        min-width: 200px;
+        &__edit{
+            max-height: 120px;
+        }
     }
 }

@@ -31,3 +31,21 @@
         cursor: pointer;
     }
 }
+
+
+@media (max-width: 400px) {
+    .card{
+        &__rect{
+            width: 50px;
+            height: 30px;
+        }
+        &__text{
+            &-number{
+                font-size: 14px;
+            }
+            &-date{
+                font-size: 12px;
+            }
+        }
+    }
+}

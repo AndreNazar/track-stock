@@ -6,7 +6,6 @@ export interface IBrand{
 export interface IProducts{
     id: number,
     images: string[],
-    link: string,
     name: string,
     size: string,
     color: string,
@@ -53,4 +52,10 @@ export interface IServiceBlock{
     img: string,
     title: string,
     text: string,
+}
+
+export interface IBrandsSelect{
+    id: number,
+    name: string,
+    selected: boolean,
 }

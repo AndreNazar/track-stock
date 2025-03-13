@@ -12,3 +12,12 @@
         align-items: end;
     }
 }
+
+
+@media (max-width: 438px) {
+    .form-user-info{
+        &__inputs{
+            grid-template-columns: 1fr;
+        }
+    }
+}

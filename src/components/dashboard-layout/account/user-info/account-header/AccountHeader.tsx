@@ -1,5 +1,5 @@
 import "./account-header.scss"
-import change_avatar from "../../../../../assets/imgs/actions/photo.png"
+import change_avatar from "../../../../../assets/imgs/actions/photo.svg"
 
 interface AccountHeaderProps {
   avatar: string

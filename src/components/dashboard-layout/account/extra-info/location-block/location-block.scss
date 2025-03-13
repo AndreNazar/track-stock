@@ -8,3 +8,19 @@
         gap: 1em;
     }
 }
+@media (max-width: 1300px) {
+    .location__fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1060px) {
+    .location__fields {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 580px) {
+    .location__fields {
+        grid-template-columns: 1fr;
+    }
+}

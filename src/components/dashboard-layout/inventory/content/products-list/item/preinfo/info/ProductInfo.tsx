@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom"
-import Property from "../../property/Property"
 import { IProducts } from "../../../../../../../../types/types"
 import "./info.scss"
 import ProductText from "../text/ProductText"

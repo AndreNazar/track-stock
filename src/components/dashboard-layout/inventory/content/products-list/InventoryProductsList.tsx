@@ -1,32 +1,45 @@
 import { IProducts } from "../../../../../types/types"
 import "./products-list.scss"
 import InventoryProductsItem from "./item/InventoryProductsItem"
-import boot_img from "../../../../../assets/imgs/boots/boots1.png"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import api from "../../../../../api/api"
 
 
 function InventoryProductsList() {
 
-  const products: IProducts[] = [
-    {
-      id: 1,
-      images: [boot_img],
-      link: "https://stockx.com/air-jordan-1-retro-high-og-dark-mocha",
-      name: "Air Jordan 1 Retro High OG Dark Mocha",
-      size: "10 US",
-      color: "Dark Mocha",
-      brand: "Nike",
-      article: "315574-001",
-      release_date: "2022-03-18",
-      price: 190,
-      price_stockX: "190",
-      price_goat: null,
-      price_outofstock: null,
-      price_poison: null,
-    },
-  ]
+  const [products, setProducts] = useState<IProducts[]>([])
 
   const [selectedProduct, setSelectedProduct] = useState<number>(-1)
+
+  async function getProducts() {
+    try {
+      const response = await api.getSneakers();
+      console.log(response)
+      setProducts(response.sneakers.map((p: any) => {
+        return {
+          id: p.sneaker.id,
+          images: [p.photo_url],
+          name: p.sneaker.model,
+          size: p.sneaker.eu_size,
+          color: p.sneaker.color,
+          brand: p.sneaker.brand.brand,
+          article: p.sneaker.article,
+          release_date: "",
+          price: p.sneaker.price,
+          price_stockX: null,
+          price_goat: null,
+          price_outofstock: null,
+          price_poison: null,
+        }
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   return (
     <div className="products-list">
