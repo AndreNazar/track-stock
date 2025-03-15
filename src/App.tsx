@@ -15,7 +15,7 @@ import { openMobileMenu } from "./redux/slices/menuSlice"
 import { useEffect, useState } from "react"
 import Loading from "./components/ui/loadings/Loading"
 import Product from "./components/dashboard-layout/product/Product"
-import AddProductDialog from "./components/dialogs/AddProductDialog"
+import AddProductDialog from "./components/dialogs/add-product/AddProductDialog"
 function App() {
 
   const openAddProductDialog = useSelector((s:any) => s.dialog.dialogAddProduct)

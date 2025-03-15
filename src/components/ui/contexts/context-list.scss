@@ -1,0 +1,46 @@
+
+.context-menu{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: .5em 1em;
+    background-color: #222D4A;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 100;
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: .5em;
+        &-title{
+            font-size: 18px;
+        }
+        &-close{
+            cursor: pointer;
+        }
+    }
+    
+    &__list{
+        display: grid;
+        gap: .5em;
+    }
+
+    &__item{
+        padding: .5em 1em;
+        background-color: #394974;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: filter .1s;
+        &:hover{
+            filter: brightness(1.1);
+        }
+        &-text{
+            font-size: 14px;
+        }
+    }
+
+
+}

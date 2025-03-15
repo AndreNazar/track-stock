@@ -26,7 +26,7 @@ export class Api {
       return res.json()
     }
     if (res.status === 401 || res.status === 403) {
-      localStorage.removeItem("token")
+      localStorage.removeItem("access-token")
     }
     const errorText = await res.text()
     throw new Error(`Error ${res.status}: ${errorText}`)
