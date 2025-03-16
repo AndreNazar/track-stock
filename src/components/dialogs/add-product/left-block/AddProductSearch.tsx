@@ -1,10 +1,7 @@
-import { useState } from "react"
 import "./left-block.scss"
 import Field from "../../../ui/fields/Field"
 
-function AddProductSearch() {
-
-  const [article, setArticle] = useState<string>("")
+function AddProductSearch({article, setArticle} : {article: string, setArticle: (value: string) => void}) {
 
   return (
     <div className="dialog__search">

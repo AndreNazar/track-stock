@@ -22,6 +22,7 @@ export class Api {
   }
 
   private async getJsonResponse(res: Response) {
+    console.log(res)
     if (res.ok) {
       return res.json()
     }

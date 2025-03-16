@@ -47,6 +47,7 @@ export enum eBrandKeys {
     city = "city",
     placeOfTransaction = "placeOfTransaction",
     checkedFitting = "checkedFitting",
+    
 }
 
 export interface ISearchProducts {
@@ -95,4 +96,19 @@ export interface IDataSelect {
   id: number
   name: string
   selected: boolean
+}
+
+export interface CreateSneakersLot {
+  brand: string;
+  model: string;
+  color: string;
+  city: string;
+  place: string;
+  condition: string;
+  uk_size: number;
+  us_size: number;
+  eu_size: number;
+  price: number;
+  fitting: boolean;
+  article: string;
 }

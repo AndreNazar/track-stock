@@ -40,6 +40,9 @@
 
     &__button{
         position: absolute;
+        display: grid;
+        justify-content: center;
+        align-items: center;        
         bottom: 0;
         left: 0;
         width: 100%;

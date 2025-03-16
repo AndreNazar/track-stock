@@ -1,4 +1,4 @@
-import { IBrandsSelect, IDataSelect, IProducts } from "../../../types/types"
+import { CreateSneakersLot, IBrandsSelect, IDataSelect, IProducts } from "../../../types/types"
 import "./add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
 import AddProductSearch from "./left-block/AddProductSearch"
@@ -7,10 +7,14 @@ import AddProductRight from "./right-block/AddProductRight"
 import { useEffect, useMemo, useState } from "react"
 import ContextList from "../../ui/contexts/ContextList"
 import api from "../../../api/api"
+import { closeDialogAddProduct } from "../../../redux/slices/dialogSlice"
+import { useDispatch } from "react-redux"
 
 function AddProductDialog() {
 
+  const dispatch = useDispatch()
   const [isOpenBrands, setIsOpenBrands] = useState<boolean>(false)
+  const [isLoadingAdd, setLoadingAdd] = useState<boolean>(false)
   const [isOpenConditions, setIsOpenConditions] = useState<boolean>(false)
   const [currentInfo, setCurrentInfo] = useState<IProducts>({
     id: 1,
@@ -73,8 +77,36 @@ function AddProductDialog() {
     setConditionsList(_conditions)
   }
 
-  function sendDataHandler () {
-    console.log(currentInfo)
+  async function sendDataHandler () {
+
+    if(isLoadingAdd) return
+    setLoadingAdd(true)
+    const data: CreateSneakersLot = {
+      brand: brandsList.find(b => b.selected)?.name ?? "",
+      model: currentInfo.name || "Adizero F50 League Laceless TF",
+      color: currentInfo.color || "1",
+      city: currentInfo.city,
+      place: currentInfo.placeOfTransaction,
+      condition: conditionsList.find(c => c.selected)?.name ?? "",
+      price: currentInfo.priceBuy,
+      uk_size: +currentInfo.sizeUK,
+      us_size: +currentInfo.sizeUS,
+      eu_size: +currentInfo.sizeEU,
+      fitting: currentInfo.checkedFitting,
+      article: currentInfo.article,
+    }
+
+    try {
+      console.log(data)
+      const response = await api.createSneakersLot(data);
+      console.log("Sneakers Lot Created:", response);
+
+      setLoadingAdd(false)
+      dispatch(closeDialogAddProduct())
+      
+    } catch (error) {
+      console.error("Failed to create sneakers lot:", error);
+    }
   }
 
   
@@ -108,9 +140,11 @@ function AddProductDialog() {
   }, [])
 
   return (
-    <Dialog onClick={sendDataHandler}>
+    <Dialog onClick={sendDataHandler} loading={isLoadingAdd}>
       <div className="dialog__wrapper-left">
-        <AddProductSearch />
+        <AddProductSearch
+        article={currentInfo.article}
+        setArticle={(e) => changeCurrentInfo("article", e)}  />
         <AddProductImages image={currentInfo.image} />
       </div>
       <div className="dialog__wrapper-right">

@@ -11,6 +11,8 @@ import { CardList, InfoList } from "../../../types/types"
 import boots_img from "../../../assets/imgs/boots/boots2.png"
 import Statuses from "./components/statuses/Statuses"
 import Sales from "./components/sales/Sales"
+import api from "../../../api/api"
+import { useParams } from "react-router"
 
 const _infoList: InfoList[] = [
     {
@@ -45,6 +47,7 @@ const _cardList: CardList[] = [
 function Product (){
 
     const navigate = useNavigate()
+    const params = useParams()
 
     const [infoList, setInfoList] = useState<InfoList[]>(_infoList)
     const [cardList, setCardList] = useState<CardList[]>(_cardList)
@@ -52,25 +55,31 @@ function Product (){
     const [name, setName] = useState<null | string>(null)
     const [size, setSize] = useState<null | string>(null)
     
+    async function getProductInfo() {
+        const res = await api.getSneakerById(+params.product_id!)
+
+        console.log(res)
+        
+        setInfoList([
+            {...infoList[0], value: res.brand.brand}, // источник
+            {...infoList[1], value: ""}, // дата покупки
+            {...infoList[2], value: res.price}, // цена покупки
+            {...infoList[3], value: res.price}, // цена доставки
+        ])
+        setCardList([
+            {...cardList[0], value: res.article}, // артикул
+            {...cardList[1], value: res.brand.brand}, // бренд
+            {...cardList[2], value: "15/04/20"}, // дата релиза
+            {...cardList[3], value: res.color}, // цвет 
+            {...cardList[4], value: ""}, //  ретейл
+        ])
+        //setMainImg(boots_img)
+        setName(res.model)
+        setSize(res.us_size + " US")
+    }
+
     useEffect(() => {
-        setTimeout(() => {
-            setInfoList([
-                {...infoList[0], value: "Nike"}, // источник
-                {...infoList[1], value: "10/07/20"}, // дата покупки
-                {...infoList[2], value: "200"}, // цена покупки
-                {...infoList[3], value: "20"}, // цена доставки
-            ])
-            setCardList([
-                {...cardList[0], value: "FY5348"}, // артикул
-                {...cardList[1], value: "Adidas"}, // бренд
-                {...cardList[2], value: "15/04/20"}, // дата релиза
-                {...cardList[3], value: "Sulfur/Sulfur/Sulfur"}, // цвет 
-                {...cardList[4], value: "$220"}, //  ретейл
-            ])
-            setMainImg(boots_img)
-            setName("Yeezy Boost 350 V2 Sulfur")
-            setSize("8.5 US")
-        }, 2000)
+        getProductInfo()
     }, [])
 
     return <div className="product">

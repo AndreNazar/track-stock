@@ -3,8 +3,15 @@ import cross_img from "../../../assets/imgs/control/cross.svg"
 import { useRef } from "react"
 import { useDispatch } from "react-redux"
 import { closeDialogAddProduct } from "../../../redux/slices/dialogSlice"
+import Loading from "../loadings/Loading"
 
-function Dialog({children, onClick = () => {}}: {children: any, onClick?: () => void}) {
+interface IDialog {
+  children: React.ReactNode
+  onClick?: () => void
+  loading?: boolean
+}
+
+function Dialog({children, onClick = () => {}, loading=false}: IDialog) {
   
   const dialogRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
@@ -26,7 +33,11 @@ function Dialog({children, onClick = () => {}}: {children: any, onClick?: () => 
         <div className="dialog__content-wrapper">
           {children}
         </div>
-        <button onClick={onClick} className="dialog__button">Добавить</button>
+        <button onClick={onClick} className="dialog__button">
+          {!loading
+          ? <span>Добавить</span>
+          : <span><Loading color="#ffffff"/></span>}
+        </button>
       </div>
     </div>
   )
