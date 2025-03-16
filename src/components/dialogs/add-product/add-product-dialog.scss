@@ -3,9 +3,11 @@
     &__wrapper-left {
         display: flex;
         flex-direction: column;
+        width: 40%;
     }
 
     &__wrapper-right {
+        width: 60%;
     }
 
     &__wrapper-down {

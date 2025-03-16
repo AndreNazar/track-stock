@@ -26,6 +26,8 @@
     &__list{
         display: grid;
         gap: .5em;
+        max-height: 300px;
+        overflow-y: auto;
     }
 
     &__item{
@@ -43,4 +45,10 @@
     }
 
 
+}
+
+@media (max-width: 320px) {
+    .context-menu{
+        width: 100%;
+    }
 }

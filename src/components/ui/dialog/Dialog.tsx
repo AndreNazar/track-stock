@@ -4,7 +4,7 @@ import { useRef } from "react"
 import { useDispatch } from "react-redux"
 import { closeDialogAddProduct } from "../../../redux/slices/dialogSlice"
 
-function Dialog({children}: any) {
+function Dialog({children, onClick = () => {}}: {children: any, onClick?: () => void}) {
   
   const dialogRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
@@ -26,7 +26,7 @@ function Dialog({children}: any) {
         <div className="dialog__content-wrapper">
           {children}
         </div>
-        <button className="dialog__button">Добавить</button>
+        <button onClick={onClick} className="dialog__button">Добавить</button>
       </div>
     </div>
   )

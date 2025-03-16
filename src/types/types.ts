@@ -23,6 +23,7 @@ export interface IProducts {
   sizeEU: string
   city: string
   placeOfTransaction: string
+  checkedFitting: boolean
 }
 
 export enum eBrandKeys {
@@ -45,6 +46,7 @@ export enum eBrandKeys {
     sizeEU = "sizeEU",
     city = "city",
     placeOfTransaction = "placeOfTransaction",
+    checkedFitting = "checkedFitting",
 }
 
 export interface ISearchProducts {

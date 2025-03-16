@@ -4,8 +4,9 @@ import Dialog from "../../ui/dialog/Dialog"
 import AddProductSearch from "./left-block/AddProductSearch"
 import AddProductImages from "./left-block/AddProductImages"
 import AddProductRight from "./right-block/AddProductRight"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import ContextList from "../../ui/contexts/ContextList"
+import api from "../../../api/api"
 
 function AddProductDialog() {
 
@@ -31,19 +32,14 @@ function AddProductDialog() {
     sizeEU: "",
     city: "",
     placeOfTransaction: "",
+    checkedFitting: false,
   })
-  const [brandsList, setBrandsList] = useState<IDataSelect[]>([
-    {id: 1, name: "Adidas", selected: true},
-    {id: 2, name: "Nike", selected: false},
-  ])
-  const [conditionsList, setConditionsList] = useState<IDataSelect[]>([
-    {id: 1, name: "Новое", selected: true},
-    {id: 2, name: "б/у", selected: false},
-  ])
+  const [brandsList, setBrandsList] = useState<IDataSelect[]>([])
+  const [conditionsList, setConditionsList] = useState<IDataSelect[]>([])
 
   
 
-  function changeCurrentInfo (key: string, value: string | number) {
+  function changeCurrentInfo (key: string, value: string | number | boolean) {
     setCurrentInfo({...currentInfo, [key]: value})
   }
   
@@ -63,6 +59,22 @@ function AddProductDialog() {
     })]
     newList[idx].selected = true
     setConditionsList(newList)
+  }
+
+  const loadDataDialog = async () => {
+    const brands = await api.getBrands()
+    const conditions = await api.getConditions()
+    let _brands: IDataSelect[] = []
+    let _conditions: IDataSelect[] = []
+    brands.brands.map((b: any) => _brands.push({id: b.id, name: b.name, selected: false}))
+    conditions.conditions.map((c: any) => _conditions.push({id: c.id, name: c.name, selected: false}))
+    
+    setBrandsList(_brands)
+    setConditionsList(_conditions)
+  }
+
+  function sendDataHandler () {
+    console.log(currentInfo)
   }
 
   
@@ -90,8 +102,13 @@ function AddProductDialog() {
 
   }, [isOpenBrands, isOpenConditions, brandsList, conditionsList])
 
+
+  useEffect(() => {
+    loadDataDialog()
+  }, [])
+
   return (
-    <Dialog>
+    <Dialog onClick={sendDataHandler}>
       <div className="dialog__wrapper-left">
         <AddProductSearch />
         <AddProductImages image={currentInfo.image} />

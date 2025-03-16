@@ -27,7 +27,7 @@ function SelectField({data, heading, openHandler}: ISelectField) {
         className="select-field__input" 
         type="text" 
         placeholder="Выберите" 
-        value={data.find(el => el.selected)?.name} 
+        value={data.find(el => el.selected)?.name || "Выберите"} 
         />
         <img onClick={() => focusInput()}  className="select-field__image" src={down_img} alt="" />
     </div>
