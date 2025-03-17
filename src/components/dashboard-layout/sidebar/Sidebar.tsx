@@ -44,8 +44,8 @@ function Sidebar() {
       </div>
       <Menu />
       <div className="sidebar__exit menu__item">
-        <NavLink to="/account" className="menu__link">
-          <p className="menu__link-text">Аккаунт</p>
+        <NavLink to="/login" className="menu__link">
+          <p className="menu__link-text">Выход</p>
           <img className="menu__link-icon" src={exit_svg} alt="" />
         </NavLink>
       </div>

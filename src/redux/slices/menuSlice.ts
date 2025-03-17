@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { MenuType } from '../../types/types';
 
 interface MenuState {
-  currentTab: number
+  currentTab: MenuType
   onMobileMenu: boolean
   isMobileMenu: boolean
 }
 
 const initialState: MenuState = {
-    currentTab: 0,
+    currentTab: "/account",
     onMobileMenu: false,
     isMobileMenu: false
 };
@@ -16,7 +17,7 @@ const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
-    switchTab(state, action: PayloadAction<number>) {
+    switchTab(state, action: PayloadAction<MenuType>) {
       state.currentTab = action.payload;
     },
     openMobileMenu(state) {

@@ -112,3 +112,5 @@ export interface CreateSneakersLot {
   fitting: boolean;
   article: string;
 }
+
+export type MenuType = "/inventory" | "/statistic" | "/account"

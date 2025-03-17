@@ -4,18 +4,20 @@ import "./product.scss"
 import Info from "./components/info/Info"
 import { useEffect, useState } from "react"
 import Card from "./components/card/Card"
-import { CardList, InfoList, IProducts } from "../../../types/types"
+import { IProducts } from "../../../types/types"
 import Statuses from "./components/statuses/Statuses"
 import Sales from "./components/sales/Sales"
 import { Api } from "../../../api/api"
 import { useParams } from "react-router"
-import Loading from "../../ui/loadings/Loading"
+import { switchTab } from "../../../redux/slices/menuSlice"
+import { useDispatch } from "react-redux"
 
 
 function Product (){
 
     const navigate = useNavigate()
     const params = useParams()
+    const dispatch = useDispatch()
 
     const [dataProduct, setDataProduct] = useState<IProducts | null>(null)
     
@@ -51,7 +53,9 @@ function Product (){
 
     useEffect(() => {
         getProductInfo()
+        dispatch(switchTab("/inventory"))
     }, [])
+    
 
     return <div className="product">
         <div className="product__back">
