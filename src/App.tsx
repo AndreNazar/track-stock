@@ -17,10 +17,12 @@ import Loading from "./components/ui/loadings/Loading"
 import Product from "./components/dashboard-layout/product/Product"
 import AddProductDialog from "./components/dialogs/add-product/AddProductDialog"
 import EditProductDialog from "./components/dialogs/edit-product/EditProductDialog"
+import DeleteProduct from "./components/dialogs/delete-product/DeleteProduct"
 
 function App() {
   const openAddProductDialog = useSelector((s:any) => s.dialog.dialogAddProduct)
   const openEditProductDialog = useSelector((s:any) => s.dialog.dialogEditProduct)
+  const opendialogDeleteProduct = useSelector((s:any) => s.dialog.dialogDeleteProduct)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(true)
@@ -40,17 +42,9 @@ function App() {
 
 
   const isActiveDialog = useMemo(() => {
-    return openAddProductDialog || openEditProductDialog
-  }, [openAddProductDialog, openEditProductDialog])
+    return openAddProductDialog || openEditProductDialog || opendialogDeleteProduct
+  }, [openAddProductDialog, openEditProductDialog, opendialogDeleteProduct])
 
-  useEffect(() => {
-    console.log(openEditProductDialog)
-  }, [openEditProductDialog])
-
-  useEffect(() => {
-    
-
-  }, [])
 
   return isGlobalLoading 
   ? <div className="global-loading"><Loading/></div>
@@ -60,6 +54,7 @@ function App() {
       </button>}
       {openAddProductDialog && <AddProductDialog />}
       {openEditProductDialog && <EditProductDialog />}
+      {opendialogDeleteProduct && <DeleteProduct />}
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route element={<AuthLayout />}>

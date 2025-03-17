@@ -57,6 +57,23 @@
     }
 }
 
+
+.confirm-dialog{
+    &__content{
+        top: 45%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+    }
+    &__button--confirm{
+        width: 50%;
+    }
+    &__button--cancel{
+        left: 50%;
+        width: 50%;
+        background-color: #EB5757;
+    }
+}
+
 @media (max-width: 1024px) {
     .dialog__content{
         width: 900px;

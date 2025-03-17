@@ -4,7 +4,7 @@ import Property from "../../../../ui/property/Property"
 import "./card.scss"
 import trash_png from "../../../../../assets/imgs/control/trash.svg"
 import edit_png from "../../../../../assets/imgs/control/edit_2.svg"
-import { openDialogEditProduct } from "../../../../../redux/slices/dialogSlice"
+import { openDialogDeleteProduct, openDialogEditProduct } from "../../../../../redux/slices/dialogSlice"
 import { useDispatch } from "react-redux"
 
 interface CardProps {
@@ -28,6 +28,11 @@ function Card({dataProduct}: CardProps) {
             dispatch(openDialogEditProduct({...dataProduct}))        
         }
     }
+    function delteProductHandler() {
+        if(dataProduct){
+            dispatch(openDialogDeleteProduct({id: dataProduct.id, name: dataProduct.name}))      
+        }
+    }
 
     return <div className="product__card">
         <div className="card__icon">
@@ -49,7 +54,7 @@ function Card({dataProduct}: CardProps) {
         </div>
         
         <div className="card__control">
-            <img src={trash_png} alt="" className="card__control-trash" />
+            <img onClick={() => delteProductHandler()} src={trash_png} alt="" className="card__control-trash" />
             <img onClick={() => editProductHandler()} src={edit_png} alt="" className="card__control-edit" />
         </div>
     </div>
