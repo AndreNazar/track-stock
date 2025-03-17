@@ -5,7 +5,7 @@ import Checkbox from "../../ui/checkbox/Checkbox"
 import "./registration.scss"
 import FieldPassword from "../../ui/fields/FieldPassword"
 import { useEffect, useState } from "react"
-import api from "../../../api/api"
+import api, { Api } from "../../../api/api"
 import Loading from "../../ui/loadings/Loading"
 
 function Registration({setIsGlobalLoading}:any) {
@@ -59,6 +59,7 @@ function Registration({setIsGlobalLoading}:any) {
     }
 
     try {
+      const api = new Api()
       const response = await api.signUp(data)
       if (response.message) {
         setMessage(response.message)

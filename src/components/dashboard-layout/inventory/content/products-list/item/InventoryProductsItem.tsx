@@ -3,7 +3,7 @@ import { useRef } from "react"
 import "./item.scss"
 import BetweenBlock from "./between/BetweenBlock"
 import ExtraInfo from "./extrainfo/ExtraInfo"
-import PreInfo from "./preinfo/Preinfo"
+import PreInfo from "./preinfo/PreInfo"
 
 interface InventoryProductsItemProps {
   product: IProducts

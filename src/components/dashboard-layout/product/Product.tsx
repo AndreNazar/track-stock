@@ -2,80 +2,51 @@ import { useNavigate } from "react-router"
 import back_svg from "../../../assets/imgs/control/back.svg"
 import "./product.scss"
 import Info from "./components/info/Info"
-import brand_png from "../../../assets/imgs/actions/brand.png"
-import date_png from "../../../assets/imgs/actions/date.png"
-import price_png from "../../../assets/imgs/actions/price.png"
 import { useEffect, useState } from "react"
 import Card from "./components/card/Card"
-import { CardList, InfoList } from "../../../types/types"
-import boots_img from "../../../assets/imgs/boots/boots2.png"
+import { CardList, InfoList, IProducts } from "../../../types/types"
 import Statuses from "./components/statuses/Statuses"
 import Sales from "./components/sales/Sales"
-import api from "../../../api/api"
+import { Api } from "../../../api/api"
 import { useParams } from "react-router"
+import Loading from "../../ui/loadings/Loading"
 
-const _infoList: InfoList[] = [
-    {
-        title: "Источник",
-        value: null,
-        img: brand_png
-    },
-    {
-        title: "Дата покупки",
-        value: null,
-        img: date_png
-    },
-    {
-        title: "Цена покупки",
-        value: null,
-        img: price_png
-    },
-    {
-        title: "Цена доставки",
-        value: null,
-        img: price_png
-    }
-]
-const _cardList: CardList[] = [
-    {title: "Артикул", value: null},
-    {title: "Бренд", value: null},
-    {title: "Дата релиза", value: null},
-    {title: "Цвет", value: null},
-    {title: "Ретейл", value: null},
-]
 
 function Product (){
 
     const navigate = useNavigate()
     const params = useParams()
 
-    const [infoList, setInfoList] = useState<InfoList[]>(_infoList)
-    const [cardList, setCardList] = useState<CardList[]>(_cardList)
-    const [mainImg, setMainImg] = useState<null | string>(null)
-    const [name, setName] = useState<null | string>(null)
-    const [size, setSize] = useState<null | string>(null)
+    const [dataProduct, setDataProduct] = useState<IProducts | null>(null)
     
     async function getProductInfo() {
+        const api = new Api()
         const res = await api.getSneakerById(+params.product_id!)
 
         console.log(res)
-        
-        setInfoList([
-            {...infoList[0], value: res.brand.brand}, // источник
-            {...infoList[1], value: ""}, // дата покупки
-            {...infoList[2], value: res.price}, // цена покупки
-            {...infoList[3], value: res.price}, // цена доставки
-        ])
-        setCardList([
-            {...cardList[0], value: res.article}, // артикул
-            {...cardList[1], value: res.brand.brand}, // бренд
-            {...cardList[2], value: "15/04/20"}, // дата релиза
-            {...cardList[3], value: res.color}, // цвет 
-            {...cardList[4], value: ""}, //  ретейл
-        ])
-        //setMainImg(boots_img)
-        setName(res.model)
-        setSize(res.us_size + " US")
+
+        setDataProduct({
+            id: res.id,
+            article: res.article,
+            brand: res.brand.brand,
+            city: res.city,
+            color: res.color,
+            condition: res.condition,
+            priceBuy: res.price,
+            placeOfTransaction: "",
+            checkedFitting: res.fitting,
+            priceDelivery: res.price,
+            price_goat: "",
+            price_outofstock: "",
+            price_poison: "",
+            price_stockX: "",
+            release_date: "",
+            sizeEU: res.eu_size,
+            sizeUK: res.uk_size,
+            sizeUS: res.us_size,
+            image: res.photo_url,
+            name: res.model,
+        })
     }
 
     useEffect(() => {
@@ -89,8 +60,15 @@ function Product (){
             </button>
         </div>
         <div className="product__wrapper">
-            <Card cardList={cardList} mainImg={mainImg} name={name} size={size}/>
-            <Info infoList={infoList}/>
+            <Card dataProduct={dataProduct}/>
+            <Info info={[
+                dataProduct?.brand || null, 
+                dataProduct?.release_date || null, 
+                dataProduct?.priceBuy.toString() || null, 
+                dataProduct?.priceDelivery.toString() || null
+            ]} />
+            
+            
             <Statuses />
             <Sales />
         </div>

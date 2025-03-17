@@ -2,7 +2,7 @@ import { IProducts } from "../../../../../types/types"
 import "./products-list.scss"
 import InventoryProductsItem from "./item/InventoryProductsItem"
 import { useEffect, useState } from "react"
-import api from "../../../../../api/api"
+import { Api } from "../../../../../api/api"
 
 
 function InventoryProductsList() {
@@ -13,23 +13,31 @@ function InventoryProductsList() {
 
   async function getProducts() {
     try {
+      const api = new Api()
       const response = await api.getSneakers();
       console.log(response)
-      setProducts(response.sneakers.map((p: any) => {
+      setProducts(response.sneakers.map((p: any): IProducts => {
         return {
           id: p.sneaker.id,
-          images: [p.photo_url],
+          image: p.photo_url,
           name: p.sneaker.model,
-          size: p.sneaker.eu_size,
+          sizeEU: p.sneaker.eu_size,
+          sizeUK: p.sneaker.uk_size,
+          sizeUS: p.sneaker.us_size,
           color: p.sneaker.color,
+          city: p.sneaker.city,
+          checkedFitting: p.sneaker.fitting,
+          condition: p.sneaker.condition,
           brand: p.sneaker.brand.brand,
           article: p.sneaker.article,
           release_date: "",
-          price: p.sneaker.price,
-          price_stockX: null,
-          price_goat: null,
-          price_outofstock: null,
-          price_poison: null,
+          priceBuy: p.sneaker.price,
+          placeOfTransaction: "",
+          price_goat: "",
+          price_outofstock: "",
+          price_poison: "",
+          price_stockX: "",
+          priceDelivery: p.sneaker.price
         }
       }))
     } catch (error) {

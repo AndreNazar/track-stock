@@ -4,7 +4,7 @@ import Field from "../../ui/fields/Field"
 import "./login.scss"
 import FieldPassword from "../../ui/fields/FieldPassword"
 import { useEffect, useState } from "react"
-import api, { ILogin } from "../../../api/api"
+import api, { Api, ILogin } from "../../../api/api"
 import Loading from "../../ui/loadings/Loading"
 
 function Login({setIsAuth}: {setIsAuth: (arg: boolean) => void}) {
@@ -19,6 +19,7 @@ function Login({setIsAuth}: {setIsAuth: (arg: boolean) => void}) {
   }
   
   async function signIn(fields: ILogin) {
+    const api = new Api()
     return api.login(fields).then(async(auth) => {
         
       setIsAuth(Boolean(auth.token));

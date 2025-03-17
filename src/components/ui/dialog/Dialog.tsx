@@ -1,26 +1,25 @@
 import "./dialog.scss"
 import cross_img from "../../../assets/imgs/control/cross.svg"
 import { useRef } from "react"
-import { useDispatch } from "react-redux"
-import { closeDialogAddProduct } from "../../../redux/slices/dialogSlice"
 import Loading from "../loadings/Loading"
 
 interface IDialog {
   children: React.ReactNode
   onClick?: () => void
   loading?: boolean
+  closeHandler: () => void
+  buttonText: string
 }
 
-function Dialog({children, onClick = () => {}, loading=false}: IDialog) {
+function Dialog({children, onClick = () => {}, loading=false, closeHandler, buttonText}: IDialog) {
   
   const dialogRef = useRef<HTMLDivElement>(null)
-  const dispatch = useDispatch()
 
   function closeDialog(){
     dialogRef.current?.classList.add("dialog--close")
     setTimeout(() => {
       dialogRef.current?.classList.remove("dialog--close")
-      dispatch(closeDialogAddProduct())
+      closeHandler()
     }, 10) // тут анимацию хотел сделать, попозже
   }
 
@@ -35,7 +34,7 @@ function Dialog({children, onClick = () => {}, loading=false}: IDialog) {
         </div>
         <button onClick={onClick} className="dialog__button">
           {!loading
-          ? <span>Добавить</span>
+          ? <span>{buttonText}</span>
           : <span><Loading color="#ffffff"/></span>}
         </button>
       </div>

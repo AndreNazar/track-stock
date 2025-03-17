@@ -12,13 +12,15 @@ import InventoryProductsList from "./components/dashboard-layout/inventory/conte
 import { useDispatch, useSelector } from "react-redux"
 import burger_svg from "./assets/imgs/control/burger.svg"
 import { openMobileMenu } from "./redux/slices/menuSlice"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Loading from "./components/ui/loadings/Loading"
 import Product from "./components/dashboard-layout/product/Product"
 import AddProductDialog from "./components/dialogs/add-product/AddProductDialog"
-function App() {
+import EditProductDialog from "./components/dialogs/edit-product/EditProductDialog"
 
+function App() {
   const openAddProductDialog = useSelector((s:any) => s.dialog.dialogAddProduct)
+  const openEditProductDialog = useSelector((s:any) => s.dialog.dialogEditProduct)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(true)
@@ -26,6 +28,7 @@ function App() {
   const navigate = useNavigate()
   
   useEffect(() => {
+    console.log(isAuth)
     if (!localStorage.getItem('access-token')) { // WARNING
       navigate("/login")
       setIsAuth(false)
@@ -33,15 +36,30 @@ function App() {
       setIsAuth(true)
     }
     setIsGlobalLoading(false)
+  }, [isAuth])
+
+
+  const isActiveDialog = useMemo(() => {
+    return openAddProductDialog || openEditProductDialog
+  }, [openAddProductDialog, openEditProductDialog])
+
+  useEffect(() => {
+    console.log(openEditProductDialog)
+  }, [openEditProductDialog])
+
+  useEffect(() => {
+    
+
   }, [])
 
   return isGlobalLoading 
   ? <div className="global-loading"><Loading/></div>
-  : (<div>
+  : (<div className={"global-wrapper" + (isActiveDialog ? " global-wrapper--blockscroll" : "")}>
       {isMobileMenu && <button onClick={() => dispatch(openMobileMenu())} className="menu-burger-button">
         <img src={burger_svg} alt="" />
       </button>}
       {openAddProductDialog && <AddProductDialog />}
+      {openEditProductDialog && <EditProductDialog />}
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route element={<AuthLayout />}>

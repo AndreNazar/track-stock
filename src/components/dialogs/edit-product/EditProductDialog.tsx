@@ -1,18 +1,19 @@
-import { CreateSneakersLot, IBrandsSelect, IDataSelect, IProducts } from "../../../types/types"
-import "./add-product-dialog.scss"
+import { CreateSneakersLot, IDataSelect, IProducts } from "../../../types/types"
+import "../add-product/add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
-import AddProductSearch from "./left-block/AddProductSearch"
-import AddProductImages from "./left-block/AddProductImages"
-import AddProductRight from "./right-block/AddProductRight"
 import { useEffect, useMemo, useState } from "react"
 import ContextList from "../../ui/contexts/ContextList"
 import api, { Api } from "../../../api/api"
-import { closeDialogAddProduct } from "../../../redux/slices/dialogSlice"
-import { useDispatch } from "react-redux"
+import { closeDialogEditProduct } from "../../../redux/slices/dialogSlice"
+import { useDispatch, useSelector } from "react-redux"
+import EditProductImages from "./left-block/EditProductImages"
+import EditProductSearch from "./left-block/EditProductSearch"
+import EditProductRight from "./right-block/EditProductRight"
 
-function AddProductDialog() {
+function EditProductDialog() {
 
   const dispatch = useDispatch()
+  const dataDialogEdit = useSelector((s:any) => s.dialog.dataDialogEdit)
   const [isOpenBrands, setIsOpenBrands] = useState<boolean>(false)
   const [isLoadingAdd, setLoadingAdd] = useState<boolean>(false)
   const [isOpenConditions, setIsOpenConditions] = useState<boolean>(false)
@@ -104,13 +105,18 @@ function AddProductDialog() {
       console.log("Sneakers Lot Created:", response);
 
       setLoadingAdd(false)
-      dispatch(closeDialogAddProduct())
+      dispatch(closeDialogEditProduct())
       
     } catch (error) {
       console.error("Failed to create sneakers lot:", error);
     }
   }
 
+  async function fillDataDialog () {
+    setCurrentInfo(dataDialogEdit)
+    //setBrandsList((prev) => prev.map(p => p.)) 
+    //setConditionsList((prev) => prev.map(p => p.))
+  }
   
   const dialogLayout = useMemo(() => {
     if(!(isOpenBrands && isOpenConditions)){
@@ -139,22 +145,24 @@ function AddProductDialog() {
 
   useEffect(() => {
     loadDataDialog()
+    fillDataDialog()
   }, [])
 
   return (
     <Dialog 
-    closeHandler={() => dispatch(closeDialogAddProduct())} 
+    closeHandler={() => dispatch(closeDialogEditProduct())} 
     onClick={sendDataHandler} 
     loading={isLoadingAdd}
-    buttonText="Добавить">
+    buttonText="Сохранить"
+    >
       <div className="dialog__wrapper-left">
-        <AddProductSearch
+        <EditProductSearch
         article={currentInfo.article}
         setArticle={(e) => changeCurrentInfo("article", e)}  />
-        <AddProductImages image={currentInfo.image} />
+        <EditProductImages image={currentInfo.image} />
       </div>
       <div className="dialog__wrapper-right">
-        <AddProductRight 
+        <EditProductRight 
         brandsList={brandsList} 
         conditionsList={conditionsList}
         currentInfo={currentInfo} 
@@ -169,4 +177,4 @@ function AddProductDialog() {
   )
 }
 
-export default AddProductDialog
+export default EditProductDialog
