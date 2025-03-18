@@ -1,0 +1,16 @@
+.profit-block{
+    display: grid;
+    background-color: #151D31;
+    flex: 1;
+    min-width: 50%;
+    border-radius: 20px;
+    padding: 1.5em 2em;
+    box-sizing: border-box;
+    &__title{
+        width: 50%;
+        &-date{
+            color: #6578A9;
+            font-size: 14px;
+        }
+    }
+}

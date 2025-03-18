@@ -48,3 +48,16 @@
         }
     }
 }
+.select-text{
+    display: flex;
+    gap: 1em;
+    cursor: pointer;
+    width: fit-content;
+    &__title{
+        font-family: "Ubuntu-Bold";
+        font-size: 18px;
+    }
+    &__image{
+        width: 15px;
+    }
+}

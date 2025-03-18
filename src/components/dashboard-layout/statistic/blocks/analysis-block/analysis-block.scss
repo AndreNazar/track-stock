@@ -1,0 +1,14 @@
+.analysis-block{
+    display: grid;
+    background-color: #151D31;
+    width: calc(50% - 1em);
+    border-radius: 20px;
+    padding: 1.5em 2em;
+    box-sizing: border-box;
+    &__between{
+        width: 100%;
+        margin: 2em 0;
+        height: 2px;
+        background-color: #394974;
+    }
+}

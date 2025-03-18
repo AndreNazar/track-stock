@@ -1,0 +1,38 @@
+.statistic{
+    &__tabs{
+        display: flex;
+    }
+    &__tab{
+        position: relative;
+        display: flex;
+        width: 120px;
+        padding: .5em;
+        box-sizing: border-box;
+        cursor: pointer;
+        justify-content: center;
+        &::after{
+            content: '';
+            position: absolute;
+            display: flex;
+            width: 100%;
+            height: 2px;
+            background-color: #394974;
+            bottom: 0;
+            transition: background-color .2s;
+        }
+        &--active{
+            &::after{
+                background-color: #56CCF2;
+            }
+        }
+    }
+
+    &__content{
+        margin-top: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1em;
+        padding-bottom: 2em;
+    }
+}

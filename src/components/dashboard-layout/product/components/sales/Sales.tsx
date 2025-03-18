@@ -1,18 +1,7 @@
-import { BarElement, CategoryScale, Chart, Legend, LinearScale, Title, Tooltip } from "chart.js";
+
 import { IProductSalesTab } from "../../../../../types/types"
 import "./sales.scss"
 import { Bar } from 'react-chartjs-2';
-
-
-
-Chart.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
 function Sales() {
   const tabs: IProductSalesTab[] = [

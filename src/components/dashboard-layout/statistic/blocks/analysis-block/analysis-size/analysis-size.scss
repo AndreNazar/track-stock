@@ -1,0 +1,12 @@
+.analysis-sizes {
+    .select-text__title {
+        font-size: 24px;
+    }
+    &__list{
+        display: grid;
+        gap: .5em;
+        height: 160px;
+        overflow-y: auto;
+        padding-right: 1em;
+    }
+}

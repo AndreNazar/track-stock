@@ -18,16 +18,19 @@ import Product from "./components/dashboard-layout/product/Product"
 import AddProductDialog from "./components/dialogs/add-product/AddProductDialog"
 import EditProductDialog from "./components/dialogs/edit-product/EditProductDialog"
 import DeleteProduct from "./components/dialogs/delete-product/DeleteProduct"
+import ContextList from "./components/ui/contexts/ContextList"
+import { IContextBlock } from "./types/types"
 
 function App() {
   const openAddProductDialog = useSelector((s:any) => s.dialog.dialogAddProduct)
   const openEditProductDialog = useSelector((s:any) => s.dialog.dialogEditProduct)
   const opendialogDeleteProduct = useSelector((s:any) => s.dialog.dialogDeleteProduct)
+  const contextBlock: IContextBlock = useSelector((s:any) => s.dialog.contextBlock)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(true)
   const [isAuth, setIsAuth] = useState<boolean>(false)
-  const navigate = useNavigate()
   
   useEffect(() => {
     console.log(isAuth)
@@ -55,6 +58,13 @@ function App() {
       {openAddProductDialog && <AddProductDialog />}
       {openEditProductDialog && <EditProductDialog />}
       {opendialogDeleteProduct && <DeleteProduct />}
+      {contextBlock && <ContextList 
+        title={contextBlock.title}
+        list={contextBlock.list}
+        top={contextBlock.top}
+        left={contextBlock.left}
+        width={contextBlock.width}
+      />}
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route element={<AuthLayout />}>

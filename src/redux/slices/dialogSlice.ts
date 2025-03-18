@@ -1,4 +1,4 @@
-import { IProducts } from './../../types/types';
+import { IContextBlock, IProducts } from './../../types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface DialogState {
@@ -7,6 +7,7 @@ interface DialogState {
     dataDialogEdit: IProducts | null
     dialogDeleteProduct: boolean
     deleteData: {id: number, name: string} | null
+    contextBlock: IContextBlock | null
 }
 
 const initialState: DialogState = {
@@ -14,7 +15,8 @@ const initialState: DialogState = {
     dialogEditProduct: false,
     dataDialogEdit: null,
     dialogDeleteProduct: false,
-    deleteData: null
+    deleteData: null,
+    contextBlock: null
 };
 
 const dialogSlice = createSlice({
@@ -42,7 +44,13 @@ const dialogSlice = createSlice({
     closeDialogDeleteProduct(state) {
       state.dialogDeleteProduct = false
       state.deleteData = null
-    }
+    },
+    newContextBlock(state, action: PayloadAction<IContextBlock | null>) {
+      state.contextBlock = action.payload
+    },
+    closeContextBlock(state) {
+      state.contextBlock = null
+    },
   },
 });
 
@@ -52,7 +60,8 @@ export const {
   openDialogEditProduct, 
   closeDialogEditProduct,
   openDialogDeleteProduct,
-  closeDialogDeleteProduct
-  
+  closeDialogDeleteProduct,
+  newContextBlock,
+  closeContextBlock,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;

@@ -1,26 +1,50 @@
 import "./context-list.scss"
-import close_img from "../../../assets/imgs/control/cross.svg"
+import { useDispatch } from "react-redux"
+import { closeContextBlock } from "../../../redux/slices/dialogSlice"
+import { IContextBlock } from "../../../types/types"
+import { selectCurrentContext } from "../../../redux/slices/selectionsSlice"
+import { useEffect, useRef, useState } from "react"
 
-interface IContextList {
-  title: string
-  list: string[]
-  setList: (idx: number) => void
-  setIsOpenBrands: (value: boolean) => void
-}
 
-function ContextList({ title, list, setList, setIsOpenBrands }: IContextList) {
+function ContextList({ list, left, top, width }: IContextBlock) {
+
+  const dispatch = useDispatch()
+  const blockRef = useRef<HTMLDivElement>(null)
+  const [firstClick, setFirstClick] = useState<boolean>(true)
 
   function selectItem(idx: number) {
-    setList(idx)
-    setIsOpenBrands(false)
+    dispatch(selectCurrentContext(idx))
+    dispatch(closeContextBlock())
   }
 
+  
+  function handleClickOutside(event: MouseEvent) {
+    console.log(firstClick)
+    if (firstClick) {
+      setFirstClick(false)
+      return
+    }
+    if (blockRef.current && !blockRef.current.contains(event.target as Node)) {
+      dispatch(closeContextBlock())
+    }
+  }
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => handleClickOutside(e);
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [firstClick])
+
   return (
-    <div className="context-menu">
-      <div className="context-menu__header">
-        <p className="context-menu__header-title">{title}</p>
-        <img onClick={() => setIsOpenBrands(false)} className="context-menu__header-close" src={close_img} alt="" />
-      </div>
+    <div style={{
+      top: top + 40,
+      left: left,
+      width: width,
+      transform: "translate(0%, 0%)"
+    }} ref={blockRef} className="context-menu">
       <ul className="context-menu__list">
         {list.map((item: string, i: number) => (
           <li key={i} onClick={() => selectItem(i)} className="context-menu__item">

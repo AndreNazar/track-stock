@@ -5,7 +5,7 @@ export interface IBrand {
 }
 export interface IProducts {
   id: number
-  image: string
+  image: string | null
   name: string
   color: string
   brand: string
@@ -111,6 +111,14 @@ export interface CreateSneakersLot {
   price: number;
   fitting: boolean;
   article: string;
+}
+
+export interface IContextBlock {
+  title: string
+  list: string[]
+  top: number
+  left: number
+  width: number
 }
 
 export type MenuType = "/inventory" | "/statistic" | "/account"

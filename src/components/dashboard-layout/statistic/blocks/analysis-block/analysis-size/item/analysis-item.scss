@@ -1,0 +1,30 @@
+.analysis-item{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    &__size{
+        font-size: 14px;
+        width: 50px;
+    }
+    &__bar{
+        position: relative;
+        flex: 1;
+        height: 20px;
+        border-radius: 20px;
+        background-color: #394974;
+        overflow: hidden;
+        &-track{
+            position: absolute;
+            left: 0;
+            border-radius: 20px;
+            height: 20px;
+            width: 50%;
+            background-color: #56CCF2;
+        }
+        &-label{
+            position: absolute;
+            right: 1em;
+            font-size: 14px;
+        }
+    }
+}

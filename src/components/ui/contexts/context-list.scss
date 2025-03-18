@@ -8,6 +8,7 @@
     padding: .5em 1em;
     background-color: #222D4A;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
     border-radius: 10px;
     z-index: 100;
     &__header{
