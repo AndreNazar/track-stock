@@ -1,6 +1,6 @@
 .analysis-sizes {
     .select-text__title {
-        font-size: 24px;
+        font-size: clamp(18px, 3vw, 24px);
     }
     &__list{
         display: grid;

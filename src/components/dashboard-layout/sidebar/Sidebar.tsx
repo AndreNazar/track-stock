@@ -44,7 +44,7 @@ function Sidebar() {
       </div>
       <Menu />
       <div className="sidebar__exit menu__item">
-        <NavLink to="/login" className="menu__link">
+        <NavLink onClick={() => localStorage.removeItem("access-token")} to="/login" className="menu__link">
           <p className="menu__link-text">Выход</p>
           <img className="menu__link-icon" src={exit_svg} alt="" />
         </NavLink>

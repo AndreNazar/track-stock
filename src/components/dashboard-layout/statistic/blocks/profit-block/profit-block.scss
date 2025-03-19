@@ -1,4 +1,4 @@
-.profit-block{
+.profit-block {
     display: grid;
     background-color: #151D31;
     flex: 1;
@@ -6,11 +6,33 @@
     border-radius: 20px;
     padding: 1.5em 2em;
     box-sizing: border-box;
-    &__title{
+    order: 1;
+
+    &__title {
         width: 50%;
-        &-date{
+
+        &-date {
             color: #6578A9;
             font-size: 14px;
         }
     }
+
+    .select-text__title {
+        font-size: clamp(18px, 3vw, 24px);
+    }
+}
+
+@media (max-width: 1115px) {
+    .profit-block {
+        &__title {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .profit-block {
+        padding: 1em;
+    }
+
 }

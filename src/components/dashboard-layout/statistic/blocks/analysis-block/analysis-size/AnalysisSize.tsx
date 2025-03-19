@@ -38,7 +38,7 @@ function AnalysisSize() {
     <div ref={titleRef} className="analysis-sizes">
       <SelectText title={listTitles[currentTitle]} onClick={openContext} />
       <ul className="analysis-sizes__list">
-        {sizesRating.map(s => <li className="analysis-sizes__item">
+        {sizesRating.map(s => <li key={s.id} className="analysis-sizes__item">
           <AnalysisSizeItem info={s} />
         </li>)}
       </ul>

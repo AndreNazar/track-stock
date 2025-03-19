@@ -1,9 +1,29 @@
+import { useEffect, useState } from "react"
 import { Bar } from "react-chartjs-2"
 
 function GraphicBar() {
+
+  const [labels, setLabels] = useState(["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"])
+
+  useEffect(() => {
+
+    function handlerResize() {
+      console.log(window.innerWidth)
+      if (window.innerWidth < 888) {
+        setLabels(["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"])
+      }else{
+        setLabels(["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"])
+      }
+    }
+
+    window.addEventListener("resize", handlerResize)
+    handlerResize()
+    return () => window.removeEventListener("resize", handlerResize)
+  }, [])
+
   return (<Bar
     data={{
-      labels: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
+      labels,
       datasets: [
         {
           label: "Количество продаж",

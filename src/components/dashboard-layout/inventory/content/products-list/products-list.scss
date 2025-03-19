@@ -1,4 +1,10 @@
 .products-list{
+    position: relative;
     display: grid;
     gap: 1em;
+    .loading{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }

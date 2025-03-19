@@ -29,6 +29,13 @@
         grid-template-columns: 1fr 1fr;
         gap: .5em;
 
+        img{
+            cursor: pointer;
+            &:hover{
+                filter: invert(0.2);
+            }
+        }
+
         &-delete {}
 
         &-close {}

@@ -5,5 +5,18 @@
     .property__value{
         font-size: 24px;
         font-family: "Ubuntu-Bold";
+        text-wrap: nowrap;
+    }
+}
+@media (max-width: 970px) {
+    .property-block{
+        justify-content: center;
+        text-align: center;
+    }
+}
+@media (max-width: 430px) {
+    .property-block{
+        flex-wrap: wrap;
+        gap: 1em;
     }
 }

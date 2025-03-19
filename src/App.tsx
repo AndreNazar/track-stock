@@ -33,7 +33,6 @@ function App() {
   const [isAuth, setIsAuth] = useState<boolean>(false)
   
   useEffect(() => {
-    console.log(isAuth)
     if (!localStorage.getItem('access-token')) { // WARNING
       navigate("/login")
       setIsAuth(false)

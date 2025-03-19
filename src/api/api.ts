@@ -22,7 +22,6 @@ export class Api {
   }
 
   private async getJsonResponse(res: Response) {
-    console.log(res)
     if (res.ok) {
       return res.json()
     }
@@ -65,6 +64,7 @@ export class Api {
   }
 
   async getSneakers() {
+    console.log(this.token)
     return fetch(this.URL + "sneakers/sneakers", {
       method: "GET",
       headers: {

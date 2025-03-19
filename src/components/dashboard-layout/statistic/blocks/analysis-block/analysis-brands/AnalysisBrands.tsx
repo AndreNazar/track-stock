@@ -6,9 +6,22 @@ import Api from "../../../../../../api/api"
 function AnalysisBrands() {
 
     const [brandsData, setBrandsData] = useState<{id: number, name: string, percent: number, color: string}[]>([])
+    const [boxWidth, setBoxWidth] = useState(50)
 
     useEffect(() => {
-        const colors = ["#56CCF2", "#2D9CDB", "#177FBB", "#0B5B89", "#002F4A", "#00131C", "#000000"]
+
+        const handleResize = () => {
+            setBoxWidth(document.documentElement.clientWidth > 1170 ? 50 : 30)
+        }
+        
+        window.addEventListener("resize", handleResize)
+        handleResize() 
+        
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
+    useEffect(() => {
+        const colors = ["#56CCF2", "#2D9CDB", "#177FBB", "#0B5B89", "#002F4A", "#01283f", "#000000"]
         const api = new Api()
         api.getBrands().then(res => {
             setBrandsData(res.brands.map((b: any, i: number) => {
@@ -45,8 +58,8 @@ function AnalysisBrands() {
                 position: "right",
                 labels: {
                   color: "white", 
-                  boxWidth: 50,
-                  boxHeight: 30,
+                  boxWidth: boxWidth,
+                  boxHeight: boxWidth/2,
                   font: {
                     size: 14, 
                   },

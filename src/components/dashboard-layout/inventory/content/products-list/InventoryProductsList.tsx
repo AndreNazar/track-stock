@@ -3,20 +3,24 @@ import "./products-list.scss"
 import InventoryProductsItem from "./item/InventoryProductsItem"
 import { useEffect, useState } from "react"
 import { Api } from "../../../../../api/api"
+import Loading from "../../../../ui/loadings/Loading"
 
 
 function InventoryProductsList() {
 
   const [products, setProducts] = useState<IProducts[]>([])
+  const [isLoading, setLoading] = useState<boolean>(false)
 
   const [selectedProduct, setSelectedProduct] = useState<number>(-1)
 
   async function getProducts() {
+    setLoading(true)
     try {
       const api = new Api()
       const response = await api.getSneakers();
       console.log(response)
       setProducts(response.sneakers.map((p: any): IProducts => {
+        setLoading(false)
         return {
           id: p.sneaker.id,
           image: p.photo_url,
@@ -51,7 +55,9 @@ function InventoryProductsList() {
 
   return (
     <div className="products-list">
-        {products.map((p: IProducts) => <InventoryProductsItem 
+        {isLoading
+        ? <Loading size={30} />
+        : products.map((p: IProducts) => <InventoryProductsItem 
         product={p} 
         key={p.id} 
         selectedProduct={selectedProduct} 

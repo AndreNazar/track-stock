@@ -5,11 +5,27 @@
     border-radius: 20px;
     padding: 1.5em 2em 1em 2em;
     box-sizing: border-box;
+    order: 3;
     &__title{
         font-family: "Ubuntu-Bold";
-        font-size: 24px;
+        font-size: clamp(18px, 3vw, 24px);
     }
     &__list{
         margin: 0;
+    }
+}
+
+
+@media (max-width: 1100px) {
+    .sales-block{
+        width: 100%;
+        order: 4;
+    }
+}
+
+@media (max-width: 400px) {
+    .sales-block {
+        padding: 1em;
+        padding-bottom: .5em;
     }
 }
