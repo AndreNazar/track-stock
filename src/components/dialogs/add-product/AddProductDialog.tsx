@@ -1,21 +1,23 @@
-import { CreateSneakersLot, IBrandsSelect, IDataSelect, IProducts } from "../../../types/types"
+import { CreateSneakersLot, eBrandKeys, IDataSelect, IProducts } from "../../../types/types"
 import "./add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
 import AddProductSearch from "./left-block/AddProductSearch"
 import AddProductImages from "./left-block/AddProductImages"
 import AddProductRight from "./right-block/AddProductRight"
-import { useEffect, useMemo, useState } from "react"
-import ContextList from "../../ui/contexts/ContextList"
-import api, { Api } from "../../../api/api"
+import { useEffect, useState } from "react"
+import { Api } from "../../../api/api"
 import { closeDialogAddProduct } from "../../../redux/slices/dialogSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { addToProductList } from "../../../redux/slices/productSlice"
+
+
+let timer: any = null
 
 function AddProductDialog() {
 
   const dispatch = useDispatch()
-  const [isOpenBrands, setIsOpenBrands] = useState<boolean>(false)
+  const currentContext  = useSelector((s: any) => s.selections.currentContext)
   const [isLoadingAdd, setLoadingAdd] = useState<boolean>(false)
-  const [isOpenConditions, setIsOpenConditions] = useState<boolean>(false)
   const [currentInfo, setCurrentInfo] = useState<IProducts>({
     id: 1,
     name: "",
@@ -40,29 +42,31 @@ function AddProductDialog() {
   })
   const [brandsList, setBrandsList] = useState<IDataSelect[]>([])
   const [conditionsList, setConditionsList] = useState<IDataSelect[]>([])
-
+  const [isLoadingArticle, setIsLoadingArticle] = useState<boolean>(false)
   
 
-  function changeCurrentInfo (key: string, value: string | number | boolean) {
-    setCurrentInfo({...currentInfo, [key]: value})
+  async function changeCurrentInfo (key: string, value: string | number | boolean) {
+    setCurrentInfo(prev => {
+      return {...prev, [key]: value}
+    })
   }
-  
 
-  function setContextListBrands(idx: number){
-    const newList = [...brandsList.map(item => {
-      item.selected = false
-      return item
-    })]
-    newList[idx].selected = true
-    setBrandsList(newList)
-  }
-  function setContextListConditions(idx: number){
-    const newList = [...conditionsList.map(item => {
-      item.selected = false
-      return item
-    })]
-    newList[idx].selected = true
-    setConditionsList(newList)
+  const articleHandler = async (e: string) => {
+    const api = new Api()
+
+    setIsLoadingArticle(true)
+    changeCurrentInfo("article", e)
+    changeCurrentInfo(eBrandKeys.color, "")
+    changeCurrentInfo(eBrandKeys.name, "")
+
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(async () => {
+      const res = await api.loadProductInfo(e)
+      await changeCurrentInfo(eBrandKeys.color, res.color)
+      await changeCurrentInfo(eBrandKeys.name, res.model)
+      await changeCurrentInfo("image", res.photo_url)
+      setIsLoadingArticle(false)
+    }, 1000)
   }
 
   const loadDataDialog = async () => {
@@ -83,18 +87,17 @@ function AddProductDialog() {
     if(isLoadingAdd) return
     setLoadingAdd(true)
     const data: CreateSneakersLot = {
-      brand: brandsList.find(b => b.selected)?.name ?? "",
-      model: currentInfo.name || "Adizero F50 League Laceless TF",
-      color: currentInfo.color || "1",
-      city: currentInfo.city,
-      place: currentInfo.placeOfTransaction,
-      condition: conditionsList.find(c => c.selected)?.name ?? "",
-      price: currentInfo.priceBuy,
       uk_size: +currentInfo.sizeUK,
       us_size: +currentInfo.sizeUS,
       eu_size: +currentInfo.sizeEU,
-      fitting: currentInfo.checkedFitting,
+      brand: brandsList.map(b => b.name)[currentContext.brands] ?? "",
+      price: +currentInfo.priceBuy,
       article: currentInfo.article,
+      condition: conditionsList.map(c => c.name)[currentContext.statuses] ?? "",
+      city: currentInfo.city,
+      place: currentInfo.placeOfTransaction,
+      fitting: currentInfo.checkedFitting,
+
     }
 
     try {
@@ -103,6 +106,11 @@ function AddProductDialog() {
       const response = await api.createSneakersLot(data);
       console.log("Sneakers Lot Created:", response);
 
+      dispatch(addToProductList({
+        ...currentInfo,
+        id: response.id
+      }))
+
       setLoadingAdd(false)
       dispatch(closeDialogAddProduct())
       
@@ -110,31 +118,6 @@ function AddProductDialog() {
       console.error("Failed to create sneakers lot:", error);
     }
   }
-
-  
-  const dialogLayout = useMemo(() => {
-    if(!(isOpenBrands && isOpenConditions)){
-      if(isOpenBrands) return <ContextList 
-      title="Выберите бренд" 
-      list={brandsList.map(b => b.name)} 
-      setList={setContextListBrands} 
-      setIsOpenBrands={setIsOpenBrands}
-      />
-
-      else if(isOpenConditions) return <ContextList
-      title="Выберите статус" 
-      list={conditionsList.map(c => c.name)} 
-      setList={setContextListConditions} 
-      setIsOpenBrands={setIsOpenConditions}
-      />
-    }else{
-      setIsOpenBrands(false)
-      setIsOpenConditions(false)
-    }
-
-    return null
-
-  }, [isOpenBrands, isOpenConditions, brandsList, conditionsList])
 
 
   useEffect(() => {
@@ -150,21 +133,18 @@ function AddProductDialog() {
       <div className="dialog__wrapper-left">
         <AddProductSearch
         article={currentInfo.article}
-        setArticle={(e) => changeCurrentInfo("article", e)}  />
-        <AddProductImages image={currentInfo.image} />
+        setArticle={articleHandler}  />
+        <AddProductImages isLoadingArticle={isLoadingArticle} image={currentInfo.image!} />
       </div>
       <div className="dialog__wrapper-right">
         <AddProductRight 
         brandsList={brandsList} 
         conditionsList={conditionsList}
         currentInfo={currentInfo} 
-        changeCurrentInfo={changeCurrentInfo} 
-        isOpenBrands={isOpenBrands}
-        setIsOpenConditions={setIsOpenConditions}
-        setIsOpenBrands={setIsOpenBrands}
+        changeCurrentInfo={changeCurrentInfo}
+        isLoadingArticle={isLoadingArticle}
         />
       </div>
-      {dialogLayout}
     </Dialog>
   )
 }

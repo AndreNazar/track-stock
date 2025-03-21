@@ -9,7 +9,7 @@ import PropertyBlock from "./property-block/PropertyBlock"
 function ProfitBlock() {
   const dispatch = useDispatch()
   const titleRef = useRef<HTMLDivElement>(null)
-  const currentTitle = useSelector((s: any) => s.selections.currentContext)
+  const currentContext = useSelector((s: any) => s.selections.currentContext)
   const listTitles = ["Аналитика продаж", "Аналитика прибыли"]
 
   function openContext() {
@@ -19,9 +19,11 @@ function ProfitBlock() {
         newContextBlock({
           list: listTitles,
           title: "",
-          top: rect.top,
+          top: document.documentElement.scrollTop + rect.top,
           left: rect.left,
           width: rect.width,
+          firstClick: true,
+          type: "profit",
         })
       )
     }
@@ -31,7 +33,7 @@ function ProfitBlock() {
   return (
     <div className="profit-block">
       <div ref={titleRef} className="profit-block__title">
-        <SelectText title={listTitles[currentTitle]} onClick={openContext} />
+        <SelectText title={listTitles[currentContext.profit]} onClick={openContext} />
         <p className="profit-block__title-date">6 сент. - 13 сент. 2020 г.</p>
       </div>
       <GraphicBar />

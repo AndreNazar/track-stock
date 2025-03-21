@@ -26,6 +26,7 @@ function App() {
   const openEditProductDialog = useSelector((s:any) => s.dialog.dialogEditProduct)
   const opendialogDeleteProduct = useSelector((s:any) => s.dialog.dialogDeleteProduct)
   const contextBlock: IContextBlock = useSelector((s:any) => s.dialog.contextBlock)
+  const currentContext: IContextBlock = useSelector((s:any) => s.selections.currentContext)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -47,6 +48,8 @@ function App() {
     return openAddProductDialog || openEditProductDialog || opendialogDeleteProduct
   }, [openAddProductDialog, openEditProductDialog, opendialogDeleteProduct])
 
+  useEffect(() => {console.log(currentContext)}, [currentContext])
+
 
   return isGlobalLoading 
   ? <div className="global-loading"><Loading/></div>
@@ -63,6 +66,8 @@ function App() {
         top={contextBlock.top}
         left={contextBlock.left}
         width={contextBlock.width}
+        type={contextBlock.type}
+        firstClick={contextBlock.firstClick}
       />}
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />

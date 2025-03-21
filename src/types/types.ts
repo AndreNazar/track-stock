@@ -1,3 +1,5 @@
+import { UnknownAction } from "@reduxjs/toolkit"
+
 export interface IBrand {
   id: number
   img: string
@@ -100,8 +102,6 @@ export interface IDataSelect {
 
 export interface CreateSneakersLot {
   brand: string;
-  model: string;
-  color: string;
   city: string;
   place: string;
   condition: string;
@@ -113,12 +113,37 @@ export interface CreateSneakersLot {
   article: string;
 }
 
+export interface UpdateSneakersLot {
+  id: number
+  brand: string;
+  city: string;
+  place: string;
+  condition: string;
+  uk_size: number;
+  us_size: number;
+  eu_size: number;
+  price: number;
+  fitting: boolean;
+  article: string;
+}
+
+export enum eContextMenuType {
+  profit = "profit",
+  analysisSize = "analysis-size",
+  brands = "brands",
+  statuses = "statuses"
+}
+
+export type ContextMenuType = keyof typeof eContextMenuType
+
 export interface IContextBlock {
   title: string
   list: string[]
   top: number
   left: number
   width: number
+  firstClick: boolean
+  type: ContextMenuType
 }
 
 export type MenuType = "/inventory" | "/statistic" | "/account"

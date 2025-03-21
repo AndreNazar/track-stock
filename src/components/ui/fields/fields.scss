@@ -1,4 +1,5 @@
 .field{
+    position: relative;
     display: grid;
     &__heading{
         color: #6578A9;
@@ -25,6 +26,11 @@
         &::placeholder{
             color: #394974;
         }
+    }
+    .loading{
+        position: absolute;
+        bottom: 10px;
+
     }
 }
 

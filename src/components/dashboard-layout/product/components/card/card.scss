@@ -60,8 +60,12 @@
     }
 }
 
-.card__property{
-
+.card__property-item{
+    
+    .loading{
+        position: absolute;
+        top: 1.5em !important;
+    }
 }
 
 @media (max-width: 650px) {

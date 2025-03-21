@@ -1,70 +1,51 @@
-import { CreateSneakersLot, IDataSelect, IProducts } from "../../../types/types"
+import { eBrandKeys, IDataSelect, IProducts, UpdateSneakersLot } from "../../../types/types"
 import "../add-product/add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
-import { useEffect, useMemo, useState } from "react"
-import ContextList from "../../ui/contexts/ContextList"
-import api, { Api } from "../../../api/api"
+import { useEffect, useState } from "react"
+import { Api } from "../../../api/api"
 import { closeDialogEditProduct } from "../../../redux/slices/dialogSlice"
 import { useDispatch, useSelector } from "react-redux"
 import EditProductImages from "./left-block/EditProductImages"
 import EditProductSearch from "./left-block/EditProductSearch"
 import EditProductRight from "./right-block/EditProductRight"
+import { selectCurrentContext } from "../../../redux/slices/selectionsSlice"
+import { changeCurrentInfoEditor, setCurrentInfo, setCurrentInfoEditor } from "../../../redux/slices/productSlice"
+
+let timer: any = null
 
 function EditProductDialog() {
 
   const dispatch = useDispatch()
   const dataDialogEdit = useSelector((s:any) => s.dialog.dataDialogEdit)
-  const [isOpenBrands, setIsOpenBrands] = useState<boolean>(false)
   const [isLoadingAdd, setLoadingAdd] = useState<boolean>(false)
-  const [isOpenConditions, setIsOpenConditions] = useState<boolean>(false)
-  const [currentInfo, setCurrentInfo] = useState<IProducts>({
-    id: 1,
-    name: "",
-    brand: "",
-    image: "",
-    color: "",
-    article: "",
-    release_date: "",
-    price_stockX: "",
-    price_goat: "",
-    price_outofstock: "",
-    price_poison: "",
-    priceBuy: 0,
-    priceDelivery: 0,
-    condition: "",
-    sizeUS: "",
-    sizeUK: "",
-    sizeEU: "",
-    city: "",
-    placeOfTransaction: "",
-    checkedFitting: false,
-  })
+  const currentContext = useSelector((s: any) => s.selections.currentContext)
+  const currentInfoEditor: IProducts = useSelector((s:any) => s.product.currentInfoEditor)
   const [brandsList, setBrandsList] = useState<IDataSelect[]>([])
   const [conditionsList, setConditionsList] = useState<IDataSelect[]>([])
+  const [isLoadingArticle, setIsLoadingArticle] = useState<boolean>(false)
 
   
 
-  function changeCurrentInfo (key: string, value: string | number | boolean) {
-    setCurrentInfo({...currentInfo, [key]: value})
-  }
-  
 
-  function setContextListBrands(idx: number){
-    const newList = [...brandsList.map(item => {
-      item.selected = false
-      return item
-    })]
-    newList[idx].selected = true
-    setBrandsList(newList)
-  }
-  function setContextListConditions(idx: number){
-    const newList = [...conditionsList.map(item => {
-      item.selected = false
-      return item
-    })]
-    newList[idx].selected = true
-    setConditionsList(newList)
-  }
+  
+    const articleHandler = async (e: string) => {
+      const api = new Api()
+  
+      setIsLoadingArticle(true)
+      dispatch(changeCurrentInfoEditor({key:"article", value: e}))
+      dispatch(changeCurrentInfoEditor({key:eBrandKeys.color, value: ""}))
+      dispatch(changeCurrentInfoEditor({key:eBrandKeys.name, value: ""}))
+  
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(async () => {
+        const res = await api.loadProductInfo(e)
+        dispatch(changeCurrentInfoEditor({key:eBrandKeys.color, value: res.color}))
+        dispatch(changeCurrentInfoEditor({key:eBrandKeys.name, value: res.model}))
+        dispatch(changeCurrentInfoEditor({key:"image", value: res.photo_url}))
+        setIsLoadingArticle(false)
+      }, 1000)
+    }
+  
 
   const loadDataDialog = async () => {
     const api = new Api()
@@ -83,26 +64,36 @@ function EditProductDialog() {
 
     if(isLoadingAdd) return
     setLoadingAdd(true)
-    const data: CreateSneakersLot = {
-      brand: brandsList.find(b => b.selected)?.name ?? "",
-      model: currentInfo.name || "Adizero F50 League Laceless TF",
-      color: currentInfo.color || "1",
-      city: currentInfo.city,
-      place: currentInfo.placeOfTransaction,
-      condition: conditionsList.find(c => c.selected)?.name ?? "",
-      price: currentInfo.priceBuy,
-      uk_size: +currentInfo.sizeUK,
-      us_size: +currentInfo.sizeUS,
-      eu_size: +currentInfo.sizeEU,
-      fitting: currentInfo.checkedFitting,
-      article: currentInfo.article,
+    const data: UpdateSneakersLot = {
+      id: currentInfoEditor.id,
+      uk_size: +currentInfoEditor.sizeUK,
+      us_size: +currentInfoEditor.sizeUS,
+      eu_size: +currentInfoEditor.sizeEU,
+      brand: brandsList.map(b => b.name)[currentContext.brands] ?? "",
+      condition: conditionsList.map(c => c.name)[currentContext.statuses] ?? "",
+      price: +currentInfoEditor.priceBuy,
+      article: currentInfoEditor.article,
+      city: currentInfoEditor.city,
+      place: currentInfoEditor.placeOfTransaction,
+      fitting: currentInfoEditor.checkedFitting,
+
     }
 
     try {
       console.log(data)
       const api = new Api()
-      const response = await api.createSneakersLot(data);
-      console.log("Sneakers Lot Created:", response);
+      const res = await api.updateSneaker(data);
+      const resArticle = await api.loadProductInfo(res.article)
+      console.log("Sneakers Lot Created:", res);
+
+      dispatch(setCurrentInfo({
+        ...currentInfoEditor,
+        brand: brandsList.map(b => b.name)[currentContext.brands] ?? "",
+        condition: conditionsList.map(c => c.name)[currentContext.statuses] ?? "",
+        color: resArticle.color,
+        image: resArticle.photo_url,
+        name: resArticle.model,
+      }))
 
       setLoadingAdd(false)
       dispatch(closeDialogEditProduct())
@@ -113,40 +104,20 @@ function EditProductDialog() {
   }
 
   async function fillDataDialog () {
-    setCurrentInfo(dataDialogEdit)
-    //setBrandsList((prev) => prev.map(p => p.)) 
-    //setConditionsList((prev) => prev.map(p => p.))
+    dispatch(setCurrentInfoEditor(dataDialogEdit))
+    let brand_idx = brandsList.findIndex(b => b.name === dataDialogEdit.brand)
+    let condition_idx = conditionsList.findIndex(c => c.name === dataDialogEdit.condition.condition)
+    dispatch(selectCurrentContext({idx: brand_idx, type: "brands"}))
+    dispatch(selectCurrentContext({idx: condition_idx, type: "statuses"}))
   }
-  
-  const dialogLayout = useMemo(() => {
-    if(!(isOpenBrands && isOpenConditions)){
-      if(isOpenBrands) return <ContextList 
-      title="Выберите бренд" 
-      list={brandsList.map(b => b.name)} 
-      setList={setContextListBrands} 
-      setIsOpenBrands={setIsOpenBrands}
-      />
-
-      else if(isOpenConditions) return <ContextList
-      title="Выберите статус" 
-      list={conditionsList.map(c => c.name)} 
-      setList={setContextListConditions} 
-      setIsOpenBrands={setIsOpenConditions}
-      />
-    }else{
-      setIsOpenBrands(false)
-      setIsOpenConditions(false)
-    }
-
-    return null
-
-  }, [isOpenBrands, isOpenConditions, brandsList, conditionsList])
 
 
   useEffect(() => {
     loadDataDialog()
-    fillDataDialog()
   }, [])
+  useEffect(() => {
+    fillDataDialog()
+  }, [brandsList, conditionsList])
 
   return (
     <Dialog 
@@ -157,22 +128,17 @@ function EditProductDialog() {
     >
       <div className="dialog__wrapper-left">
         <EditProductSearch
-        article={currentInfo.article}
-        setArticle={(e) => changeCurrentInfo("article", e)}  />
-        <EditProductImages image={currentInfo.image} />
+        article={currentInfoEditor.article}
+        setArticle={articleHandler}  />
+        <EditProductImages isLoadingArticle={isLoadingArticle} image={currentInfoEditor.image!} />
       </div>
       <div className="dialog__wrapper-right">
         <EditProductRight 
         brandsList={brandsList} 
         conditionsList={conditionsList}
-        currentInfo={currentInfo} 
-        changeCurrentInfo={changeCurrentInfo} 
-        isOpenBrands={isOpenBrands}
-        setIsOpenConditions={setIsOpenConditions}
-        setIsOpenBrands={setIsOpenBrands}
+        isLoadingArticle={isLoadingArticle}
         />
       </div>
-      {dialogLayout}
     </Dialog>
   )
 }

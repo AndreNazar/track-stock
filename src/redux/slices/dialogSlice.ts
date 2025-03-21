@@ -48,6 +48,12 @@ const dialogSlice = createSlice({
     newContextBlock(state, action: PayloadAction<IContextBlock | null>) {
       state.contextBlock = action.payload
     },
+    firstClickContextBlock(state) {
+      state.contextBlock = {
+        ...state.contextBlock,
+        firstClick: false
+      } as IContextBlock
+    },
     closeContextBlock(state) {
       state.contextBlock = null
     },
@@ -63,5 +69,6 @@ export const {
   closeDialogDeleteProduct,
   newContextBlock,
   closeContextBlock,
+  firstClickContextBlock
 } = dialogSlice.actions;
 export default dialogSlice.reducer;

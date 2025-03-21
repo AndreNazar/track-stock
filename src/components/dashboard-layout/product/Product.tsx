@@ -10,7 +10,8 @@ import Sales from "./components/sales/Sales"
 import { Api } from "../../../api/api"
 import { useParams } from "react-router"
 import { switchTab } from "../../../redux/slices/menuSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { setCurrentInfo } from "../../../redux/slices/productSlice"
 
 
 function Product (){
@@ -18,16 +19,16 @@ function Product (){
     const navigate = useNavigate()
     const params = useParams()
     const dispatch = useDispatch()
-
-    const [dataProduct, setDataProduct] = useState<IProducts | null>(null)
+    
+    const currentInfo: IProducts = useSelector((s:any) => s.product.currentInfo)
     
     async function getProductInfo() {
         const api = new Api()
         const res = await api.getSneakerById(+params.product_id!)
+        const resImage = await api.loadProductInfo(res.article)
+        
 
-        console.log(res)
-
-        setDataProduct({
+        dispatch(setCurrentInfo({
             id: res.id,
             article: res.article,
             brand: res.brand.brand,
@@ -46,9 +47,9 @@ function Product (){
             sizeEU: res.eu_size,
             sizeUK: res.uk_size,
             sizeUS: res.us_size,
-            image: res.photo_url,
+            image: resImage.photo_url,
             name: res.model,
-        })
+        }))
     }
 
     useEffect(() => {
@@ -64,12 +65,12 @@ function Product (){
             </button>
         </div>
         <div className="product__wrapper">
-            <Card dataProduct={dataProduct}/>
+            <Card/>
             <Info info={[
-                dataProduct?.brand || null, 
-                dataProduct?.release_date || null, 
-                dataProduct?.priceBuy.toString() || null, 
-                dataProduct?.priceDelivery.toString() || null
+                currentInfo?.brand || null, 
+                currentInfo?.release_date || null, 
+                currentInfo?.priceBuy.toString() || null, 
+                currentInfo?.priceDelivery.toString() || null
             ]} />
             
             

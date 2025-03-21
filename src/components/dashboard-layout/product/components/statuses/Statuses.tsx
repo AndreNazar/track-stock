@@ -15,8 +15,8 @@ function Statuses() {
           </div>
         </div>
         <div className="product__statuses-buttons">
-          <ButtonDash>Продано</ButtonDash>
-          <ButtonDash>Разместить</ButtonDash>
+          <ButtonDash onClick={() => {}}>Продано</ButtonDash>
+          <ButtonDash onClick={() => {}}>Разместить</ButtonDash>
         </div>
       </div>
     </div>

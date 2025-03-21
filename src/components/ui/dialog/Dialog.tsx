@@ -1,7 +1,10 @@
 import "./dialog.scss"
 import cross_img from "../../../assets/imgs/control/cross.svg"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import Loading from "../loadings/Loading"
+import { useDispatch, useSelector } from "react-redux"
+import { closeContextBlock } from "../../../redux/slices/dialogSlice"
+import { IContextBlock } from "../../../types/types"
 
 interface IDialog {
   children: React.ReactNode
@@ -14,6 +17,8 @@ interface IDialog {
 function Dialog({children, onClick = () => {}, loading=false, closeHandler, buttonText}: IDialog) {
   
   const dialogRef = useRef<HTMLDivElement>(null)
+  const dispatch = useDispatch()
+  const contextBlock: IContextBlock = useSelector((s:any) => s.dialog.contextBlock)
 
   function closeDialog(){
     dialogRef.current?.classList.add("dialog--close")
@@ -23,9 +28,19 @@ function Dialog({children, onClick = () => {}, loading=false, closeHandler, butt
     }, 10) // тут анимацию хотел сделать, попозже
   }
 
+  function clickContent(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    e.stopPropagation();
+    e.preventDefault()
+    contextBlock && dispatch(closeContextBlock());
+  }
+
+  useEffect(() => {
+    console.log(contextBlock?.firstClick!)
+  }, [contextBlock])
+
   return (
     <div ref={dialogRef} onClick={closeDialog} className="dialog">
-      <div onClick={(e) => {e.stopPropagation();e.preventDefault()}} className="dialog__content">
+      <div onClick={clickContent} className="dialog__content">
         <div onClick={closeDialog} className="dialog__close">
           <img className="dialog__close-img" src={cross_img} alt="close" />
         </div>

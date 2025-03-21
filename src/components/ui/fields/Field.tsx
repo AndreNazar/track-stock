@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "./fields.scss"
+import Loading from "../loadings/Loading"
 
 
 
@@ -9,9 +10,10 @@ interface IField {
     heading: string
     placeholder: string
     disable?: boolean
+    loading?: boolean
 }
 
-function Field ({value, setValue, heading, placeholder, disable = false}: IField) {
+function Field ({value, setValue, heading, placeholder, disable = false, loading = false}: IField) {
 
     const [isFocus, setIsFocus] = useState<boolean>(false)
 
@@ -25,6 +27,7 @@ function Field ({value, setValue, heading, placeholder, disable = false}: IField
         placeholder={placeholder}
         disabled={disable}
         type="text" className={`field__input${isFocus ? " active" : ""}`} />
+        {loading && <Loading size={14} />}
     </div>
 }
 

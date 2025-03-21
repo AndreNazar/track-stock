@@ -115,6 +115,17 @@ export class Api {
       },
     }).then(this.getJsonResponse)
   }
+  
+  async loadProductInfo(article: string) {
+    return fetch(`${this.URL}load/load`, {
+      method: "POST",
+      body: JSON.stringify({ article }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
 }
 
 export default Api

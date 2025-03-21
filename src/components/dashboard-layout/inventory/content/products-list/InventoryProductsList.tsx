@@ -4,13 +4,15 @@ import InventoryProductsItem from "./item/InventoryProductsItem"
 import { useEffect, useState } from "react"
 import { Api } from "../../../../../api/api"
 import Loading from "../../../../ui/loadings/Loading"
+import { useDispatch, useSelector } from "react-redux"
+import { setProductList } from "../../../../../redux/slices/productSlice"
 
 
 function InventoryProductsList() {
 
-  const [products, setProducts] = useState<IProducts[]>([])
+  const dispatch = useDispatch()
+  const productList = useSelector((s: any) => s.product.productList)
   const [isLoading, setLoading] = useState<boolean>(false)
-
   const [selectedProduct, setSelectedProduct] = useState<number>(-1)
 
   async function getProducts() {
@@ -19,7 +21,7 @@ function InventoryProductsList() {
       const api = new Api()
       const response = await api.getSneakers();
       console.log(response)
-      setProducts(response.sneakers.map((p: any): IProducts => {
+      dispatch(setProductList(response.sneakers.map((p: any): IProducts => {
         setLoading(false)
         return {
           id: p.sneaker.id,
@@ -43,7 +45,7 @@ function InventoryProductsList() {
           price_stockX: "",
           priceDelivery: p.sneaker.price
         }
-      }))
+      })))
     } catch (error) {
       console.log(error)
     }
@@ -53,11 +55,17 @@ function InventoryProductsList() {
     getProducts()
   }, [])
 
+  function sortedProducts():IProducts[] {
+    let sortProducts = [...productList]
+    return sortProducts.sort((a: IProducts, b: IProducts) => b.id - a.id)
+  }
+
   return (
     <div className="products-list">
         {isLoading
         ? <Loading size={30} />
-        : products.map((p: IProducts) => <InventoryProductsItem 
+        : sortedProducts()
+        .map((p: IProducts) => <InventoryProductsItem 
         product={p} 
         key={p.id} 
         selectedProduct={selectedProduct} 

@@ -4,7 +4,7 @@ import Field from "../../ui/fields/Field"
 import "./login.scss"
 import FieldPassword from "../../ui/fields/FieldPassword"
 import { useEffect, useState } from "react"
-import api, { Api, ILogin } from "../../../api/api"
+import { Api, ILogin } from "../../../api/api"
 import Loading from "../../ui/loadings/Loading"
 
 function Login({setIsAuth}: {setIsAuth: (arg: boolean) => void}) {

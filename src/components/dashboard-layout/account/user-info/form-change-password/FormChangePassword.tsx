@@ -17,7 +17,7 @@ function FormChangePassword() {
             <Field heading="Старый пароль" placeholder="Введите пароль" value={prevPassword} setValue={setPrevPassword} />
             <FieldPassword heading="Новый пароль" placeholder="Введите пароль" value={newPassword} setValue={setNewPassword} />
             <FieldPassword heading="Подтвердите пароль" placeholder="Введите пароль" value={confirmPassword} setValue={setConfirmPassword} />
-            <ButtonDash color="#6FCF97">Сменить пароль</ButtonDash>
+            <ButtonDash onClick={() => {}} color="#6FCF97">Сменить пароль</ButtonDash>
         </div>
     </div>
   )

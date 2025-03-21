@@ -3,13 +3,15 @@ import authReducer from './slices/authSlice';
 import menuReducer from './slices/menuSlice';
 import dialogReducer from './slices/dialogSlice';
 import selectionsReducer from './slices/selectionsSlice';
+import productReducer from './slices/productSlice';
 
 const store = configureStore({
   reducer: {
     auth: authReducer, 
     menu: menuReducer, 
     dialog: dialogReducer, 
-    selections: selectionsReducer
+    selections: selectionsReducer,
+    product: productReducer
   },
 });
 

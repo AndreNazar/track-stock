@@ -5,10 +5,10 @@ import Checkbox from "../../ui/checkbox/Checkbox"
 import "./registration.scss"
 import FieldPassword from "../../ui/fields/FieldPassword"
 import { useEffect, useState } from "react"
-import api, { Api } from "../../../api/api"
+import { Api } from "../../../api/api"
 import Loading from "../../ui/loadings/Loading"
 
-function Registration({setIsGlobalLoading}:any) {
+function Registration() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [message, setMessage] = useState<string | null>("")
   const [isError, setIsError] = useState<boolean>(false)
@@ -72,6 +72,13 @@ function Registration({setIsGlobalLoading}:any) {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('access-token')) { // WARNING
+      navigate("/inventory")
+      setIsAuth(true)
+    }
+  }, [])
 
   return (
     <div className="registration">

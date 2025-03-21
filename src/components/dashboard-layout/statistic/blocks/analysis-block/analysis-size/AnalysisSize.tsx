@@ -9,7 +9,7 @@ function AnalysisSize() {
   const dispatch = useDispatch()
   const titleRef = useRef<HTMLDivElement | null>(null)
   const listTitles = ["Анализ размеров по инвентарю", "Анализ размеров по продажам"]
-  const currentTitle = useSelector((s: any) => s.selections.currentContext)
+  const currentContext = useSelector((s: any) => s.selections.currentContext)
   const sizesRating = [
     {id: 1, size: 10, percent: 50},
     {id: 2, size: 15, percent: 25},
@@ -29,6 +29,8 @@ function AnalysisSize() {
           top: document.documentElement.scrollTop + rect.top,
           left: rect.left,
           width: rect.width,
+          firstClick: true,
+          type: "analysisSize",
         })
       )
     }
@@ -36,7 +38,7 @@ function AnalysisSize() {
 
   return (
     <div ref={titleRef} className="analysis-sizes">
-      <SelectText title={listTitles[currentTitle]} onClick={openContext} />
+      <SelectText title={listTitles[currentContext.analysisSize]} onClick={openContext} />
       <ul className="analysis-sizes__list">
         {sizesRating.map(s => <li key={s.id} className="analysis-sizes__item">
           <AnalysisSizeItem info={s} />

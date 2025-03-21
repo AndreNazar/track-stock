@@ -1,7 +1,8 @@
 import "../../add-product/left-block/left-block.scss"
 import empty_img from "../../../../assets/imgs/actions/photo.svg"
+import Loading from "../../../ui/loadings/Loading"
 
-function EditProductImages({image}: {image: string}) {
+function EditProductImages({image, isLoadingArticle}: {image: string, isLoadingArticle: boolean}) {
 
   function getFirstImage() {
     if(!image) return empty_img
@@ -12,7 +13,9 @@ function EditProductImages({image}: {image: string}) {
   return (
     <div className="dialog__image">
         <div className="dialog__image-wrapper">
-            <img className={"dialog__image-img" + (!image ? " dialog__image-img--empty" : "")} src={getFirstImage()} alt="" />
+            {isLoadingArticle 
+            ? <Loading /> 
+            : <img className={"dialog__image-img" + (!image ? " dialog__image-img--empty" : "")} src={getFirstImage()} alt="" />}
         </div>
     </div>
   )

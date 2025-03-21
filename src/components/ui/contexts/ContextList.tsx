@@ -1,19 +1,19 @@
 import "./context-list.scss"
 import { useDispatch } from "react-redux"
-import { closeContextBlock } from "../../../redux/slices/dialogSlice"
+import { closeContextBlock, firstClickContextBlock } from "../../../redux/slices/dialogSlice"
 import { IContextBlock } from "../../../types/types"
-import { selectCurrentContext } from "../../../redux/slices/selectionsSlice"
 import { useEffect, useRef, useState } from "react"
+import { selectCurrentContext } from "../../../redux/slices/selectionsSlice"
 
 
-function ContextList({ list, left, top, width }: IContextBlock) {
+function ContextList({ list, left, top, width, type, firstClick }: IContextBlock ) {
 
   const dispatch = useDispatch()
   const blockRef = useRef<HTMLDivElement>(null)
-  const [firstClick, setFirstClick] = useState<boolean>(true)
+  const [blockTop, setBlockTop] = useState<number>(top + 40)
 
   function selectItem(idx: number) {
-    dispatch(selectCurrentContext(idx))
+    dispatch(selectCurrentContext({idx, type}))
     dispatch(closeContextBlock())
   }
 
@@ -21,7 +21,7 @@ function ContextList({ list, left, top, width }: IContextBlock) {
   function handleClickOutside(event: MouseEvent) {
     console.log(firstClick)
     if (firstClick) {
-      setFirstClick(false)
+      dispatch(firstClickContextBlock())
       return
     }
     if (blockRef.current && !blockRef.current.contains(event.target as Node)) {
@@ -29,8 +29,18 @@ function ContextList({ list, left, top, width }: IContextBlock) {
     }
   }
 
+  const calculateTop = () => {
+    console.log(document.getElementsByTagName("body")[0].scrollHeight)
+    console.log(document.documentElement.scrollHeight)
+    if (blockTop + blockRef.current?.clientHeight! > document.getElementsByTagName("body")[0].scrollHeight) {
+      setBlockTop(window.innerHeight - 315)
+    }else{
+      setBlockTop(top + 40)
+    }
+  }
+
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => handleClickOutside(e);
+    const handleClick = (e: Event) => handleClickOutside(e as MouseEvent);
     document.addEventListener('click', handleClick);
 
     return () => {
@@ -38,9 +48,13 @@ function ContextList({ list, left, top, width }: IContextBlock) {
     };
   }, [firstClick])
 
+  useEffect(() => {
+    calculateTop()
+  }, [firstClick])
+
   return (
     <div style={{
-      top: top + 40,
+      top: blockTop,
       left: left,
       width: width,
       transform: "translate(0%, 0%)"
