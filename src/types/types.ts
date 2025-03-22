@@ -1,5 +1,3 @@
-import { UnknownAction } from "@reduxjs/toolkit"
-
 export interface IBrand {
   id: number
   img: string
