@@ -1,6 +1,8 @@
+@use "../../../../../styles/variables.scss" as *;
+
 .service-block {
     display: flex;
-    background-color: #151D31;
+    background-color: $color-secondary;
     gap: 1em;
     padding: 1em 2em;
     align-items: center;
@@ -16,7 +18,7 @@
         }
     }
     &__info{
-        color: #6578A9;
+        color: $color-text;
         &-heading{
             font-size: 18px;
             font-family: "Ubuntu-Bold";

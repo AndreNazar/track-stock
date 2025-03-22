@@ -1,13 +1,15 @@
+@use "../../../styles/variables.scss" as *;
+
 .field{
     position: relative;
     display: grid;
     &__heading{
-        color: #6578A9;
+        color: $color-text;
         margin: 0;
         font-size: 14px;
         transition: color .2s;
         &.active{
-            color: #8199d5;
+            color: $color-text--active;
         }
     }
     &__input{

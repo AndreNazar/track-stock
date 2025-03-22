@@ -1,3 +1,5 @@
+@use "../../../../styles/variables.scss" as *;
+
 .inventory {
 
     &__tabs {
@@ -43,7 +45,7 @@
                     left: 0;
                     height: 2px;
                     width: 100%;
-                    background-color: #56CCF2;
+                    background-color: $color-primary;
                     z-index: 2;
                 }
             }

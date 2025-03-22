@@ -1,3 +1,4 @@
+@use "../../../styles/variables.scss" as *;
 
 .registration {
     width: 600px;
@@ -23,7 +24,7 @@
         &-text{
             width: 150px;
             font-size: 14px;
-            color: #6578A9;
+            color: $color-text;
             line-height: 1em;
         }
     }

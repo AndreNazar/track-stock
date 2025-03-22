@@ -1,5 +1,7 @@
+@use "../../../../../styles/variables.scss" as *;
+
 .privacy{
-    background-color: #151D31;
+    background-color: $color-secondary;
     padding: 2em;
     border-radius: 20px;
     &__heading{
@@ -9,7 +11,7 @@
     &__fields{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1em;
+        gap: 0 1em;
     }
 }
 @media (max-width: 1300px) {

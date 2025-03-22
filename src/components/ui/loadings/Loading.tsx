@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import "./loading.scss"
+import { COLOR_PRIMARY } from "../../../global-variables";
 
-function Loading({color = "#56CCF2", size = 20}: {color?: string, size?:number}) {
+function Loading({color = COLOR_PRIMARY, size = 20}: {color?: string, size?:number}) {
 
   const getSize = useMemo(() => {
     if(size > 25) return 5

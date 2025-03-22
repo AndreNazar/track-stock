@@ -16,6 +16,14 @@
 }
 
 
+@media (max-width: 768px) {
+    .dialog__wrapper-left {
+        width: 100% !important;
+    }
+    .dialog__wrapper-right {
+        width: 100% !important;
+    }
+}
 @media (max-width: 625px) {
     .dialog__wrapper-down {
         grid-column: 1/2;

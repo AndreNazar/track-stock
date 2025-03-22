@@ -13,7 +13,6 @@ export interface IProducts {
   release_date: string
   price_stockX: string | null
   price_goat: string | null
-  price_outofstock: string | null
   price_poison: string | null
   priceBuy: number
   priceDelivery: number
@@ -36,7 +35,6 @@ export enum eBrandKeys {
     release_date = "release_date",
     price_stockX = "price_stockX",
     price_goat = "price_goat",
-    price_outofstock = "price_outofstock",
     price_poison = "price_poison",
     priceBuy = "priceBuy",
     priceDelivery = "priceDelivery",
@@ -129,7 +127,12 @@ export enum eContextMenuType {
   profit = "profit",
   analysisSize = "analysis-size",
   brands = "brands",
-  statuses = "statuses"
+  statuses = "statuses",
+  tg = "tg",
+  vk = "vk",
+  account = "account",
+  country = "country",
+  city = "city",
 }
 
 export type ContextMenuType = keyof typeof eContextMenuType

@@ -1,4 +1,5 @@
 
+import { COLOR_PRIMARY } from "../../../../../global-variables";
 import { IProductSalesTab } from "../../../../../types/types"
 import "./sales.scss"
 import { Bar } from 'react-chartjs-2';
@@ -45,7 +46,7 @@ function Sales() {
                 label: '# of Votes',
                 data: [9, 12, 3, 5, 2, 3, 6, 5, 8],
                 borderWidth: 1,
-                backgroundColor: "#56CCF2",
+                backgroundColor: COLOR_PRIMARY,
                 borderRadius: 10,
               }]
             }}

@@ -1,3 +1,5 @@
+@use "../../../styles/variables.scss" as *;
+
 .statistic {
     &__tabs {
         display: flex;
@@ -25,7 +27,7 @@
 
         &--active {
             &::after {
-                background-color: #56CCF2;
+                background-color: $color-primary;
             }
         }
     }

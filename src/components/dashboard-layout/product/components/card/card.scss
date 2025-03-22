@@ -1,8 +1,10 @@
+@use "../../../../../styles/variables.scss" as *;
+
 .product__card{
     position: relative;
     display: flex;
     flex: 1;
-    background-color: #151D31;
+    background-color: $color-secondary;
     border-radius: 20px;
     padding: 1em;
     align-items: center;
@@ -11,7 +13,7 @@
     .card__icon{
         position: relative;
         display: flex;
-        background-color: #1D263F;
+        background-color: $color-tertiary;
         border-radius: 10px;
         height: 150px;
         width: 15rem;
@@ -37,7 +39,7 @@
             font-family: "Ubuntu-Bold";
         }
         &-size{
-            color: #56CCF2;
+            color: $color-primary;
             font-size: clamp(1rem, 4vw, 1.5rem);
         }
         .card__property{

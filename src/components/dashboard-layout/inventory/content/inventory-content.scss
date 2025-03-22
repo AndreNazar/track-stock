@@ -1,3 +1,5 @@
+@use "../../../../styles/variables.scss" as *;
+
 .inventory__content {
     box-sizing: border-box;
     margin-top: 3em;
@@ -12,13 +14,13 @@
 }
 
 .inventory__content::-webkit-scrollbar-track {
-    background: #2A3759;
+    background: $color-scrollbar-track;
     /* Цвет дорожки */
     border-radius: 20px;
 }
 
 .inventory__content::-webkit-scrollbar-thumb {
-    background-color: #8BA1DA;
+    background-color: $color-scrollbar;
     /* Цвет бегунка */
     border-radius: 20px;
     /* Округление бегунка */

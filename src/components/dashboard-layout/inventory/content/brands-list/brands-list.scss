@@ -1,3 +1,5 @@
+@use "../../../../../styles/variables.scss" as *;
+
 .brands__list{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -36,7 +38,7 @@
             right: 0;
             border: 0;
             padding: 0;
-            background-color: #56CCF2;
+            background-color: $color-primary;
             border-top-right-radius: 30px;
             border-bottom-left-radius: 30px;
             max-height: 0;

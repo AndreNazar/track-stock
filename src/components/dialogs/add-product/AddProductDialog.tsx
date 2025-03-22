@@ -28,7 +28,6 @@ function AddProductDialog() {
     release_date: "",
     price_stockX: "",
     price_goat: "",
-    price_outofstock: "",
     price_poison: "",
     priceBuy: 0,
     priceDelivery: 0,

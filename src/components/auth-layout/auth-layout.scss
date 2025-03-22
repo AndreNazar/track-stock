@@ -1,3 +1,5 @@
+@use "../../styles/variables.scss" as *;
+
 .auth {
     display: grid;
     width: 100%;
@@ -22,7 +24,7 @@
             gap: 1em;
         }
         &-rules{
-            color: #6578A9;
+            color: $color-text;
         }
     }
 
@@ -40,7 +42,7 @@
         }
 
         &-recovery {
-            color: #6578A9;
+            color: $color-text;
         }
     }
     

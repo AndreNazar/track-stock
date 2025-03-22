@@ -1,10 +1,10 @@
 import "./selects.scss"
 import down_img from "../../../assets/imgs/actions/down-arrow.svg"
 
-function Select({data}: {data: string[]}) {
+function Select({value, onClick}: {value: string, onClick? : () => void}) {
 
-    return <div className="select">
-        <input className="select__input" disabled type="text" placeholder="Выберите" value={data[0]} />
+    return <div onClick={onClick} className="select">
+        <input className="select__input" type="text" placeholder="Выберите" value={value} />
         <img className="select__image" src={down_img} alt="" />
     </div>
 }

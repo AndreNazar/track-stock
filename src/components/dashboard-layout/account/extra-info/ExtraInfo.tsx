@@ -3,7 +3,6 @@ import "./extra-info.scss"
 import ServiceBlock from "./service-block/ServiceBlock"
 import { IServiceBlock } from "../../../../types/types"
 import vk_img from "../../../../assets/imgs/platforms/vk.png"
-import avito_img from "../../../../assets/imgs/platforms/avito.png"
 import PrivacyBlock from "./privacy-block/PrivacyBlock"
 import LocationBlock from "./location-block/LocationBlock"
 
@@ -17,13 +16,13 @@ function ExtraInfo() {
     onClick: handleClickVK
   })
 
-  const [serviceDataAvito, setServiceDataAvito] = useState<IServiceBlock>({
+  /*const [serviceDataAvito, setServiceDataAvito] = useState<IServiceBlock>({
     img: avito_img,
     title: "Avito",
     text: "Для отображения информации подключитесь к сервису.",
     isSelect: false,
     onClick: handleClickAvito
-  })
+  })*/
 
   function handleClickVK() {
     setServiceDataVK(prev => {
@@ -35,18 +34,18 @@ function ExtraInfo() {
   }
 
 
-  function handleClickAvito() {
+  /*function handleClickAvito() {
     setServiceDataAvito(prev => {
       return {
         ...prev,
         isSelect: !prev.isSelect
       }
     })
-  }
+  }*/
 
   return <div className="extra-info">
     <ServiceBlock serviceInfo={serviceDataVK} />
-    <ServiceBlock serviceInfo={serviceDataAvito} />
+    {/* <ServiceBlock serviceInfo={serviceDataAvito} /> */}
     <PrivacyBlock />
     <LocationBlock />
   </div>

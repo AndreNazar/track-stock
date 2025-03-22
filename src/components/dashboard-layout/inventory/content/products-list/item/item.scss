@@ -1,12 +1,14 @@
+@use "../../../../../../styles/variables.scss" as *;
+
 .inventory-product {
     display: grid;
-    background-color: #151D31;
+    background-color: $color-secondary;
     border-radius: 25px;
     padding: 2em;
     gap: 1em;
     overflow: hidden;
     border: 2px solid transparent;
-    max-height: 167px;
+    max-height: 160px;
     box-sizing: border-box;
     transition: max-height .2s;
 }

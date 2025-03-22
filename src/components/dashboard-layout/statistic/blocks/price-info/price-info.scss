@@ -1,6 +1,8 @@
+@use "../../../../../styles/variables.scss" as *;
+
 .price-info{
     display: grid;
-    background-color: #151D31;
+    background-color: $color-secondary;
     width: 250px;
     border-radius: 20px;
     padding: 1.5em 2em;

@@ -1,6 +1,8 @@
+@use "../../../../../styles/variables.scss" as *;
+
 .analysis-block{
     display: grid;
-    background-color: #151D31;
+    background-color: $color-secondary;
     width: calc(50% - 1em);
     border-radius: 20px;
     padding: 1.5em 2em;

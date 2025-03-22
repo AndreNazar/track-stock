@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Bar } from "react-chartjs-2"
+import { COLOR_PRIMARY } from "../../../../../../global-variables"
 
 function GraphicBar() {
 
@@ -29,7 +30,7 @@ function GraphicBar() {
           label: "Количество продаж",
           data: [2, 5, 1, 4, 2, 4, 7],
           borderWidth: 1,
-          backgroundColor: "#56CCF2",
+          backgroundColor: COLOR_PRIMARY,
           borderRadius: 10,
         }
       ],

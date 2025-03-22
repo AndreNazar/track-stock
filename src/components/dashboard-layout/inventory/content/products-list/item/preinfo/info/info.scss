@@ -1,3 +1,5 @@
+@use '../../../../../../../../styles/variables.scss' as *;
+
 .product{
     
     &__info-wrapper {
@@ -27,6 +29,7 @@
             font-size: 24px;
             height: 30px;
             font-family: "Ubuntu-Bold";
+            text-wrap: nowrap;
         }
 
         &-name {
@@ -40,7 +43,7 @@
         }
 
         &-link {
-            color: #56CCF2;
+            color: $color-primary;
             align-items: center;
             margin-right: auto;
             &:hover {
@@ -50,7 +53,7 @@
     }
     &__image {
         width: 120px;
-        max-height: 90px;
+        height: 90px;
     }
 
 }

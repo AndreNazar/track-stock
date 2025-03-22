@@ -1,3 +1,4 @@
+import { COLOR_PRIMARY } from "../../../global-variables";
 import "./button.scss";
 
 interface PropsButtonDash {
@@ -6,7 +7,7 @@ interface PropsButtonDash {
   color?: string
 }
 
-function ButtonDash({children, color = "#56CCF2", onClick}: PropsButtonDash) {
+function ButtonDash({children, color = COLOR_PRIMARY, onClick}: PropsButtonDash) {
   return (
     <button onClick={onClick} style={{border: `2px solid ${color}`}} className="button-dash">{children}</button>
   )

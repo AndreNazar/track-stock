@@ -1,3 +1,5 @@
+@use "../../../styles/variables.scss" as *;
+
 .dialog{
     position: absolute;
     top: 0;
@@ -18,7 +20,7 @@
         transform: translateX(-50%);
         border-radius: 20px;
         padding-bottom: 4em;
-        background-color: #151D31;
+        background-color: $color-secondary;
         width: 1000px;
         &-wrapper{
             display: flex;
@@ -95,6 +97,9 @@
 @media (max-width: 768px) {
     .dialog__content{
         width: 600px;
+        &-wrapper{
+            display: grid;
+        }
     }
 }
 @media (max-width: 625px) {
@@ -113,7 +118,6 @@
 @media (max-width: 425px) {
     .dialog__content{
         width: 100vw;
-        height: 100vh;
         border-radius: 0;
         &-wrapper{
             padding: 2em 1em !important;

@@ -20,7 +20,7 @@ function ProductInfo({product}: {product: IProducts}) {
           <NavLink onClick={linkHandler} to={`${product.id}`} className="product__text-link">
             Подробнее
           </NavLink>
-          <p className="product__text-price">${product.priceBuy}</p>
+          <p className="product__text-price">{product.priceBuy} ₽</p>
         </div>
         <ProductText product={product} flag="web" />
       </div>

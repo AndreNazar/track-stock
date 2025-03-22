@@ -40,7 +40,6 @@ function Product (){
             checkedFitting: res.fitting,
             priceDelivery: res.price,
             price_goat: "",
-            price_outofstock: "",
             price_poison: "",
             price_stockX: "",
             release_date: "",

@@ -1,5 +1,7 @@
+@use "../../../../../styles/variables.scss" as *;
+
 .location{
-    background-color: #151D31;
+    background-color: $color-secondary;
     padding: 1em 2em;
     border-radius: 20px;
     &__fields{

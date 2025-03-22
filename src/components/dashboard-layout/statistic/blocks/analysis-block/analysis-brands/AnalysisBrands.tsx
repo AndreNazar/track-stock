@@ -21,7 +21,7 @@ function AnalysisBrands() {
     }, [])
 
     useEffect(() => {
-        const colors = ["#56CCF2", "#2D9CDB", "#177FBB", "#0B5B89", "#002F4A", "#01283f", "#000000"]
+        const colors = ["#24ba7d", "#209867", "#1c7c55", "#155f41", "#0f452f", "#0b3122", "#071f16"]
         const api = new Api()
         api.getBrands().then(res => {
             setBrandsData(res.brands.map((b: any, i: number) => {

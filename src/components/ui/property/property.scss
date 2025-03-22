@@ -1,7 +1,9 @@
+@use "../../../styles/variables.scss" as *;
+
 .property{
     position: relative;
     &__title{
-        color: #6578A9;
+        color: $color-text;
         font-size: clamp(12px, 2vw, 14px);
     }
     &__value{

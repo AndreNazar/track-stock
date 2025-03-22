@@ -2,19 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SelectionState {
   currentContext: {
-    profit: number,
-    analysisSize: number,
-    brands: number,
-    statuses: number,
+    [key: string]: number;
   }
 }
 
 const initialState: SelectionState = {
   currentContext: {
-    profit: 0,
-    analysisSize: 0,
-    brands: 0,
-    statuses: 0,
   }
 };
 

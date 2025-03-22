@@ -40,7 +40,6 @@ function InventoryProductsList() {
           priceBuy: p.sneaker.price,
           placeOfTransaction: "",
           price_goat: "",
-          price_outofstock: "",
           price_poison: "",
           price_stockX: "",
           priceDelivery: p.sneaker.price
