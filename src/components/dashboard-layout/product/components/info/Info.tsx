@@ -13,7 +13,7 @@ function Info({ info }: { info: (string | null)[] }) {
       img: brand_png,
     },
     {
-      title: "Дата покупки",
+      title: "Дата продажи",
       value: info[1],
       img: date_png,
     },
@@ -35,7 +35,7 @@ function Info({ info }: { info: (string | null)[] }) {
         {infoList.map((item: InfoList, i: number) => (
           <li key={item.title} className="product__info-item">
             <img className="product__info-icon" src={item.img} alt="" />
-            <Property isPrice={i === 2 || i === 3} title={item.title} value={item.value} />
+            <Property isPrice={(i === 2 || i === 3)} title={item.title} value={item.value} />
           </li>
         ))}
       </ul>

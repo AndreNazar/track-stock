@@ -11,7 +11,7 @@ function ExtraInfo ({product}: {product: IProducts}) {
     return (
         <div className="product__extrainfo">
           <Property attribute="Артикул" value={product.article} />
-          <Property attribute="Ср. рыночная стоимость" value={product.avg_price + " ₽"} />
+          <Property attribute="Ср. рыночная стоимость" value={(+product.avg_price).toFixed(1) + " ₽"} />
           <div className="product__platforms">
             <PropertyPlatform img={goat_png} value={product.price_goat} />
             <PropertyPlatform img={poizon_png} value={product.price_poison} />

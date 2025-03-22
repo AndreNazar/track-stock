@@ -4,8 +4,17 @@ import goat_png from "../../../../../assets/imgs/platforms/goat.png"
 import poizon_png from "../../../../../assets/imgs/platforms/poizon.png"
 import stock_png from "../../../../../assets/imgs/platforms/stock.png"
 import StatusItem from "./item/StatusItem"
+import Loading from "../../../../ui/loadings/Loading"
 
-function Statuses({goat, poizon, stockX}: {goat: string, poizon: string, stockX: string}) {
+interface IStatuses {
+  goat: string,
+  poizon: string,
+  stockX: string,
+  inStore: boolean,
+  article: string
+}
+
+function Statuses({goat, poizon, stockX, inStore, article}: IStatuses) {
   return (
     <div className="product__statuses"> 
       <div className="product__statuses-wrapper">
@@ -16,8 +25,12 @@ function Statuses({goat, poizon, stockX}: {goat: string, poizon: string, stockX:
           {stockX && <StatusItem image={stock_png} value={stockX} />}
         </div>
         <div className="product__statuses-buttons">
-          <ButtonDash onClick={() => {}}>Продано</ButtonDash>
-          <ButtonDash onClick={() => {}}>Разместить</ButtonDash>
+          {!article
+          ? <Loading />
+          : inStore
+            ? <ButtonDash onClick={() => {}}>Продано</ButtonDash>
+            : <ButtonDash onClick={() => {}}>Разместить</ButtonDash>
+          }
         </div>
       </div>
     </div>

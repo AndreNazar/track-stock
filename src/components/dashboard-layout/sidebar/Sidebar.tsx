@@ -1,5 +1,5 @@
 import "./sidebar.scss"
-import logoXL from "../../../assets/imgs/logo/logoXL.png"
+import logoXL from "../../../assets/imgs/logo/logo.svg"
 import { NavLink } from "react-router-dom"
 import Menu from "./menu/Menu"
 import exit_svg from "../../../assets/imgs/tabs/exit.svg"

@@ -15,7 +15,8 @@ export interface IProducts {
   price_goat: string | null
   price_poison: string | null
   priceBuy: number
-  priceDelivery: number
+  priceSale: number
+  dateBuy: string
   condition: string
   sizeUS: string
   sizeUK: string
@@ -23,6 +24,7 @@ export interface IProducts {
   city: string
   placeOfTransaction: string
   checkedFitting: boolean
+  inStore: boolean
 }
 
 export enum eBrandKeys {
@@ -32,12 +34,12 @@ export enum eBrandKeys {
     color = "color",
     brand = "brand",
     article = "article",
-    release_date = "release_date",
     price_stockX = "price_stockX",
     price_goat = "price_goat",
     price_poison = "price_poison",
     priceBuy = "priceBuy",
-    priceDelivery = "priceDelivery",
+    priceSale = "priceSale",
+    dateBuy = "dateBuy",
     condition = "condition",
     sizeUS = "sizeUS",
     sizeUK = "sizeUK",

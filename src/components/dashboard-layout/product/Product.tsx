@@ -37,10 +37,11 @@ function Product (){
             city: res.sneaker.city,
             color: res.sneaker.color,
             condition: res.sneaker.condition,
-            priceBuy: res.sneaker.price,
+            priceBuy: res.sneaker.price_buy,
+            priceSale: res.sneaker.price_sale,
+            dateBuy: res.sneaker.date_buy,
             placeOfTransaction: "",
             checkedFitting: res.sneaker.fitting,
-            priceDelivery: res.sneaker.price,
             price_goat: res.prices.goat,
             price_poison: res.prices.poizon,
             price_stockX: res.prices.stock_x,
@@ -50,6 +51,7 @@ function Product (){
             sizeUS: res.sneaker.us_size,
             image: resImage.photo_url,
             name: res.sneaker.model,
+            inStore: res.sneaker.in_store,
         }))
     }
 
@@ -67,7 +69,8 @@ function Product (){
                 priceBuy: 0,
                 placeOfTransaction: "",
                 checkedFitting: false,
-                priceDelivery: 0,
+                priceSale: 0,
+                dateBuy: "",
                 price_goat: "",
                 price_poison: "",
                 price_stockX: "",
@@ -77,6 +80,7 @@ function Product (){
                 sizeUS: "",
                 image: "",
                 name: "",
+                inStore: false,
             }))
         }
     }, [])
@@ -92,9 +96,9 @@ function Product (){
             <Card/>
             <Info info={[
                 currentInfo?.brand || null, 
-                currentInfo?.avg_price || null, 
-                currentInfo?.priceBuy.toString() || null, 
-                currentInfo?.priceDelivery.toString() || null
+                null, // Дата продажи
+                currentInfo?.priceBuy?.toString() || null, 
+                currentInfo?.priceSale?.toString() || null
             ]} />
             
             
@@ -102,6 +106,8 @@ function Product (){
             goat={currentInfo?.price_goat!}
             poizon={currentInfo?.price_poison!} 
             stockX={currentInfo?.price_stockX!}
+            inStore={currentInfo?.inStore!}
+            article={currentInfo?.article!}
             />
             <Sales />
         </div>
