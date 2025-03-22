@@ -25,35 +25,60 @@ function Product (){
     async function getProductInfo() {
         const api = new Api()
         const res = await api.getSneakerById(+params.product_id!)
-        const resImage = await api.loadProductInfo(res.article)
+        const resImage = await api.loadProductInfo(res.sneaker.article)
         
+        console.log(res)
+        console.log(resImage)
 
         dispatch(setCurrentInfo({
-            id: res.id,
-            article: res.article,
-            brand: res.brand.brand,
-            city: res.city,
-            color: res.color,
-            condition: res.condition,
-            priceBuy: res.price,
+            id: res.sneaker.id,
+            article: res.sneaker.article,
+            brand: res.sneaker.brand.brand,
+            city: res.sneaker.city,
+            color: res.sneaker.color,
+            condition: res.sneaker.condition,
+            priceBuy: res.sneaker.price,
             placeOfTransaction: "",
-            checkedFitting: res.fitting,
-            priceDelivery: res.price,
-            price_goat: "",
-            price_poison: "",
-            price_stockX: "",
-            release_date: "",
-            sizeEU: res.eu_size,
-            sizeUK: res.uk_size,
-            sizeUS: res.us_size,
+            checkedFitting: res.sneaker.fitting,
+            priceDelivery: res.sneaker.price,
+            price_goat: res.prices.goat,
+            price_poison: res.prices.poizon,
+            price_stockX: res.prices.stock_x,
+            avg_price: res.prices.avg_price,
+            sizeEU: res.sneaker.eu_size,
+            sizeUK: res.sneaker.uk_size,
+            sizeUS: res.sneaker.us_size,
             image: resImage.photo_url,
-            name: res.model,
+            name: res.sneaker.model,
         }))
     }
 
     useEffect(() => {
         getProductInfo()
         dispatch(switchTab("/inventory"))
+        return () => {
+            dispatch(setCurrentInfo({
+                id: 0,
+                article: "",
+                brand: "",
+                city: "",
+                color: "",
+                condition: "",
+                priceBuy: 0,
+                placeOfTransaction: "",
+                checkedFitting: false,
+                priceDelivery: 0,
+                price_goat: "",
+                price_poison: "",
+                price_stockX: "",
+                avg_price: "",
+                sizeEU: "",
+                sizeUK: "",
+                sizeUS: "",
+                image: "",
+                name: "",
+            }))
+        }
     }, [])
     
 
@@ -67,13 +92,17 @@ function Product (){
             <Card/>
             <Info info={[
                 currentInfo?.brand || null, 
-                currentInfo?.release_date || null, 
+                currentInfo?.avg_price || null, 
                 currentInfo?.priceBuy.toString() || null, 
                 currentInfo?.priceDelivery.toString() || null
             ]} />
             
             
-            <Statuses />
+            <Statuses 
+            goat={currentInfo?.price_goat!}
+            poizon={currentInfo?.price_poison!} 
+            stockX={currentInfo?.price_stockX!}
+            />
             <Sales />
         </div>
     </div>

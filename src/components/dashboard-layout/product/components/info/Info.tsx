@@ -23,7 +23,7 @@ function Info({ info }: { info: (string | null)[] }) {
       img: price_png,
     },
     {
-      title: "Цена доставки",
+      title: "Цена продажи",
       value: info[3],
       img: price_png,
     },
@@ -32,10 +32,10 @@ function Info({ info }: { info: (string | null)[] }) {
   return (
     <div className="product__info">
       <ul className="product__info-list">
-        {infoList.map((item: InfoList) => (
+        {infoList.map((item: InfoList, i: number) => (
           <li key={item.title} className="product__info-item">
             <img className="product__info-icon" src={item.img} alt="" />
-            <Property title={item.title} value={item.value} />
+            <Property isPrice={i === 2 || i === 3} title={item.title} value={item.value} />
           </li>
         ))}
       </ul>

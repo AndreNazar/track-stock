@@ -1,18 +1,19 @@
 import ButtonDash from "../../../../ui/buttons/ButtonDash"
 import "./statuses.scss"
 import goat_png from "../../../../../assets/imgs/platforms/goat.png"
+import poizon_png from "../../../../../assets/imgs/platforms/poizon.png"
+import stock_png from "../../../../../assets/imgs/platforms/stock.png"
+import StatusItem from "./item/StatusItem"
 
-function Statuses() {
+function Statuses({goat, poizon, stockX}: {goat: string, poizon: string, stockX: string}) {
   return (
     <div className="product__statuses"> 
       <div className="product__statuses-wrapper">
         <h3 className="product__statuses-heading">Статусы</h3>
         <div className="product__statuses-list">
-          <div className="product__statuses-item">
-            <img className="product__statuses-icon" src={goat_png} alt="" />
-            <p className="product__statuses-title">Статус</p>
-            <p className="product__statuses-value">$220</p>
-          </div>
+          {goat && <StatusItem image={goat_png} value={goat} />}
+          {poizon && <StatusItem image={poizon_png} value={poizon} />}
+          {stockX && <StatusItem image={stock_png} value={stockX} />}
         </div>
         <div className="product__statuses-buttons">
           <ButtonDash onClick={() => {}}>Продано</ButtonDash>

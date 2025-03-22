@@ -1,0 +1,17 @@
+@use "../../../../../../styles/variables.scss" as *;
+
+.product__statuses{
+    &-item{
+        
+    }
+    &-icon{
+
+    }
+    &-title{
+        color: $color-text;
+        font-size: clamp(12px, 2vw, 14px);
+    }
+    &-value{
+        font-size: clamp(12px, 2vw, 14px);
+    }
+}

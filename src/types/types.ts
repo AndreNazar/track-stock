@@ -10,7 +10,7 @@ export interface IProducts {
   color: string
   brand: string
   article: string
-  release_date: string
+  avg_price: string
   price_stockX: string | null
   price_goat: string | null
   price_poison: string | null

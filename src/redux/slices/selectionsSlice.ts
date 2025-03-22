@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { eContextMenuType } from '../../types/types';
 
 interface SelectionState {
   currentContext: {
@@ -8,6 +9,8 @@ interface SelectionState {
 
 const initialState: SelectionState = {
   currentContext: {
+    [eContextMenuType.profit]: 0,
+    [eContextMenuType.analysisSize]: 0,
   }
 };
 

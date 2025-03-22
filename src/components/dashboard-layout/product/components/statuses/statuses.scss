@@ -30,3 +30,9 @@
         gap: 1em;
     }
 }
+
+@media (max-width: 550px) {
+    .product__statuses{
+        width: 100%;
+    }
+}

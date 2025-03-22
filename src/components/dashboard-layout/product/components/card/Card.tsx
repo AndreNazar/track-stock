@@ -36,9 +36,8 @@ function Card() {
         setCardList([
             {title: "Артикул", value: currentInfo?.article ?? null},
             {title: "Бренд", value: currentInfo?.brand ?? null},
-            {title: "Дата релиза", value: currentInfo?.release_date ?? null},
             {title: "Цвет", value: currentInfo?.color ?? null},
-            {title: "Ретейл", value: null},
+            {title: "Ретейл", value: currentInfo?.avg_price ?? null},
         ])
     }, [currentInfo])
 

@@ -29,12 +29,12 @@ function Dropdown({ data, title, type, value }: { data: string[], title: string,
   }
 
   return (
-    <div ref={dropdownRef} className="dropdown">
+    <div className="dropdown">
       <div className="dropdown__heading">
         <p className="dropdown__heading-text">{title}</p>
         <img className="dropdown__heading-information" src={info_svg} alt="i" />
       </div>
-      <Select onClick={openConditionsHandler} value={value} />
+      <Select ref={dropdownRef} onClick={openConditionsHandler} value={value} />
     </div>
   )
 }

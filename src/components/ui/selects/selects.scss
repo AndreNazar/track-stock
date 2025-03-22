@@ -1,3 +1,5 @@
+@use "../../../styles/variables.scss" as *;
+
 .select{
     position: relative;
     display: grid;
@@ -9,7 +11,7 @@
         transform: translateY(-50%);
     }
     &__input{
-        border: 2px solid #2D9CDB;
+        border: 2px solid $color-primary;
         padding: .7em 1.3em;
         font-size: 14px;
         border-radius: 20px;

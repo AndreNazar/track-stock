@@ -36,12 +36,12 @@ function InventoryProductsList() {
           condition: p.sneaker.condition,
           brand: p.sneaker.brand.brand,
           article: p.sneaker.article,
-          release_date: "",
+          avg_price: p.prices.avg_price,
           priceBuy: p.sneaker.price,
           placeOfTransaction: "",
-          price_goat: "",
-          price_poison: "",
-          price_stockX: "",
+          price_goat: p.prices.goat,
+          price_poison: p.prices.poizon,
+          price_stockX: p.prices.stock_x,
           priceDelivery: p.sneaker.price
         }
       })))
