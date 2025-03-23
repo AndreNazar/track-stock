@@ -1,14 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IProducts } from "../../types/types"
+import { eLocalTab, ILocalTab, IProducts } from "../../types/types"
 
 interface ProductState {
   productList: IProducts[]
   currentInfo: IProducts
+  localTab: ILocalTab,
   currentInfoEditor: IProducts
+  searchText: string
 }
 
 const initialState: ProductState = {
   productList: [],
+  localTab: eLocalTab.inventory,
+  searchText: "",
   currentInfo: {
     id: 1,
     name: "",
@@ -16,12 +20,10 @@ const initialState: ProductState = {
     image: "",
     color: "",
     article: "",
-    release_date: "",
     price_stockX: "",
     price_goat: "",
     price_poison: "",
     priceBuy: 0,
-    priceDelivery: 0,
     condition: "",
     sizeUS: "",
     sizeUK: "",
@@ -29,6 +31,11 @@ const initialState: ProductState = {
     city: "",
     placeOfTransaction: "",
     checkedFitting: false,
+    avg_price: "",
+    inStore: false,
+    isSale: false,
+    dateBuy: "",
+    priceSale: 0
   },
   currentInfoEditor: {
     id: 1,
@@ -37,12 +44,10 @@ const initialState: ProductState = {
     image: "",
     color: "",
     article: "",
-    release_date: "",
     price_stockX: "",
     price_goat: "",
     price_poison: "",
     priceBuy: 0,
-    priceDelivery: 0,
     condition: "",
     sizeUS: "",
     sizeUK: "",
@@ -50,6 +55,11 @@ const initialState: ProductState = {
     city: "",
     placeOfTransaction: "",
     checkedFitting: false,
+    avg_price: "",
+    dateBuy: "",
+    inStore: false,
+    isSale: false,
+    priceSale: 0
   },
 }
 
@@ -87,8 +97,14 @@ const productSlice = createSlice({
         action.payload
       ]
     },
+    changeSearchText(state, action: PayloadAction<string>) {
+      state.searchText = action.payload
+    },
+    setLocalTab(state, action: PayloadAction<ILocalTab>) {
+      state.localTab = action.payload
+    },
   },
 })
 
-export const { setCurrentInfo, changeCurrentInfo, setCurrentInfoEditor, changeCurrentInfoEditor, setProductList, addToProductList } = productSlice.actions
+export const { setLocalTab, setCurrentInfo, changeCurrentInfo, setCurrentInfoEditor, changeCurrentInfoEditor, setProductList, addToProductList, changeSearchText } = productSlice.actions
 export default productSlice.reducer

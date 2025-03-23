@@ -25,6 +25,7 @@ export interface IProducts {
   placeOfTransaction: string
   checkedFitting: boolean
   inStore: boolean
+  isSale: boolean
 }
 
 export enum eBrandKeys {
@@ -98,21 +99,9 @@ export interface IDataSelect {
   selected: boolean
 }
 
-export interface CreateSneakersLot {
-  brand: string;
-  city: string;
-  place: string;
-  condition: string;
-  uk_size: number;
-  us_size: number;
-  eu_size: number;
-  price: number;
-  fitting: boolean;
-  article: string;
-}
 
-export interface UpdateSneakersLot {
-  id: number
+export interface SneakersLot {
+  id?: number
   brand: string;
   city: string;
   place: string;
@@ -123,6 +112,8 @@ export interface UpdateSneakersLot {
   price: number;
   fitting: boolean;
   article: string;
+  purchase_price: number;
+  purchase_date: string;
 }
 
 export enum eContextMenuType {
@@ -150,3 +141,20 @@ export interface IContextBlock {
 }
 
 export type MenuType = "/inventory" | "/statistic" | "/account"
+
+export enum eBrandKeys {
+  adidas = "adidas",
+  nike = "nike",
+  newbalance = "newbalance",
+  jordan = "jordan",
+  asics = "asics",
+  noname = "noname",
+}
+
+export type TBrandKeys = keyof typeof eBrandKeys
+
+export enum eLocalTab{
+  inventory = "inventory",
+  sales = "sales"
+}
+export type ILocalTab = "inventory" | "sales"

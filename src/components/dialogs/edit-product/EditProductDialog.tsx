@@ -1,4 +1,4 @@
-import { eBrandKeys, IDataSelect, IProducts, UpdateSneakersLot } from "../../../types/types"
+import { eBrandKeys, IDataSelect, IProducts, SneakersLot } from "../../../types/types"
 import "../add-product/add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
 import { useEffect, useState } from "react"
@@ -64,21 +64,25 @@ function EditProductDialog() {
 
     if(isLoadingAdd) return
     setLoadingAdd(true)
-    const data: UpdateSneakersLot = {
+
+
+    const data: SneakersLot = {
       id: currentInfoEditor.id,
       uk_size: +currentInfoEditor.sizeUK,
       us_size: +currentInfoEditor.sizeUS,
       eu_size: +currentInfoEditor.sizeEU,
       brand: brandsList.map(b => b.name)[currentContext.brands] ?? "",
       condition: conditionsList.map(c => c.name)[currentContext.statuses] ?? "",
-      price: +currentInfoEditor.priceBuy,
+      price: +currentInfoEditor.priceSale,
       article: currentInfoEditor.article,
       city: currentInfoEditor.city,
       place: currentInfoEditor.placeOfTransaction,
       fitting: currentInfoEditor.checkedFitting,
-
+      purchase_date: currentInfoEditor.dateBuy,
+      purchase_price: currentInfoEditor.priceBuy,
     }
-
+    
+    
     try {
       console.log(data)
       const api = new Api()

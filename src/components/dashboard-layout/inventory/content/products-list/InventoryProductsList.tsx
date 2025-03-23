@@ -1,77 +1,83 @@
-import { IProducts } from "../../../../../types/types"
+import { eLocalTab, IProducts } from "../../../../../types/types"
 import "./products-list.scss"
 import InventoryProductsItem from "./item/InventoryProductsItem"
-import { useEffect, useState } from "react"
-import { Api } from "../../../../../api/api"
 import Loading from "../../../../ui/loadings/Loading"
-import { useDispatch, useSelector } from "react-redux"
-import { setProductList } from "../../../../../redux/slices/productSlice"
-
+import { useEffect, useState } from "react"
+import { useOutletContext } from "react-router"
+import getBrandByName from "../../../../../utilities/getBrandByName"
+import { useParams } from "react-router"
+import { useSelector } from "react-redux"
 
 function InventoryProductsList() {
-
-  const dispatch = useDispatch()
-  const productList = useSelector((s: any) => s.product.productList)
-  const [isLoading, setLoading] = useState<boolean>(false)
   const [selectedProduct, setSelectedProduct] = useState<number>(-1)
+  const { isLoading, productList } = useOutletContext<{ productList: IProducts[]; isLoading: boolean }>()
+  const localTab = useSelector((s: any) => s.product.localTab)
+  const searchText = useSelector((s: any) => s.product.searchText)
+  const [products, setProducts] = useState<IProducts[]>([])
+  const [searchProducts, setSearchProducts] = useState<IProducts[]>([])
+  const params = useParams()
+
+  function sortedProducts(): IProducts[] {
+    let sortProducts = [...tabHandler()]
+    return sortProducts.sort((a: IProducts, b: IProducts) => b.id - a.id)
+  }
+
+  function tabHandler() {
+    if (localTab === eLocalTab.sales) return productList.filter((pl) => pl.isSale)
+    else return productList.filter((pl) => !pl.isSale)
+  }
 
   async function getProducts() {
-    setLoading(true)
-    try {
-      const api = new Api()
-      const response = await api.getSneakers();
-      console.log(response)
-      dispatch(setProductList(response.sneakers.map((p: any): IProducts => {
-        setLoading(false)
-        return {
-          id: p.sneaker.id,
-          image: p.photo_url,
-          name: p.sneaker.model,
-          sizeEU: p.sneaker.eu_size,
-          sizeUK: p.sneaker.uk_size,
-          sizeUS: p.sneaker.us_size,
-          color: p.sneaker.color,
-          city: p.sneaker.city,
-          checkedFitting: p.sneaker.fitting,
-          condition: p.sneaker.condition,
-          brand: p.sneaker.brand.brand,
-          article: p.sneaker.article,
-          avg_price: p.prices.avg_price,
-          priceBuy: p.sneaker.price,
-          placeOfTransaction: "",
-          price_goat: p.prices.goat,
-          price_poison: p.prices.poizon,
-          price_stockX: p.prices.stock_x,
-          priceDelivery: p.sneaker.price
-        }
-      })))
-    } catch (error) {
-      console.log(error)
-    }
+    console.log(localTab)
+    setProducts(
+      sortedProducts()
+        .filter((s: IProducts) => getBrandByName(s.brand) === params.brand_name)
+        .map((s: IProducts): IProducts => {
+          return {
+            id: s.id,
+            image: s.image,
+            name: s.name,
+            sizeEU: s.sizeEU,
+            sizeUK: s.sizeUK,
+            sizeUS: s.sizeUS,
+            color: s.color,
+            city: s.city,
+            checkedFitting: s.checkedFitting,
+            condition: s.condition,
+            brand: s.brand,
+            article: s.article,
+            avg_price: s.avg_price,
+            priceBuy: s.priceBuy,
+            placeOfTransaction: s.placeOfTransaction,
+            price_goat: s.price_goat,
+            price_poison: s.price_poison,
+            price_stockX: s.price_stockX,
+            priceSale: s.priceSale,
+            dateBuy: s.dateBuy,
+            inStore: s.inStore,
+            isSale: s.isSale,
+          }
+        })
+    )
+  }
+
+  function getList() {
+    if (searchProducts.length > 0) return searchProducts
+    else return products
   }
 
   useEffect(() => {
     getProducts()
-  }, [])
+  }, [productList, localTab])
 
-  function sortedProducts():IProducts[] {
-    let sortProducts = [...productList]
-    return sortProducts.sort((a: IProducts, b: IProducts) => b.id - a.id)
-  }
+  useEffect(() => {
+    console.log(searchText)
+    if (searchText.trim() !== "") {
+      setSearchProducts(sortedProducts().filter((s: IProducts) => s.name.toLowerCase().includes(searchText.toLowerCase())))
+    }
+  }, [searchText])
 
-  return (
-    <div className="products-list">
-        {isLoading
-        ? <Loading size={30} />
-        : sortedProducts()
-        .map((p: IProducts) => <InventoryProductsItem 
-        product={p} 
-        key={p.id} 
-        selectedProduct={selectedProduct} 
-        setSelectedProduct={setSelectedProduct}/>
-        )}
-    </div>
-  )
+  return <div className="products-list">{isLoading ? <Loading size={40} /> : getList().map((p: IProducts) => <InventoryProductsItem product={p} key={p.id} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} />)}</div>
 }
 
 export default InventoryProductsList

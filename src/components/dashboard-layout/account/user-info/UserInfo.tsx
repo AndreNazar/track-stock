@@ -20,16 +20,16 @@ function UserInfo() {
           isOpenEditBlock={isOpenEditBlock} 
           setOpenEditBlock={setOpenEditBlock}
         />
-        <CardLinked cardData={{
+        {/* <CardLinked cardData={{
           number: "•••• •••• •••• 1234",
           date: "11/26"
-        }} />
+        }} /> */}
         <FormUserInfo />
         <FormChangePassword/>
       </div>
-      <div className="user-info__subscribe">
+      {/* <div className="user-info__subscribe">
         <Subscribe/>
-      </div>
+      </div> */}
     </div>
   )
 }

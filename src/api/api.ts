@@ -73,6 +73,34 @@ export class Api {
       },
     }).then(this.getJsonResponse)
   }
+  
+  async putInStore(id: number) {
+    return fetch(`${this.URL}sneakers/sneakers/put_in_store/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
+  async setSoldOut(id: number) {
+    return fetch(`${this.URL}sneakers/sneakers/sold_out/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
+  async deleteFromStore(id: number) {
+    return fetch(`${this.URL}sneakers/sneakers/delete_from_store/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
 
   async getSneakerById(id: number) {
     return fetch(`${this.URL}sneakers/sneakers/${id}`, {

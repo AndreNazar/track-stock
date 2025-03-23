@@ -18,7 +18,7 @@ function Dropdown({ data, title, type, value }: { data: string[], title: string,
         newContextBlock({
           list: data,
           title: "",
-          top: rect.top,
+          top: dropdownRef.current.offsetTop + 32,
           left: rect.left,
           width: rect.width,
           firstClick: true,

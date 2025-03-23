@@ -8,13 +8,13 @@ import LocationBlock from "./location-block/LocationBlock"
 
 function ExtraInfo() {
 
-  const [serviceDataVK, setServiceDataVK] = useState<IServiceBlock>({
-    img: vk_img,
-    title: "ВКонтакте",
-    text: "Для отображения информации подключитесь к сервису.",
-    isSelect: false,
-    onClick: handleClickVK
-  })
+  // const [serviceDataVK, setServiceDataVK] = useState<IServiceBlock>({
+  //   img: vk_img,
+  //   title: "ВКонтакте",
+  //   text: "Для отображения информации подключитесь к сервису.",
+  //   isSelect: false,
+  //   onClick: handleClickVK
+  // })
 
   /*const [serviceDataAvito, setServiceDataAvito] = useState<IServiceBlock>({
     img: avito_img,
@@ -24,14 +24,14 @@ function ExtraInfo() {
     onClick: handleClickAvito
   })*/
 
-  function handleClickVK() {
+  /*function handleClickVK() {
     setServiceDataVK(prev => {
       return {
         ...prev,
         isSelect: !prev.isSelect
       }
     })
-  }
+  }*/
 
 
   /*function handleClickAvito() {
@@ -44,7 +44,7 @@ function ExtraInfo() {
   }*/
 
   return <div className="extra-info">
-    <ServiceBlock serviceInfo={serviceDataVK} />
+    {/* <ServiceBlock serviceInfo={serviceDataVK} /> */}
     {/* <ServiceBlock serviceInfo={serviceDataAvito} /> */}
     <PrivacyBlock />
     <LocationBlock />

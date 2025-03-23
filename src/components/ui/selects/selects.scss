@@ -21,6 +21,9 @@
         outline: none;
     }
 }
+.field-circle, .select__input{
+    cursor: text !important;
+}
 .select-field{
     position: relative;
     display: grid;

@@ -26,7 +26,6 @@ function App() {
   const openEditProductDialog = useSelector((s:any) => s.dialog.dialogEditProduct)
   const opendialogDeleteProduct = useSelector((s:any) => s.dialog.dialogDeleteProduct)
   const contextBlock: IContextBlock = useSelector((s:any) => s.dialog.contextBlock)
-  const currentContext: IContextBlock = useSelector((s:any) => s.selections.currentContext)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -47,8 +46,6 @@ function App() {
   const isActiveDialog = useMemo(() => {
     return openAddProductDialog || openEditProductDialog || opendialogDeleteProduct
   }, [openAddProductDialog, openEditProductDialog, opendialogDeleteProduct])
-
-  useEffect(() => {console.log(currentContext)}, [currentContext])
 
 
   return isGlobalLoading 
@@ -79,11 +76,16 @@ function App() {
         {isAuth && <Route element={<DashboardLayout />}>
           <Route path="/inventory" element={<Inventory />}>
             <Route path="" element={<InventoryBrandsList />} />
-            <Route path=":brand_name" element={<InventoryProductsList />} />
+            <Route path=":brand_name" element={<InventoryProductsList  />} />
+          </Route>
+          <Route path="/sales" element={<Inventory />}>
+            <Route path="" element={<InventoryBrandsList />} />
+            <Route path=":brand_name" element={<InventoryProductsList  />} />
           </Route>
           <Route path="/statistic" element={<Statistic />} />
           <Route path="/account" element={<Account />} />
           <Route path="/inventory/:brand_name/:product_id" element={<Product />} />
+          <Route path="/sales/:brand_name/:product_id" element={<Product />} />
         </Route>}
       </Routes>
     </div>

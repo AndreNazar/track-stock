@@ -23,7 +23,7 @@ Chart.register(
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
-    <BrowserRouter basename='/track-stock'>
+    <BrowserRouter basename='/'>
       <Suspense fallback={<Loading />}>
         <App />
       </Suspense> 

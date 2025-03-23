@@ -37,9 +37,9 @@ function Product (){
             city: res.sneaker.city,
             color: res.sneaker.color,
             condition: res.sneaker.condition,
-            priceBuy: res.sneaker.price_buy,
-            priceSale: res.sneaker.price_sale,
-            dateBuy: res.sneaker.date_buy,
+            priceBuy: res.sneaker.purchase_price,
+            priceSale: res.sneaker.price,
+            dateBuy: res.sneaker.purchase_date,
             placeOfTransaction: "",
             checkedFitting: res.sneaker.fitting,
             price_goat: res.prices.goat,
@@ -52,6 +52,7 @@ function Product (){
             image: resImage.photo_url,
             name: res.sneaker.model,
             inStore: res.sneaker.in_store,
+            isSale: res.sneaker.is_sale,
         }))
     }
 
@@ -81,6 +82,7 @@ function Product (){
                 image: "",
                 name: "",
                 inStore: false,
+                isSale: false,
             }))
         }
     }, [])
@@ -96,17 +98,19 @@ function Product (){
             <Card/>
             <Info info={[
                 currentInfo?.brand || null, 
-                null, // Дата продажи
+                currentInfo?.dateBuy || null, // Дата продажи
                 currentInfo?.priceBuy?.toString() || null, 
                 currentInfo?.priceSale?.toString() || null
             ]} />
             
             
             <Statuses 
+            id={currentInfo?.id!}
             goat={currentInfo?.price_goat!}
             poizon={currentInfo?.price_poison!} 
             stockX={currentInfo?.price_stockX!}
             inStore={currentInfo?.inStore!}
+            isSale={currentInfo?.isSale!}
             article={currentInfo?.article!}
             />
             <Sales />

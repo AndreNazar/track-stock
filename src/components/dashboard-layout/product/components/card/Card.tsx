@@ -37,7 +37,7 @@ function Card() {
             {title: "Артикул", value: currentInfo?.article ?? null},
             {title: "Бренд", value: currentInfo?.brand ?? null},
             {title: "Цвет", value: currentInfo?.color ?? null},
-            {title: "Ср. рыночная цена", value: currentInfo?.avg_price ? ((+currentInfo?.avg_price).toFixed(1) + " ₽") : null},
+            {title: "Ср. рыночная цена", value: currentInfo?.avg_price ? ((+currentInfo?.avg_price).toFixed(0) + " ₽") : null},
         ])
     }, [currentInfo])
 

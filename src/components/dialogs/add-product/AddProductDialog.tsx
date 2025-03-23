@@ -1,4 +1,4 @@
-import { CreateSneakersLot, eBrandKeys, IDataSelect, IProducts } from "../../../types/types"
+import { eBrandKeys, IDataSelect, IProducts, SneakersLot } from "../../../types/types"
 import "./add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
 import AddProductSearch from "./left-block/AddProductSearch"
@@ -33,12 +33,14 @@ function AddProductDialog() {
     priceBuy: 0,
     dateBuy: "",
     condition: "",
+    inStore: false,
     sizeUS: "",
     sizeUK: "",
     sizeEU: "",
     city: "",
     placeOfTransaction: "",
     checkedFitting: false,
+    isSale: false
   })
   const [brandsList, setBrandsList] = useState<IDataSelect[]>([])
   const [conditionsList, setConditionsList] = useState<IDataSelect[]>([])
@@ -86,7 +88,7 @@ function AddProductDialog() {
 
     if(isLoadingAdd) return
     setLoadingAdd(true)
-    const data: CreateSneakersLot = {
+    const data: SneakersLot = {
       uk_size: +currentInfo.sizeUK,
       us_size: +currentInfo.sizeUS,
       eu_size: +currentInfo.sizeEU,
@@ -97,6 +99,8 @@ function AddProductDialog() {
       city: currentInfo.city,
       place: currentInfo.placeOfTransaction,
       fitting: currentInfo.checkedFitting,
+      purchase_date: currentInfo.dateBuy,
+      purchase_price: currentInfo.priceBuy,
 
     }
 

@@ -28,7 +28,7 @@ const selectionsSlice = createSlice({
       state.currentContext = {
         ...state.currentContext,
         brands: -1,
-        statuses: -1,
+        statuses: -1
       }
     },
   },

@@ -4,7 +4,8 @@ import InventorySearchBlock from "./search-block/InventorySearchBlock"
 import InventoryTabs from "./tabs/InventoryTabs"
 
 function Inventory() {
-    
+
+
     return <div className="inventory">
         <InventoryTabs />
         <InventorySearchBlock />

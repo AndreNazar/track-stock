@@ -1,10 +1,12 @@
 @use "../../../../../styles/variables.scss" as *;
 
 .brands__list{
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0;
     gap: 2em;
+    
     .brands__item{
         position: relative;
         background: url('../../../../../assets/imgs/backgrounds/brand-bg.png') no-repeat;
@@ -56,6 +58,11 @@
             transform: translateY(0);
             transition: transform .1s ease;
         }
+    }
+    .loading{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
