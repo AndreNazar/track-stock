@@ -5,7 +5,9 @@
         min-width: 1390px;
         align-items: center;
     }
-    &__logo{}
+    &__logo{
+      width: 50px;
+    }
     &__menu{
         &-list{
             display: flex;

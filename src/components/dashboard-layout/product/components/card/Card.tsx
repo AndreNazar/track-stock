@@ -49,7 +49,7 @@ function Card() {
             {cardList[0].value 
             ? <>
                 <p className="card__info-name">{currentInfo?.name}</p>
-                <p className="card__info-size">{currentInfo?.sizeEU}</p>
+                <p className="card__info-size">{currentInfo?.sizeEU} EU</p>
                 <ul className="card__property-list">
                     {cardList.map((p:CardList) => <li key={p.title} className="card__property-item">
                         <Property title={p.title} value={p.value} />

@@ -15,7 +15,7 @@
     &__input{
         outline: none;
         border: none;
-        border-bottom: 2px solid #394974;
+        border-bottom: 2px solid $color-quaternary;
         background-color: transparent;
         width: 100%;
         padding: .5em 0;
@@ -23,10 +23,10 @@
         color: #ffffff;
         transition: border-bottom .2s;
         &.active{
-            border-bottom: 2px solid #576eae;
+            border-bottom: 2px solid $color-quaternary-light;
         }
         &::placeholder{
-            color: #394974;
+            color: $color-quaternary;
         }
     }
     .loading{

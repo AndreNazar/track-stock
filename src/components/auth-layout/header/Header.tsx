@@ -1,5 +1,5 @@
 import './header.scss'
-import logo_img from "../../../assets/imgs/logo/logo.png"
+import logo_img from "../../../assets/imgs/logo/logo.svg"
 
 function Header(){
     return <div className="header">

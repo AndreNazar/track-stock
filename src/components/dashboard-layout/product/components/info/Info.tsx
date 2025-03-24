@@ -1,30 +1,30 @@
 import { InfoList } from "../../../../../types/types"
 import Property from "../../../../ui/property/Property"
 import "./info.scss"
-import date_png from "../../../../../assets/imgs/actions/date.png"
-import price_png from "../../../../../assets/imgs/actions/price.png"
+import date_green_png from "../../../../../assets/imgs/actions/date_green.svg"
+import price_green_png from "../../../../../assets/imgs/actions/price_green.svg"
 
 function Info({ info }: { info: (string | null)[] }) {
   const infoList: InfoList[] = [
     {
       title: "Дата покупки",
       value: info[0],
-      img: date_png,
+      img: date_green_png,
     },
     {
       title: "Дата продажи",
       value: info[1],
-      img: date_png,
+      img: date_green_png,
     },
     {
       title: "Цена покупки",
       value: info[2],
-      img: price_png,
+      img: price_green_png,
     },
     {
       title: "Цена продажи",
       value: info[3],
-      img: price_png,
+      img: price_green_png,
     },
   ]
 

@@ -5,7 +5,7 @@ function ProductText({product, flag}: {product: IProducts, flag: "web" | "mobile
 
     return (
         <div className={`product__text-wrapper product__text-wrapper--${flag}`}>
-        <Property attribute="Размер" value={product.sizeEU} />
+        <Property attribute="Размер" value={product.sizeEU + " EU"} />
         <Property attribute="Источник" value={product.brand} />
         <Property attribute="Цвет" value={product.color} />
       </div>

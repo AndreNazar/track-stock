@@ -40,7 +40,8 @@ function AddProductDialog() {
     city: "",
     placeOfTransaction: "",
     checkedFitting: false,
-    isSale: false
+    isSale: false,
+    dateSale: "",
   })
   const [brandsList, setBrandsList] = useState<IDataSelect[]>([])
   const [conditionsList, setConditionsList] = useState<IDataSelect[]>([])

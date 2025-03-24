@@ -27,7 +27,8 @@ function SalesBlock() {
       dateBuy: "",
       inStore: false,
       isSale: false,
-      priceSale: 0
+      priceSale: 0,
+      dateSale: ""
     },
     {
       id: 2,
@@ -51,7 +52,8 @@ function SalesBlock() {
       dateBuy: "",
       inStore: false,
       isSale: false,
-      priceSale: 0
+      priceSale: 0,
+      dateSale: ""
     },
     {
       id: 3,
@@ -75,7 +77,8 @@ function SalesBlock() {
       dateBuy: "",
       inStore: false,
       isSale: false,
-      priceSale: 0
+      priceSale: 0,
+      dateSale: ""
     }
   ]
 

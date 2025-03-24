@@ -129,7 +129,7 @@ export interface IAccount {
 
 export enum eContextMenuType {
   profit = "profit",
-  analysisSize = "analysis-size",
+  analysisSize = "analysisSize",
   brands = "brands",
   statuses = "statuses",
   tg = "tg",

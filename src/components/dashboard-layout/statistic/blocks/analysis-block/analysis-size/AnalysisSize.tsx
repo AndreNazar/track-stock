@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { newContextBlock } from "../../../../../../redux/slices/dialogSlice"
 import SelectText from "../../../../../ui/selects/SelectText"
 import "./analysis-size.scss"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import AnalysisSizeItem from "./item/AnalysisSizeItem"
 
 function AnalysisSize() {
@@ -35,6 +35,10 @@ function AnalysisSize() {
       )
     }
   }
+
+  useEffect(() => {
+    console.log(currentContext)
+  }, [currentContext])
 
   return (
     <div ref={titleRef} className="analysis-sizes">
