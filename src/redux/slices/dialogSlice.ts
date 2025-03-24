@@ -1,4 +1,4 @@
-import { IContextBlock, IProducts } from './../../types/types';
+import { ICalendarData, IContextBlock, IProducts } from './../../types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface DialogState {
@@ -8,6 +8,7 @@ interface DialogState {
     dialogDeleteProduct: boolean
     deleteData: {id: number, name: string} | null
     contextBlock: IContextBlock | null
+    calendarData: ICalendarData | null
 }
 
 const initialState: DialogState = {
@@ -16,7 +17,11 @@ const initialState: DialogState = {
     dataDialogEdit: null,
     dialogDeleteProduct: false,
     deleteData: null,
-    contextBlock: null
+    contextBlock: null,
+    calendarData: {
+      date: "",
+      isOpen: false,
+    }
 };
 
 const dialogSlice = createSlice({
@@ -57,6 +62,12 @@ const dialogSlice = createSlice({
     closeContextBlock(state) {
       state.contextBlock = null
     },
+    setCalendarData(state, action: PayloadAction<ICalendarData>) {
+      state.calendarData = action.payload
+    },
+    closeCalendarData(state) {
+      state.calendarData = null
+    },
   },
 });
 
@@ -69,6 +80,8 @@ export const {
   closeDialogDeleteProduct,
   newContextBlock,
   closeContextBlock,
-  firstClickContextBlock
+  firstClickContextBlock,
+  setCalendarData,
+  closeCalendarData,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;

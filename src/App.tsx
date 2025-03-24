@@ -19,18 +19,36 @@ import AddProductDialog from "./components/dialogs/add-product/AddProductDialog"
 import EditProductDialog from "./components/dialogs/edit-product/EditProductDialog"
 import DeleteProduct from "./components/dialogs/delete-product/DeleteProduct"
 import ContextList from "./components/ui/contexts/ContextList"
-import { IContextBlock } from "./types/types"
+import { ICalendarData, IContextBlock } from "./types/types"
+import { DayPicker } from "react-day-picker"
+import { setCalendarData } from "./redux/slices/dialogSlice"
+import { format, isValid, parse } from "date-fns"
 
 function App() {
   const openAddProductDialog = useSelector((s:any) => s.dialog.dialogAddProduct)
   const openEditProductDialog = useSelector((s:any) => s.dialog.dialogEditProduct)
   const opendialogDeleteProduct = useSelector((s:any) => s.dialog.dialogDeleteProduct)
   const contextBlock: IContextBlock = useSelector((s:any) => s.dialog.contextBlock)
+  const calendarData: ICalendarData = useSelector((s:any) => s.dialog.calendarData)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(true)
   const [isAuth, setIsAuth] = useState<boolean>(false)
+  
+  
+function parseDateString(dateString: string, formatStr: string): Date | null {
+  try {
+    const parsed = parse(dateString, formatStr, new Date());
+    return isValid(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+    const isActiveDialog = useMemo(() => {
+      return openAddProductDialog || openEditProductDialog || opendialogDeleteProduct
+    }, [openAddProductDialog, openEditProductDialog, opendialogDeleteProduct])
   
   useEffect(() => {
     if (!localStorage.getItem('access-token')) { // WARNING
@@ -41,11 +59,6 @@ function App() {
     }
     setIsGlobalLoading(false)
   }, [isAuth])
-
-
-  const isActiveDialog = useMemo(() => {
-    return openAddProductDialog || openEditProductDialog || opendialogDeleteProduct
-  }, [openAddProductDialog, openEditProductDialog, opendialogDeleteProduct])
 
 
   return isGlobalLoading 
@@ -66,6 +79,17 @@ function App() {
         type={contextBlock.type}
         firstClick={contextBlock.firstClick}
       />}
+      {calendarData.isOpen && <div className="calendar-popup">
+        <DayPicker
+          animate
+          mode="single"
+          selected={parseDateString(calendarData.date, "yyyy-dd-MM")!}
+          onSelect={(date: Date | undefined) => dispatch(setCalendarData({
+            isOpen: false,
+            date: date ? format(date, "yyyy-dd-MM") : format(Date.now(), "yyyy-dd-MM")
+          }))}
+        />
+        </div>}
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route element={<AuthLayout />}>

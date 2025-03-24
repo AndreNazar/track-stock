@@ -1,3 +1,5 @@
+@use "../../../../styles/variables.scss" as *;
+
 .dialog {
     &__right {
         display: grid;
@@ -26,6 +28,11 @@
                 cursor: pointer;
             }
         }
+
+        .date-picker-container {
+            position: relative;
+          }
+
     }
 
 

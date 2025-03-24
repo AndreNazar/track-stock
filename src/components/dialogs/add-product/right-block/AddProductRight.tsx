@@ -5,8 +5,11 @@ import Checkbox from "../../../ui/checkbox/Checkbox"
 import SelectField from "../../../ui/selects/SelectField"
 import { eBrandKeys, IDataSelect, IProducts } from "../../../../types/types"
 import { useDispatch, useSelector } from "react-redux"
-import { newContextBlock } from "../../../../redux/slices/dialogSlice"
+import { newContextBlock, setCalendarData } from "../../../../redux/slices/dialogSlice"
+import 'react-day-picker/dist/style.css';
 import { useEffect, useRef } from "react"
+import { format } from "date-fns"
+import FieldCalendar from "../../../ui/fields/FieldCalendar"
 
 
 interface IAddProductRight {
@@ -29,6 +32,11 @@ const dispatch = useDispatch()
 const brandsRef = useRef<HTMLDivElement>(null)
 const conditionsRef = useRef<HTMLDivElement>(null)
 const currentContext = useSelector((s:any) => s.selections.currentContext)
+const calendarData = useSelector((s:any) => s.dialog.calendarData)
+
+const handleInputClick = () => {
+  dispatch(setCalendarData({date: format(new Date(), 'yyyy-dd-MM'), isOpen:true}))
+}
 
   function openBrandsHandler() {
     console.log(brandsRef.current)
@@ -74,10 +82,12 @@ const currentContext = useSelector((s:any) => s.selections.currentContext)
         <div className="right__locker">
           <img className="right__locker-img" src={locker_img} alt="" />
         </div>
-        <div className="right__content-field-xl"><Field loading={isLoadingArticle} disable={true} heading="Название" placeholder={isLoadingArticle?"...":""} value={currentInfo.name} setValue={(e: string) => changeCurrentInfo(eBrandKeys.name, e)} /></div>
-        <div className="right__content-field-m"><Field loading={isLoadingArticle} disable={true} heading="Цвет" placeholder={isLoadingArticle?"...":""} value={currentInfo.color} setValue={(e: string) => changeCurrentInfo(eBrandKeys.color, e)} /></div>
-        <div className="right__content-field-m"><Field heading="Цена покупки" placeholder="10" value={currentInfo.priceBuy} setValue={(e: string) => changeCurrentInfo(eBrandKeys.priceBuy, e)} /></div>
-        <div className="right__content-field-m"><Field heading="Дата покупки" placeholder="XX.XX.XX" value={currentInfo.dateBuy} setValue={(e: string) => changeCurrentInfo(eBrandKeys.dateBuy, e)} /></div>
+        <div className="right__content-field-xl"><Field loading={isLoadingArticle} disable={true} heading="Название" placeholder={!isLoadingArticle?"...":""} value={currentInfo.name} setValue={(e: string) => changeCurrentInfo(eBrandKeys.name, e)} /></div>
+        <div className="right__content-field-m"><Field loading={isLoadingArticle} disable={true} heading="Цвет" placeholder={!isLoadingArticle?"...":""} value={currentInfo.color} setValue={(e: string) => changeCurrentInfo(eBrandKeys.color, e)} /></div>
+        <div className="right__content-field-m"><Field heading="Цена покупки" placeholder="10" value={currentInfo.priceBuy!} setValue={(e: string) => changeCurrentInfo(eBrandKeys.priceBuy, e)} /></div>
+        <div className="right__content-field-m date-picker-container">
+          <FieldCalendar heading="Дата покупки" value={calendarData.date} onClick={handleInputClick} />
+        </div>
         <div className="right__content-field-l"><SelectField ref={conditionsRef} value={conditionsList.map(l => l.name)[currentContext.statuses]} onClick={openConditionsHandler} heading="Состояние" /></div>
         <div className="right__content-field-m"><Field heading="Размер US" placeholder="10 US" value={currentInfo.sizeUS} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeUS, e)} /></div>
         <div className="right__content-field-m"><Field heading="Размер UK" placeholder="10 UK" value={currentInfo.sizeUK} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeUK, e)} /></div>

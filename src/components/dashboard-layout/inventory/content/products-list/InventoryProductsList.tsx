@@ -23,11 +23,11 @@ function InventoryProductsList() {
     return sortProducts.sort((a: IProducts, b: IProducts) => {
       switch(currentContext.sort){
         case 0:
-          return (a.priceSale - b.priceSale)
+          return (a.priceSale! - b.priceSale!)
         case 1:
-          return (b.priceSale - a.priceSale)
+          return (b.priceSale! - a.priceSale!)
         default:
-          return (a.priceSale - b.priceSale)
+          return (a.priceSale! - b.priceSale!)
       }
     })
   }, [currentContext.sort, tabHandler(), productList, localTab])
@@ -82,7 +82,12 @@ function InventoryProductsList() {
 
   useEffect(() => {
     if (searchText.trim() !== "") {
-      setSearchProducts(sortedProducts.filter((s: IProducts) => s.name.toLowerCase().includes(searchText.toLowerCase())))
+      setSearchProducts(sortedProducts.filter((s: IProducts) => {
+        return s.name.toLowerCase().includes(searchText.toLowerCase())
+        || s.brand.toLowerCase().includes(searchText.toLowerCase())
+        || s.color.toLowerCase().includes(searchText.toLowerCase())
+        || s.article.toLowerCase().includes(searchText.toLowerCase())
+      }))
     }
   }, [searchText])
 

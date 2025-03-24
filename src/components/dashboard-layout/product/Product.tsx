@@ -68,10 +68,10 @@ function Product (){
                 city: "",
                 color: "",
                 condition: "",
-                priceBuy: 0,
+                priceBuy: null,
+                priceSale: null,
                 placeOfTransaction: "",
                 checkedFitting: false,
-                priceSale: 0,
                 dateBuy: "",
                 dateSale: "",
                 price_goat: "",
@@ -101,8 +101,8 @@ function Product (){
             <Info info={[
                 currentInfo?.dateSale || null, 
                 currentInfo?.dateBuy || null, // Дата продажи
-                currentInfo?.priceBuy?.toString() || null, 
-                currentInfo?.priceSale?.toString() || null
+                currentInfo?.priceBuy, 
+                currentInfo?.priceSale
             ]} />
             
             

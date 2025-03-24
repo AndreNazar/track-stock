@@ -16,7 +16,8 @@ let timer: any = null
 function AddProductDialog() {
 
   const dispatch = useDispatch()
-  const currentContext  = useSelector((s: any) => s.selections.currentContext)
+  const currentContext = useSelector((s: any) => s.selections.currentContext)
+  const calendarData = useSelector((s: any) => s.dialog.calendarData)
   const [isLoadingAdd, setLoadingAdd] = useState<boolean>(false)
   const [currentInfo, setCurrentInfo] = useState<IProducts>({
     id: 1,
@@ -69,7 +70,7 @@ function AddProductDialog() {
       await changeCurrentInfo(eBrandKeys.name, res.model)
       await changeCurrentInfo("image", res.photo_url)
       setIsLoadingArticle(false)
-    }, 1000)
+    }, 500)
   }
 
   const loadDataDialog = async () => {
@@ -94,14 +95,14 @@ function AddProductDialog() {
       us_size: +currentInfo.sizeUS,
       eu_size: +currentInfo.sizeEU,
       brand: brandsList.map(b => b.name)[currentContext.brands] ?? "",
-      price: +currentInfo.priceBuy,
+      price: +currentInfo.priceBuy!,
       article: currentInfo.article,
       condition: conditionsList.map(c => c.name)[currentContext.statuses] ?? "",
       city: currentInfo.city,
       place: currentInfo.placeOfTransaction,
       fitting: currentInfo.checkedFitting,
-      purchase_date: currentInfo.dateBuy,
-      purchase_price: currentInfo.priceBuy,
+      purchase_date: calendarData.date,
+      purchase_price: +currentInfo.priceBuy!,
 
     }
 

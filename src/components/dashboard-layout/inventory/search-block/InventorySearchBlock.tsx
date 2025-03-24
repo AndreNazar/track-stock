@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { newContextBlock, openDialogAddProduct } from "../../../../redux/slices/dialogSlice"
 import { useNavigate } from "react-router"
 import { changeSearchText } from "../../../../redux/slices/productSlice"
-import { useRef } from "react"
+import { useEffect, useMemo, useRef } from "react"
 
 function InventorySearchBlock() {
   
@@ -16,10 +16,18 @@ function InventorySearchBlock() {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const listSort = ["По возрастанию цены", "По убыванию цены"]
+
+  const getMainLink = useMemo(() => {
+    const local3symols = location.pathname.replace(/^\/+/, '').slice(0, 3)
+    if (local3symols === "inv") return "inventory"
+    if (local3symols === "sal") return "sales"
+    return `${local3symols}`
+  }, [location.pathname])
  
   function searchHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    if(e.target.value.trim() !== "") navigate("/inventory/search")
-    else navigate("/inventory")
+
+    if(e.target.value.trim() !== "") navigate(`/${getMainLink}/search`)
+    else navigate(`/${getMainLink}`)
 
     dispatch(changeSearchText(e.target.value))
   }
@@ -43,6 +51,10 @@ function InventorySearchBlock() {
       )
     }
   }
+
+  useEffect(() => {
+    console.log(location.pathname.replace(/^\/+/, ''))
+  }, [location.pathname])
 
   return (
     <div className="inventory-control">

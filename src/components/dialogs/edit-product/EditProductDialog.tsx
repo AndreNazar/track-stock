@@ -3,13 +3,14 @@ import "../add-product/add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
 import { useEffect, useState } from "react"
 import { Api } from "../../../api/api"
-import { closeDialogEditProduct } from "../../../redux/slices/dialogSlice"
+import { closeDialogEditProduct, setCalendarData } from "../../../redux/slices/dialogSlice"
 import { useDispatch, useSelector } from "react-redux"
 import EditProductImages from "./left-block/EditProductImages"
 import EditProductSearch from "./left-block/EditProductSearch"
 import EditProductRight from "./right-block/EditProductRight"
 import { selectCurrentContext } from "../../../redux/slices/selectionsSlice"
 import { changeCurrentInfoEditor, setCurrentInfo, setCurrentInfoEditor } from "../../../redux/slices/productSlice"
+import { format } from "date-fns"
 
 let timer: any = null
 
@@ -17,15 +18,14 @@ function EditProductDialog() {
 
   const dispatch = useDispatch()
   const dataDialogEdit = useSelector((s:any) => s.dialog.dataDialogEdit)
-  const [isLoadingAdd, setLoadingAdd] = useState<boolean>(false)
   const currentContext = useSelector((s: any) => s.selections.currentContext)
   const currentInfoEditor: IProducts = useSelector((s:any) => s.product.currentInfoEditor)
+  const calendarData = useSelector((s: any) => s.dialog.calendarData)
+
+  const [isLoadingAdd, setLoadingAdd] = useState<boolean>(false)
   const [brandsList, setBrandsList] = useState<IDataSelect[]>([])
   const [conditionsList, setConditionsList] = useState<IDataSelect[]>([])
   const [isLoadingArticle, setIsLoadingArticle] = useState<boolean>(false)
-
-  
-
 
   
     const articleHandler = async (e: string) => {
@@ -73,13 +73,13 @@ function EditProductDialog() {
       eu_size: +currentInfoEditor.sizeEU,
       brand: brandsList.map(b => b.name)[currentContext.brands] ?? "",
       condition: conditionsList.map(c => c.name)[currentContext.statuses] ?? "",
-      price: +currentInfoEditor.priceSale,
+      price: +currentInfoEditor.priceSale!,
       article: currentInfoEditor.article,
       city: currentInfoEditor.city,
       place: currentInfoEditor.placeOfTransaction,
       fitting: currentInfoEditor.checkedFitting,
-      purchase_date: currentInfoEditor.dateBuy,
-      purchase_price: currentInfoEditor.priceBuy,
+      purchase_date: calendarData.date,
+      purchase_price: +currentInfoEditor.priceBuy!,
     }
     
     
@@ -109,6 +109,7 @@ function EditProductDialog() {
 
   async function fillDataDialog () {
     dispatch(setCurrentInfoEditor(dataDialogEdit))
+    dispatch(setCalendarData({date: dataDialogEdit.dateBuy ? format(dataDialogEdit.dateBuy, 'yyyy-dd-MM') : "", isOpen:false}))
     let brand_idx = brandsList.findIndex(b => b.name === dataDialogEdit.brand)
     let condition_idx = conditionsList.findIndex(c => c.name === dataDialogEdit.condition.condition)
     dispatch(selectCurrentContext({idx: brand_idx, type: "brands"}))

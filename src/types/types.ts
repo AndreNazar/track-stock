@@ -14,8 +14,8 @@ export interface IProducts {
   price_stockX: string | null
   price_goat: string | null
   price_poison: string | null
-  priceBuy: number
-  priceSale: number
+  priceBuy: number | null
+  priceSale: number | null
   dateBuy: string
   dateSale: string
   condition: string
@@ -62,12 +62,12 @@ export interface ISearchProducts {
 
 export interface InfoList {
   title: string
-  value: string | null
+  value: string | number | null
   img: string
 }
 export interface CardList {
   title: string
-  value: string | null
+  value: string | number | null
 }
 export interface IProductSalesTab {
   type: string
@@ -150,6 +150,10 @@ export interface IContextBlock {
   width: number
   firstClick: boolean
   type: ContextMenuType
+}
+export interface ICalendarData {
+  date: string
+  isOpen: boolean
 }
 
 export type MenuType = "/inventory" | "/statistic" | "/account"

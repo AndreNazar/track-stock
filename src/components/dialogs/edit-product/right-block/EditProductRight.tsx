@@ -6,8 +6,10 @@ import SelectField from "../../../ui/selects/SelectField"
 import { eBrandKeys, IDataSelect } from "../../../../types/types"
 import { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { newContextBlock } from "../../../../redux/slices/dialogSlice"
+import { newContextBlock, setCalendarData } from "../../../../redux/slices/dialogSlice"
 import { changeCurrentInfoEditor } from "../../../../redux/slices/productSlice"
+import FieldCalendar from "../../../ui/fields/FieldCalendar"
+import { format } from "date-fns"
 
 
 interface IEditProductRight {
@@ -26,7 +28,12 @@ function EditProductRight({
   const conditionsRef = useRef<HTMLDivElement>(null)
   const currentContext = useSelector((s:any) => s.selections.currentContext)
   const currentInfoEditor = useSelector((s:any) => s.product.currentInfoEditor)
+  const calendarData = useSelector((s:any) => s.dialog.calendarData)
 
+  
+  const handleInputClick = () => {
+    dispatch(setCalendarData({date: format(new Date(), 'yyyy-dd-MM'), isOpen:true}))
+  }
 
     function openBrandsHandler() {
       console.log(brandsRef.current)
@@ -71,7 +78,9 @@ function EditProductRight({
         <div className="right__content-field-xl"><Field loading={isLoadingArticle} disable={true} heading="Название" placeholder={!isLoadingArticle?"...":""} value={currentInfoEditor.name} setValue={(e: string) => dispatch(changeCurrentInfoEditor({key: eBrandKeys.name, value: e}))} /></div>
         <div className="right__content-field-m"><Field loading={isLoadingArticle} disable={true} heading="Цвет" placeholder={!isLoadingArticle?"...":""} value={currentInfoEditor.color} setValue={(e: string) => dispatch(changeCurrentInfoEditor({key: eBrandKeys.color, value: e}))} /></div>
         <div className="right__content-field-m"><Field heading="Цена покупки" placeholder="10" value={currentInfoEditor.priceBuy} setValue={(e: string) => dispatch(changeCurrentInfoEditor({key: eBrandKeys.priceBuy, value: e}))} /></div>
-        <div className="right__content-field-m"><Field heading="Дата покупки" placeholder="XX.XX.XX" value={currentInfoEditor.dateBuy} setValue={(e: string) => dispatch(changeCurrentInfoEditor({key: eBrandKeys.dateBuy, value: e}))} /></div>
+        <div className="right__content-field-m date-picker-container">
+          <FieldCalendar heading="Дата покупки" value={calendarData.date} onClick={handleInputClick} />
+        </div>        
         <div className="right__content-field-l"><SelectField ref={conditionsRef} value={conditionsList.map(l => l.name)[currentContext.statuses]} onClick={openConditionsHandler} heading="Состояние" /></div>
         <div className="right__content-field-m"><Field heading="Размер US" placeholder="10 US" value={currentInfoEditor.sizeUS} setValue={(e: string) => dispatch(changeCurrentInfoEditor({key: eBrandKeys.sizeUS, value: e}))} /></div>
         <div className="right__content-field-m"><Field heading="Размер UK" placeholder="10 UK" value={currentInfoEditor.sizeUK} setValue={(e: string) => dispatch(changeCurrentInfoEditor({key: eBrandKeys.sizeUK, value: e}))} /></div>

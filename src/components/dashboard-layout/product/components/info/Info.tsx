@@ -4,7 +4,7 @@ import "./info.scss"
 import date_green_png from "../../../../../assets/imgs/actions/date_green.svg"
 import price_green_png from "../../../../../assets/imgs/actions/price_green.svg"
 
-function Info({ info }: { info: (string | null)[] }) {
+function Info({ info }: { info: (string | number | null)[] }) {
   const infoList: InfoList[] = [
     {
       title: "Дата покупки",

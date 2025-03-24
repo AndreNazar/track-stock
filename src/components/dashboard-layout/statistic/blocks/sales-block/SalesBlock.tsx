@@ -93,7 +93,7 @@ function SalesBlock() {
             color: p.color,
             name: p.name,
             size: p.sizeUS,
-            price: p.priceBuy.toString(),
+            price: p.priceBuy!.toString(),
             image: p.image
           }}
           lastElement={products.length === i+1} />

@@ -24,7 +24,8 @@ const initialState: ProductState = {
     price_stockX: "",
     price_goat: "",
     price_poison: "",
-    priceBuy: 0,
+    priceBuy: null,
+    priceSale: null,
     condition: "",
     sizeUS: "",
     sizeUK: "",
@@ -36,7 +37,6 @@ const initialState: ProductState = {
     inStore: false,
     isSale: false,
     dateBuy: "",
-    priceSale: 0
   },
   currentInfoEditor: {
     id: 1,
