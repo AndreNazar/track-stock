@@ -20,7 +20,7 @@ function InventoryContent() {
     try {
       const api = new Api()
       const response = await api.getSneakers();
-
+      console.log(response)
       setLoading(false)
       dispatch(setProductList(response.sneakers.map((p: any): IProducts => {
         return {
@@ -38,12 +38,13 @@ function InventoryContent() {
           article: p.sneaker.article,
           avg_price: p.prices.avg_price,
           priceBuy: p.sneaker.price,
-          placeOfTransaction: "",
+          placeOfTransaction: p.sneaker.place,
           price_goat: p.prices.goat,
           price_poison: p.prices.poizon,
           price_stockX: p.prices.stock_x,
           priceSale: p.sneaker.price,
-          dateBuy: "",
+          dateBuy: p.sneaker.purchase_date,
+          dateSale: p.sneaker.sale_date,
           inStore: p.sneaker.in_store,
           isSale: p.sneaker.is_sale,
         }

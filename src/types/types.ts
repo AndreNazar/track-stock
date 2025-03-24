@@ -17,6 +17,7 @@ export interface IProducts {
   priceBuy: number
   priceSale: number
   dateBuy: string
+  dateSale: string
   condition: string
   sizeUS: string
   sizeUK: string
@@ -116,6 +117,16 @@ export interface SneakersLot {
   purchase_date: string;
 }
 
+export interface IAccount {
+  name: string
+  lastname: string
+  nickname: string
+  email: string
+  vk_link: string
+  showVK: boolean
+  showTG: boolean
+}
+
 export enum eContextMenuType {
   profit = "profit",
   analysisSize = "analysis-size",
@@ -126,6 +137,7 @@ export enum eContextMenuType {
   account = "account",
   country = "country",
   city = "city",
+  sort = "sort",
 }
 
 export type ContextMenuType = keyof typeof eContextMenuType

@@ -9,7 +9,7 @@ function PreInfo({product}: {product: IProducts}) {
       <div className="product__preinfo">
         <ProductInfo product={product} />
         <ProductText product={product} flag="mobile" />
-        <ProductControl />
+        <ProductControl product={product} />
       </div>
     )
   }

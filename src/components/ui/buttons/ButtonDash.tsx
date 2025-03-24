@@ -2,7 +2,7 @@ import { COLOR_PRIMARY } from "../../../global-variables";
 import "./button.scss";
 
 interface PropsButtonDash {
-  children: string,
+  children: any,
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void,
   color?: string
 }

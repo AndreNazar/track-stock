@@ -19,6 +19,7 @@ const initialState: ProductState = {
     brand: "",
     image: "",
     color: "",
+    dateSale: "",
     article: "",
     price_stockX: "",
     price_goat: "",
@@ -39,6 +40,7 @@ const initialState: ProductState = {
   },
   currentInfoEditor: {
     id: 1,
+    dateSale: "",
     name: "",
     brand: "",
     image: "",

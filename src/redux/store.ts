@@ -4,6 +4,7 @@ import menuReducer from './slices/menuSlice';
 import dialogReducer from './slices/dialogSlice';
 import selectionsReducer from './slices/selectionsSlice';
 import productReducer from './slices/productSlice';
+import accountReducer from './slices/accountSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     menu: menuReducer, 
     dialog: dialogReducer, 
     selections: selectionsReducer,
-    product: productReducer
+    product: productReducer,
+    account: accountReducer
   },
 });
 

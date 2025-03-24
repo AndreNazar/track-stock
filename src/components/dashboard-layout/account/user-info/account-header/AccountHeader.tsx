@@ -1,5 +1,4 @@
 import "./account-header.scss"
-import change_avatar from "../../../../../assets/imgs/actions/photo.svg"
 
 interface AccountHeaderProps {
   avatar: string
@@ -14,9 +13,6 @@ function AccountHeader({avatar, nickname, mail, isOpenEditBlock, setOpenEditBloc
     <div className="account-header">
       <div className="account-header__avatar">
         <img className="account-header__avatar-image" src={avatar} alt="avatar" />
-        <button className="account-header__avatar-change">
-            <img src={change_avatar} alt="change avatar" />
-        </button>
       </div>
       <div className="account-header__text">
         <h3 className="account-header__text-nickname">{nickname}</h3>

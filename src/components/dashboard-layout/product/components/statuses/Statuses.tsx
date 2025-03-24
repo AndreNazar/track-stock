@@ -3,6 +3,7 @@ import "./statuses.scss"
 import goat_png from "../../../../../assets/imgs/platforms/goat.png"
 import poizon_png from "../../../../../assets/imgs/platforms/poizon.png"
 import stock_png from "../../../../../assets/imgs/platforms/stock.png"
+import success_img from "../../../../../assets/imgs/statuses/success.svg"
 import StatusItem from "./item/StatusItem"
 import Loading from "../../../../ui/loadings/Loading"
 import Api from "../../../../../api/api"
@@ -71,7 +72,9 @@ function Statuses({id, goat, poizon, stockX, inStore, isSale, article}: IStatuse
           {!article
           ? <Loading />
           : <>
-            {!isSale && <ButtonDash onClick={saleHandler}>Продано</ButtonDash>}
+          {isSale 
+          ? <div className="sale-status"><img src={success_img} alt="" />Продано</div>
+          : <ButtonDash onClick={saleHandler}>Продано</ButtonDash>}
             {!inStore
             ? <ButtonDash onClick={postHandler}>Разместить</ButtonDash>
             : <ButtonDash onClick={hideHandler}>Скрыть</ButtonDash>}

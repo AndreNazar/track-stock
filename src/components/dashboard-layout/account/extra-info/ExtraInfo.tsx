@@ -1,10 +1,5 @@
-import { useState } from "react"
 import "./extra-info.scss"
-import ServiceBlock from "./service-block/ServiceBlock"
-import { IServiceBlock } from "../../../../types/types"
-import vk_img from "../../../../assets/imgs/platforms/vk.png"
 import PrivacyBlock from "./privacy-block/PrivacyBlock"
-import LocationBlock from "./location-block/LocationBlock"
 
 function ExtraInfo() {
 
@@ -47,7 +42,6 @@ function ExtraInfo() {
     {/* <ServiceBlock serviceInfo={serviceDataVK} /> */}
     {/* <ServiceBlock serviceInfo={serviceDataAvito} /> */}
     <PrivacyBlock />
-    <LocationBlock />
   </div>
 }
 

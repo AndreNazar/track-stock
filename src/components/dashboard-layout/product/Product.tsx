@@ -40,7 +40,8 @@ function Product (){
             priceBuy: res.sneaker.purchase_price,
             priceSale: res.sneaker.price,
             dateBuy: res.sneaker.purchase_date,
-            placeOfTransaction: "",
+            dateSale: res.sneaker.sale_date,
+            placeOfTransaction: res.sneaker.place,
             checkedFitting: res.sneaker.fitting,
             price_goat: res.prices.goat,
             price_poison: res.prices.poizon,
@@ -72,6 +73,7 @@ function Product (){
                 checkedFitting: false,
                 priceSale: 0,
                 dateBuy: "",
+                dateSale: "",
                 price_goat: "",
                 price_poison: "",
                 price_stockX: "",
@@ -97,7 +99,7 @@ function Product (){
         <div className="product__wrapper">
             <Card/>
             <Info info={[
-                currentInfo?.brand || null, 
+                currentInfo?.dateSale || null, 
                 currentInfo?.dateBuy || null, // Дата продажи
                 currentInfo?.priceBuy?.toString() || null, 
                 currentInfo?.priceSale?.toString() || null

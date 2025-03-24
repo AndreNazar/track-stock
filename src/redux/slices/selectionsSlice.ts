@@ -11,6 +11,7 @@ const initialState: SelectionState = {
   currentContext: {
     [eContextMenuType.profit]: 0,
     [eContextMenuType.analysisSize]: 0,
+    [eContextMenuType.sort]: 0,
   }
 };
 

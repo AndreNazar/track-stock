@@ -2,7 +2,7 @@ import { eLocalTab, IProducts } from "../../../../../types/types"
 import "./products-list.scss"
 import InventoryProductsItem from "./item/InventoryProductsItem"
 import Loading from "../../../../ui/loadings/Loading"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useOutletContext } from "react-router"
 import getBrandByName from "../../../../../utilities/getBrandByName"
 import { useParams } from "react-router"
@@ -15,12 +15,22 @@ function InventoryProductsList() {
   const searchText = useSelector((s: any) => s.product.searchText)
   const [products, setProducts] = useState<IProducts[]>([])
   const [searchProducts, setSearchProducts] = useState<IProducts[]>([])
+  const currentContext = useSelector((s: any) => s.selections.currentContext)
   const params = useParams()
 
-  function sortedProducts(): IProducts[] {
+  const sortedProducts = useMemo((): IProducts[] => {
     let sortProducts = [...tabHandler()]
-    return sortProducts.sort((a: IProducts, b: IProducts) => b.id - a.id)
-  }
+    return sortProducts.sort((a: IProducts, b: IProducts) => {
+      switch(currentContext.sort){
+        case 0:
+          return (a.priceSale - b.priceSale)
+        case 1:
+          return (b.priceSale - a.priceSale)
+        default:
+          return (a.priceSale - b.priceSale)
+      }
+    })
+  }, [currentContext.sort, tabHandler(), productList, localTab])
 
   function tabHandler() {
     if (localTab === eLocalTab.sales) return productList.filter((pl) => pl.isSale)
@@ -28,9 +38,8 @@ function InventoryProductsList() {
   }
 
   async function getProducts() {
-    console.log(localTab)
     setProducts(
-      sortedProducts()
+      sortedProducts
         .filter((s: IProducts) => getBrandByName(s.brand) === params.brand_name)
         .map((s: IProducts): IProducts => {
           return {
@@ -48,6 +57,7 @@ function InventoryProductsList() {
             article: s.article,
             avg_price: s.avg_price,
             priceBuy: s.priceBuy,
+            dateSale: s.dateSale,
             placeOfTransaction: s.placeOfTransaction,
             price_goat: s.price_goat,
             price_poison: s.price_poison,
@@ -68,12 +78,11 @@ function InventoryProductsList() {
 
   useEffect(() => {
     getProducts()
-  }, [productList, localTab])
+  }, [productList, localTab, currentContext.sort])
 
   useEffect(() => {
-    console.log(searchText)
     if (searchText.trim() !== "") {
-      setSearchProducts(sortedProducts().filter((s: IProducts) => s.name.toLowerCase().includes(searchText.toLowerCase())))
+      setSearchProducts(sortedProducts.filter((s: IProducts) => s.name.toLowerCase().includes(searchText.toLowerCase())))
     }
   }, [searchText])
 

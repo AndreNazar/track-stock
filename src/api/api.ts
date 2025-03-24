@@ -64,7 +64,6 @@ export class Api {
   }
 
   async getSneakers() {
-    console.log(this.token)
     return fetch(this.URL + "sneakers/sneakers", {
       method: "GET",
       headers: {
@@ -74,6 +73,47 @@ export class Api {
     }).then(this.getJsonResponse)
   }
   
+  async getUserInfo() {
+    return fetch(`${this.URL}profile/get-user-info`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
+  
+  async updateUserInfo(data: any) {
+    return fetch(`${this.URL}profile/update`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
+  
+  async updateVision({data}: {data: {show_telegram: boolean, show_vk: boolean}}) {
+    return fetch(`${this.URL}profile/update-vision`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
+  async updateUserPassword(data: {old_password: string, new_password: string}) {
+    return fetch(`${this.URL}profile/change-password`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${this.token ?? ""}`,
+      },
+    }).then(this.getJsonResponse)
+  }
   async putInStore(id: number) {
     return fetch(`${this.URL}sneakers/sneakers/put_in_store/${id}`, {
       method: "POST",

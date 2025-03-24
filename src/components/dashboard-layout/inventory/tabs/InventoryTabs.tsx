@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom"
-import export_svg from "../../../../assets/imgs/actions/export.svg"
 import "./inventory-tabs.scss"
 import { eLocalTab } from "../../../../types/types"
 import { useDispatch, useSelector } from "react-redux"
@@ -20,9 +19,6 @@ function InventoryTabs() {
           <NavLink onClick={() => dispatch(setLocalTab("sales"))} to={"/sales"}>Продажи</NavLink>
         </li>
       </ul>
-      <div className="inventory__tabs-export">
-        <img src={export_svg} alt="" />
-      </div>
     </div>
   )
 }

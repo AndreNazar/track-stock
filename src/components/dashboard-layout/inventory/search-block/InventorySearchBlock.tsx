@@ -3,24 +3,45 @@ import search_svg from "../../../../assets/imgs/actions/search.svg"
 import add_svg from "../../../../assets/imgs/actions/add.svg"
 import down_arrow_svg from "../../../../assets/imgs/actions/down-arrow.svg"
 import { useDispatch, useSelector } from "react-redux"
-import { openDialogAddProduct } from "../../../../redux/slices/dialogSlice"
+import { newContextBlock, openDialogAddProduct } from "../../../../redux/slices/dialogSlice"
 import { useNavigate } from "react-router"
 import { changeSearchText } from "../../../../redux/slices/productSlice"
-import { useParams } from "react-router"
+import { useRef } from "react"
 
 function InventorySearchBlock() {
   
   const dispatch = useDispatch()
   const searchText = useSelector((s: any) => s.product.searchText)
+  const currentContext = useSelector((s: any) => s.selections.currentContext)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
-  const params = useParams()
+  const listSort = ["По возрастанию цены", "По убыванию цены"]
  
   function searchHandler(e: React.ChangeEvent<HTMLInputElement>) {
-console.log(params)
     if(e.target.value.trim() !== "") navigate("/inventory/search")
     else navigate("/inventory")
 
     dispatch(changeSearchText(e.target.value))
+  }
+
+  function openContextPrice(e: React.MouseEvent<HTMLDivElement>) {
+    e.stopPropagation()
+    e.preventDefault()
+    
+    if (dropdownRef.current) {
+      const rect = dropdownRef.current.getBoundingClientRect()
+      dispatch(
+        newContextBlock({
+          list: listSort,
+          title: "",
+          top: dropdownRef.current.offsetTop + 32,
+          left: rect.left,
+          width: rect.width,
+          firstClick: true,
+          type: "sort",
+        })
+      )
+    }
   }
 
   return (
@@ -29,8 +50,8 @@ console.log(params)
         <img className="inventory-control__search-icon" src={search_svg} alt="" />
         <input placeholder="Что ищем?" value={searchText} onChange={searchHandler} className="inventory-control__search-input" type="text" />
       </div>
-      <div className="inventory-control__sort inventory-ui">
-        <p className="inventory-ui__text">Группировка</p>
+      <div ref={dropdownRef} onClick={openContextPrice} className="inventory-control__sort inventory-ui">
+        <p className="inventory-ui__text">{listSort[currentContext.sort]}</p>
         <img src={down_arrow_svg} className="inventory-ui__icon" alt="" />
       </div>
       <div onClick={() => dispatch(openDialogAddProduct())} className="inventory-control__add inventory-ui">

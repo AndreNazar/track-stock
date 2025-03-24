@@ -14,14 +14,16 @@
         border: 2px solid $color-primary;
         padding: .7em 1.3em;
         font-size: 14px;
+        line-height: 1em;
         border-radius: 20px;
+        height: 16px;
         cursor: pointer;
         background-color: transparent;
         color: #ffffff;
         outline: none;
     }
 }
-.field-circle, .select__input{
+.field-circle{
     cursor: text !important;
 }
 .select-field{
