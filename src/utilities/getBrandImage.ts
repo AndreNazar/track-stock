@@ -57,6 +57,20 @@ import { eBrandKeys, TBrandKeys } from "../types/types"
         return jordan_logo
       case eBrandKeys.asics:
         return asics_logo
+      case eBrandKeys.balenciaga:
+        return balenciaga_logo
+      case eBrandKeys.bottega_veneta:
+        return bottega_veneta
+      case eBrandKeys.brioni:
+        return brioni
+      case eBrandKeys.brown_university:
+        return brown_university
+      case eBrandKeys.brunello_cucinelli:
+        return brunello_cucinelli
+      case eBrandKeys.burberry:
+        return burberry
+      case eBrandKeys.c_p_company:
+        return c_p_company
       default:
         return no_logo
     }

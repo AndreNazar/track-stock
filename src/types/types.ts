@@ -157,6 +157,7 @@ export interface ICalendarData {
 }
 
 export type MenuType = "/inventory" | "/statistic" | "/account"
+export type IStatus = "success" | "warning" | "error" | "info"
 
 export enum eBrandKeys {
   adidas = "adidas",
@@ -164,6 +165,7 @@ export enum eBrandKeys {
   newbalance = "newbalance",
   jordan = "jordan",
   asics = "asics",
+  
   noname = "noname",
 }
 

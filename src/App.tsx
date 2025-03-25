@@ -23,6 +23,7 @@ import { ICalendarData, IContextBlock } from "./types/types"
 import { DayPicker } from "react-day-picker"
 import { setCalendarData } from "./redux/slices/dialogSlice"
 import { format, isValid, parse } from "date-fns"
+import PopapStatus from "./components/ui/dialog/PopapStatus"
 
 function App() {
   const openAddProductDialog = useSelector((s:any) => s.dialog.dialogAddProduct)
@@ -30,6 +31,7 @@ function App() {
   const opendialogDeleteProduct = useSelector((s:any) => s.dialog.dialogDeleteProduct)
   const contextBlock: IContextBlock = useSelector((s:any) => s.dialog.contextBlock)
   const calendarData: ICalendarData = useSelector((s:any) => s.dialog.calendarData)
+  const popapData = useSelector((s:any) => s.dialog.popapData)
   const isMobileMenu = useSelector((s:any) => s.menu.isMobileMenu)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -67,6 +69,7 @@ function parseDateString(dateString: string, formatStr: string): Date | null {
       {isMobileMenu && <button onClick={() => dispatch(openMobileMenu())} className="menu-burger-button">
         <img src={burger_svg} alt="" />
       </button>}
+      {popapData.isOpen && <PopapStatus text={popapData.text} status={popapData.status} />}
       {openAddProductDialog && <AddProductDialog />}
       {openEditProductDialog && <EditProductDialog />}
       {opendialogDeleteProduct && <DeleteProduct />}

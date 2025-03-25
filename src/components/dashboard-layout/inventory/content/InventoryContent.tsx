@@ -6,6 +6,7 @@ import { switchTab } from "../../../../redux/slices/menuSlice"
 import { setProductList } from "../../../../redux/slices/productSlice"
 import Api from "../../../../api/api"
 import { IProducts } from "../../../../types/types"
+import { showPopapStatus } from "../../../../redux/slices/dialogSlice"
 
 function InventoryContent() {
 
@@ -51,6 +52,8 @@ function InventoryContent() {
       })))
     } catch (error) {
       console.log(error)
+      setLoading(false)
+      dispatch(showPopapStatus({text: `Ошибка загрузки данных ${error}`, status: "error"}))
     }
   }
   

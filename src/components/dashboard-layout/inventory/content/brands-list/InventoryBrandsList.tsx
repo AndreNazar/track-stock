@@ -7,6 +7,7 @@ import Loading from "../../../../ui/loadings/Loading";
 import getBrandImage from "../../../../../utilities/getBrandImage";
 import getBrandByName from "../../../../../utilities/getBrandByName";
 import { useSelector } from "react-redux";
+import EmptyParagraph from "../../../../ui/paragraph/EmptyParagraph";
 
 function InventoryBrandsList() {
 
@@ -42,7 +43,10 @@ function InventoryBrandsList() {
       <ul className="brands__list">
         {isLoading 
         ? <Loading size={40}/>
-        : brandList.map((b: IBrand) => <InventoryBrandsItem key={b.id} brand={b} />)}
+        : productList.length > 0
+          ? brandList.map((b: IBrand) => <InventoryBrandsItem key={b.id} brand={b} />)
+          : <EmptyParagraph title="Пока что товаров нет" />
+        }
       </ul>
     );
   }
