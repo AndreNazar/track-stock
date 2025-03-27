@@ -84,17 +84,16 @@ const handleInputClick = () => {
         </div>
         <div className="right__content-field-xl"><Field loading={isLoadingArticle} disable={true} heading="Название" placeholder={!isLoadingArticle?"...":""} value={currentInfo.name} setValue={(e: string) => changeCurrentInfo(eBrandKeys.name, e)} /></div>
         <div className="right__content-field-m"><Field loading={isLoadingArticle} disable={true} heading="Цвет" placeholder={!isLoadingArticle?"...":""} value={currentInfo.color} setValue={(e: string) => changeCurrentInfo(eBrandKeys.color, e)} /></div>
-        <div className="right__content-field-m"><Field heading="Цена покупки" placeholder="10" value={currentInfo.priceBuy!} setValue={(e: string) => changeCurrentInfo(eBrandKeys.priceBuy, e)} /></div>
-        <div className="right__content-field-m date-picker-container">
-          <FieldCalendar heading="Дата покупки" value={calendarData.date} onClick={handleInputClick} />
-        </div>
+        <div className="right__content-field-m date-picker-container"><FieldCalendar heading="Дата покупки" value={calendarData.date} onClick={handleInputClick} /></div>
+        <div className="right__content-field-m right__content-price"><Field heading="Цена покупки" placeholder="10" value={currentInfo.priceBuy!} setValue={(e: string) => changeCurrentInfo(eBrandKeys.priceBuy, e)} /></div>
+        <div className="right__content-field-m right__content-price"><Field heading="Цена продажи" placeholder="10" value={currentInfo.priceSale!} setValue={(e: string) => changeCurrentInfo(eBrandKeys.priceSale, e)} /></div>
         <div className="right__content-field-l"><SelectField ref={conditionsRef} value={conditionsList.map(l => l.name)[currentContext.statuses]} onClick={openConditionsHandler} heading="Состояние" /></div>
-        <div className="right__content-field-m"><Field heading="Размер US" placeholder="10 US" value={currentInfo.sizeUS} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeUS, e)} /></div>
-        <div className="right__content-field-m"><Field heading="Размер UK" placeholder="10 UK" value={currentInfo.sizeUK} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeUK, e)} /></div>
-        <div className="right__content-field-m"><Field heading="Размер EU" placeholder="10 EU" value={currentInfo.sizeEU} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeEU, e)} /></div>
         <div className="right__content-field-l"><SelectField ref={brandsRef} value={brandsList.map(l => l.name)[currentContext.brands]} onClick={openBrandsHandler} heading="Бренд" /></div>
-        <div className="right__content-field-m"><Field heading="Город" placeholder="Москва" value={currentInfo.city} setValue={(e: string) => changeCurrentInfo(eBrandKeys.city, e)} /></div>
-        <div className="right__content-field-m"><Field heading="Место сделки" placeholder="м. Белорусская" value={currentInfo.placeOfTransaction} setValue={(e: string) => changeCurrentInfo(eBrandKeys.placeOfTransaction, e)} /></div>
+        <div className="right__content-field-m"><Field heading="Размер US" placeholder="10.5 US" value={currentInfo.sizeUS} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeUS, e)} /></div>
+        <div className="right__content-field-m"><Field heading="Размер UK" placeholder="10 UK" value={currentInfo.sizeUK} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeUK, e)} /></div>
+        <div className="right__content-field-m"><Field heading="Размер EU" placeholder="44.5 EU" value={currentInfo.sizeEU} setValue={(e: string) => changeCurrentInfo(eBrandKeys.sizeEU, e)} /></div>
+        <div className="right__content-field-m right__content-city"><Field heading="Город" placeholder="Москва" value={currentInfo.city} setValue={(e: string) => changeCurrentInfo(eBrandKeys.city, e)} /></div>
+        <div className="right__content-field-m right__content-place"><Field heading="Место сделки" placeholder="м. Белорусская" value={currentInfo.placeOfTransaction} setValue={(e: string) => changeCurrentInfo(eBrandKeys.placeOfTransaction, e)} /></div>
         <div onClick={() => changeCurrentInfo(eBrandKeys.checkedFitting, !currentInfo.checkedFitting)} className="right__content-checkbox">
           <Checkbox checked={currentInfo.checkedFitting} setChecked={() => changeCurrentInfo(eBrandKeys.checkedFitting, !currentInfo.checkedFitting)} />
           <p>Есть примерка</p>

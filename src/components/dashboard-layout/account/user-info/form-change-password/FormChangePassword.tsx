@@ -5,6 +5,8 @@ import FieldPassword from "../../../../ui/fields/FieldPassword"
 import ButtonDash from "../../../../ui/buttons/ButtonDash"
 import "./form-change-password.scss"
 import Api from "../../../../../api/api"
+import { showPopapStatus } from "../../../../../redux/slices/dialogSlice"
+import { useDispatch } from "react-redux"
 
 function FormChangePassword() {
   const api = new Api()
@@ -12,6 +14,7 @@ function FormChangePassword() {
   const [prevPassword, setPrevPassword] = useState<string>("")
   const [newPassword, setNewPassword] = useState<string>("")
   const [confirmPassword, setConfirmPassword] = useState<string>("")
+  const dispatch = useDispatch()
 
   function updatePasswordHandler() {
     if (newPassword === confirmPassword) {
@@ -23,9 +26,10 @@ function FormChangePassword() {
         .then((res) => {
           console.log(res)
         }).catch((err) => {
-          console.log(err)
+          dispatch(showPopapStatus({text: `Ошибка: ${err}`, status: "error"}))
         })
     } else {
+      dispatch(showPopapStatus({text: `Ошибка: Пароли не совпадают`, status: "error"}))
     }
   }
 

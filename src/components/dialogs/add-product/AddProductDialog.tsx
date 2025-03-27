@@ -6,7 +6,7 @@ import AddProductImages from "./left-block/AddProductImages"
 import AddProductRight from "./right-block/AddProductRight"
 import { useEffect, useState } from "react"
 import { Api } from "../../../api/api"
-import { closeDialogAddProduct } from "../../../redux/slices/dialogSlice"
+import { closeDialogAddProduct, showPopapStatus } from "../../../redux/slices/dialogSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { addToProductList } from "../../../redux/slices/productSlice"
 
@@ -95,7 +95,7 @@ function AddProductDialog() {
       us_size: +currentInfo.sizeUS,
       eu_size: +currentInfo.sizeEU,
       brand: brandsList.map(b => b.name)[currentContext.brands] ?? "",
-      price: +currentInfo.priceBuy!,
+      price: +currentInfo.priceSale!,
       article: currentInfo.article,
       condition: conditionsList.map(c => c.name)[currentContext.statuses] ?? "",
       city: currentInfo.city,
@@ -122,6 +122,7 @@ function AddProductDialog() {
       
     } catch (error) {
       console.error("Failed to create sneakers lot:", error);
+      dispatch(showPopapStatus({text: `Ошибка при добавлении товара: ${error}`, status: "error"}))
     }
   }
 

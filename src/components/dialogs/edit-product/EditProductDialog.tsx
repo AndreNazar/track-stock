@@ -3,7 +3,7 @@ import "../add-product/add-product-dialog.scss"
 import Dialog from "../../ui/dialog/Dialog"
 import { useEffect, useState } from "react"
 import { Api } from "../../../api/api"
-import { closeDialogEditProduct, setCalendarData } from "../../../redux/slices/dialogSlice"
+import { closeDialogEditProduct, setCalendarData, showPopapStatus } from "../../../redux/slices/dialogSlice"
 import { useDispatch, useSelector } from "react-redux"
 import EditProductImages from "./left-block/EditProductImages"
 import EditProductSearch from "./left-block/EditProductSearch"
@@ -88,7 +88,6 @@ function EditProductDialog() {
       const api = new Api()
       const res = await api.updateSneaker(data);
       const resArticle = await api.loadProductInfo(res.article)
-      console.log("Sneakers Lot Created:", res);
 
       dispatch(setCurrentInfo({
         ...currentInfoEditor,
@@ -104,6 +103,7 @@ function EditProductDialog() {
       
     } catch (error) {
       console.error("Failed to create sneakers lot:", error);
+      dispatch(showPopapStatus({text: `Ошибка при редактировании товара: ${error}`, status: "error"}))
     }
   }
 

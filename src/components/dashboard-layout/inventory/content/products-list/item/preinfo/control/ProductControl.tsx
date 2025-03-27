@@ -5,7 +5,7 @@ import copy_svg from "../../../../../../../../assets/imgs/control/copy.svg"
 import success_img from "../../../../../../../../assets/imgs/statuses/success.svg"
 import "./control.scss"
 import { IProducts } from "../../../../../../../../types/types"
-import { openDialogDeleteProduct, openDialogEditProduct } from "../../../../../../../../redux/slices/dialogSlice"
+import { openDialogDeleteProduct, openDialogEditProduct, showPopapStatus } from "../../../../../../../../redux/slices/dialogSlice"
 import { useDispatch } from "react-redux"
 import { changeCurrentInfo } from "../../../../../../../../redux/slices/productSlice"
 import { useState } from "react"
@@ -73,6 +73,8 @@ function ProductControl({ product }: { product: IProducts }) {
   const copyButtonHandler = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation()
     e.preventDefault()
+    navigator.clipboard.writeText(location.href)
+    dispatch(showPopapStatus({text: `Ссылка скопирована в буфер обмена!`, status: "success"}))
   }
 
   return (

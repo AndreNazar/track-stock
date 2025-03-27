@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setAccount } from "../../../../../redux/slices/accountSlice"
 import Api from "../../../../../api/api"
+import { showPopapStatus } from "../../../../../redux/slices/dialogSlice"
 
 
 function FormUserInfo () {
@@ -19,7 +20,7 @@ function FormUserInfo () {
   const [vkLink, setVkLink] = useState<string>("")
 
     async function saveInfoAccount () {
-        await api.updateUserInfo({
+        const response = await api.updateUserInfo({
             first_name: name,
             email,
             vk_account: vkLink,
@@ -36,6 +37,13 @@ function FormUserInfo () {
             showTG: false,
             showVK: true,
         }))
+        response
+        .then(() => {
+            dispatch(showPopapStatus({text: `Данные успешно обновлены`, status: "success"}))
+        })
+        .catch((error: string) => {
+            dispatch(showPopapStatus({text: `Произошла ошибка при обновлении данных ${error}`, status: "error"}))
+        })
     }
 
     useEffect(() => {

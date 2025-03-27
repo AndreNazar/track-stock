@@ -24,6 +24,7 @@
             }
             &-checkbox{
                 display: flex;
+                align-self: center;
                 gap: 1em;
                 cursor: pointer;
             }
@@ -76,10 +77,15 @@
             }
             .right__content {
                 gap: 1.5em 1em;
+                &-field-l, &-city, &-place, &-price{
+                    width: 45%;
+                }
 
             }
         }
 
-
+        .date-picker-container{
+            width: 60%;
+        }
     }
 }
